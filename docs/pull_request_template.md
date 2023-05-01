@@ -15,7 +15,7 @@
 - [ ] I have read and followed the [Contributing Guidelines](https://atharva-cm.atlassian.net/wiki/spaces/OP/pages/19988481/Optiflow+Process+Document).
 - [ ] New page under `/pages` has been added.
 - [ ] Any new env variables have been added to `.env-example` or `.env`.
-- [ ] `optiflow` builds successfully on both `vercel`.
+- [ ] `Nishad Pune` builds successfully on `vercel`.
 
 ## Summary of changes (incl. QA instructions)
 
