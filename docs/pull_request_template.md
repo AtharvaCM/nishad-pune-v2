@@ -1,6 +1,4 @@
-# PR Description
-
-## Title/Summary
+# Title/Summary
 
 ## Change Type
 
