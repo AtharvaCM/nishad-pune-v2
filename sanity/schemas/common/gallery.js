@@ -21,6 +21,7 @@ export default {
               name: 'alt',
               type: 'string',
               title: 'Alternative text',
+              validation: (Rule) => Rule.required(),
             },
           ],
         },
