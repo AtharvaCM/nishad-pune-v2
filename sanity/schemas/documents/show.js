@@ -39,8 +39,15 @@ export default {
       name: 'themes',
       title: 'Themes',
       type: 'array',
-      of: [{ type: 'string' }],
-      validation: (Rule) => Rule.required(),
+      of: [
+        {
+          type: 'string',
+          validation: (Rule) =>
+            Rule.required().min(1).error('Theme cannot be empty'),
+        },
+      ],
+      validation: (Rule) =>
+        Rule.required().min(1).error('At least one theme is required'),
     },
     {
       name: 'images',
