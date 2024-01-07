@@ -60,14 +60,12 @@ export default {
           preview: {
             select: {
               title: 'caption',
-              media: 'image',
               videoUrl: 'videoUrl',
             },
-            prepare({ title, media, videoUrl }) {
+            prepare({ title, videoUrl }) {
               return {
                 title: title,
                 subtitle: videoUrl ? 'Video media' : 'Image media',
-                media: media || videoUrl,
               }
             },
           },
