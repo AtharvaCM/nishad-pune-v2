@@ -1,4 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
+import ticketTier from '../common/ticketTier'
 
 export default {
   name: 'show',
@@ -95,7 +96,7 @@ export default {
       name: 'ticketTiers',
       title: 'Ticket Tiers',
       type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'ticketTier' }] }],
+      of: [ticketTier],
     },
     {
       name: 'contact',
