@@ -47,6 +47,7 @@ export default {
               name: 'isRequired',
               title: 'Is Required',
               type: 'boolean',
+              initialValue: true,
             },
             {
               name: 'description',

@@ -120,6 +120,7 @@ export default {
       name: 'isFeatured',
       title: 'Featured Show',
       type: 'boolean',
+      initialValue: false,
       description: 'Check this if the show is to be featured on the main page.',
     },
     // Add any other relevant fields that may be necessary for your shows

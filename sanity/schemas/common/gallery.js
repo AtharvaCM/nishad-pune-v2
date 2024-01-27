@@ -48,6 +48,7 @@ export default {
       name: 'zoom',
       type: 'boolean',
       title: 'Zoom enabled',
+      initialValue: false,
       description: 'Should we enable zooming of images?',
     },
   ],

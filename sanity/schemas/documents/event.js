@@ -75,6 +75,7 @@ export default {
       title: 'Highlight this event?',
       description: 'Mark if the event is a key past event to be highlighted',
       type: 'boolean',
+      initialValue: false,
     },
     // You can add an image or a gallery of images if you want to display event visuals
     {
