@@ -40,6 +40,7 @@ export default {
       description:
         'Moderators can toggle this once the feedback is reviewed and approved.',
       type: 'boolean',
+      initialValue: false,
       validation: (Rule) => Rule.required(),
     },
     // Add any other relevant fields as needed
