@@ -8,6 +8,8 @@ export default {
       name: 'videoLabel',
       type: 'string',
       title: 'Video Label',
+      validation: (Rule) =>
+        Rule.required().min(1).error('Video label cannot be empty'),
     },
     {
       name: 'url',

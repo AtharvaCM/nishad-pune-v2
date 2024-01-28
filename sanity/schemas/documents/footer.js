@@ -17,13 +17,15 @@ export default {
               name: 'usefulLinkName',
               type: 'string',
               title: 'Useful Link Name',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) =>
+                Rule.required().min(1).error('Link Name cannot be empty'),
             },
             {
               name: 'usefulLinkPath',
               type: 'string',
               title: 'Useful Link Path',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) =>
+                Rule.required().min(1).error('Link Path cannot be empty'),
             },
           ],
         },
@@ -39,7 +41,8 @@ export default {
           name: 'physicalAddress',
           type: 'string',
           title: 'Physical Address',
-          validation: (Rule) => Rule.required(),
+          validation: (Rule) =>
+            Rule.required().min(1).error('Address cannot be empty'),
         },
         {
           name: 'emailAddress',
@@ -72,7 +75,8 @@ export default {
           name: 'companyName',
           type: 'string',
           title: 'Company Name',
-          validation: (Rule) => Rule.required(),
+          validation: (Rule) =>
+            Rule.required().min(1).error('Company Name cannot be empty'),
         },
         {
           name: 'year',
@@ -105,13 +109,20 @@ export default {
               name: 'socialMediaServiceName',
               type: 'string',
               title: 'Social Media Service Name',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) =>
+                Rule.required()
+                  .min(1)
+                  .error('Social Media Serive Name cannot be empty'),
             },
             {
               name: 'socialMediaServiceURL',
               type: 'url',
               title: 'Social Media Service URL',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) =>
+                Rule.uri({
+                  allowRelative: false,
+                  scheme: ['https'],
+                }),
             },
           ],
         },

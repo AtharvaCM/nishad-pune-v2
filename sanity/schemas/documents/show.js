@@ -10,7 +10,8 @@ export default {
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().min(1).error('Title cannot be empty'),
     },
     {
       name: 'slug',
@@ -20,14 +21,16 @@ export default {
         source: 'title',
         maxLength: 200,
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().min(1).error('Slug cannot be empty'),
     },
     {
       name: 'description',
       title: 'Description',
       type: 'array',
       of: [{ type: 'block' }],
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().min(1).error('Description cannot be empty'),
     },
     {
       name: 'extendedDescription',

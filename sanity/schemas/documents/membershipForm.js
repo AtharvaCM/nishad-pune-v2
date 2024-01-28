@@ -9,7 +9,8 @@ export default {
       name: 'formTitle',
       title: 'Form Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().min(1).error('Form Title cannot be empty'),
     },
     {
       name: 'formDescription',
@@ -28,7 +29,8 @@ export default {
               name: 'fieldName',
               title: 'Field Name',
               type: 'string',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) =>
+                Rule.required().min(1).error('Field Name cannot be empty'),
             },
             {
               name: 'fieldType',
@@ -83,7 +85,8 @@ export default {
               name: 'type',
               title: 'Membership Type',
               type: 'string',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) =>
+                Rule.required().min(1).error('Membership Type cannot be empty'),
             },
             {
               name: 'fee',

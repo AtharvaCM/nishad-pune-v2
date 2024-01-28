@@ -10,6 +10,8 @@ export default {
       name: 'title',
       title: 'Event Title',
       type: 'string',
+      validation: (Rule) =>
+        Rule.required().min(1).error('Event title cannot be empty'),
     },
     {
       name: 'theme',
@@ -60,7 +62,8 @@ export default {
           // add any other statuses as required
         ],
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().min(1).error('Event Status cannot be empty'),
     },
     {
       name: 'priority',

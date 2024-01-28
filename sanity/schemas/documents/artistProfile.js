@@ -8,7 +8,8 @@ export default {
       name: 'name',
       title: 'Name',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().min(1).error('Name cannot be empty'),
     },
     {
       name: 'slug',
@@ -18,7 +19,8 @@ export default {
         source: 'name',
         maxLength: 96,
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().min(1).error('Slug cannot be empty'),
     },
     {
       name: 'biography',
