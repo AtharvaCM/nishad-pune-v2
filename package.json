@@ -6,8 +6,18 @@
     "format": "npx prettier --write . --ignore-path .gitignore",
     "lint": "next lint -- --ignore-path .gitignore",
     "lint:fix": "npm run format && npm run lint -- --fix",
+    "prepare": "husky install",
     "start": "next start",
     "type-check": "tsc --noEmit"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.scss": [
+      "prettier --write"
+    ]
   },
   "prettier": {
     "semi": false,
@@ -15,6 +25,7 @@
   },
   "dependencies": {
     "@next/font": "^13.1.1",
+    "@portabletext/react": "^3.0.11",
     "@sanity/demo": "^1.0.1",
     "@sanity/vision": "^3.1.4",
     "@tailwindcss/typography": "^0.5.8",
@@ -31,6 +42,8 @@
     "eslint": "^8.31.0",
     "eslint-config-next": "13.0.8-canary.5",
     "eslint-plugin-simple-import-sort": "^8.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.0",
     "postcss": "^8.4.20",
     "prettier": "^2.8.8",
     "prettier-plugin-packagejson": "^2.3.0",

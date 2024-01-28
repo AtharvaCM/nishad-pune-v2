@@ -1,11 +1,27 @@
 import { SchemaTypeDefinition } from 'sanity'
 
+import article from './schemas/documents/article'
+import audienceFeedback from './schemas/documents/audienceFeedback'
+import event from './schemas/documents/event'
 import footer from './schemas/documents/footer'
+import galleySection from './schemas/documents/gallerySection'
 import header from './schemas/documents/header'
 import homepage from './schemas/documents/homepage'
+import membershipForm from './schemas/documents/membershipForm'
+import show from './schemas/documents/show'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [header, footer, homepage],
+  types: [
+    article,
+    audienceFeedback,
+    event,
+    footer,
+    galleySection,
+    header,
+    homepage,
+    membershipForm,
+    show,
+  ],
 }
 
 // TODO: Add meta tags in next sprint
