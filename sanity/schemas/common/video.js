@@ -9,7 +9,12 @@ export default {
       type: 'string',
       title: 'Video Label',
       validation: (Rule) =>
-        Rule.required().min(1).error('Video label cannot be empty'),
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Video Label cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'url',

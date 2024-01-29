@@ -18,14 +18,24 @@ export default {
               type: 'string',
               title: 'Useful Link Name',
               validation: (Rule) =>
-                Rule.required().min(1).error('Link Name cannot be empty'),
+                Rule.required().custom((value) => {
+                  if (typeof value === 'string' && value.trim() === '') {
+                    return 'Link cannot be empty'
+                  }
+                  return true
+                }),
             },
             {
               name: 'usefulLinkPath',
               type: 'string',
               title: 'Useful Link Path',
               validation: (Rule) =>
-                Rule.required().min(1).error('Link Path cannot be empty'),
+                Rule.required().custom((value) => {
+                  if (typeof value === 'string' && value.trim() === '') {
+                    return 'Link Path cannot be empty'
+                  }
+                  return true
+                }),
             },
           ],
         },
@@ -42,7 +52,12 @@ export default {
           type: 'string',
           title: 'Physical Address',
           validation: (Rule) =>
-            Rule.required().min(1).error('Address cannot be empty'),
+            Rule.required().custom((value) => {
+              if (typeof value === 'string' && value.trim() === '') {
+                return 'Address cannot be empty'
+              }
+              return true
+            }),
         },
         {
           name: 'emailAddress',
@@ -76,7 +91,12 @@ export default {
           type: 'string',
           title: 'Company Name',
           validation: (Rule) =>
-            Rule.required().min(1).error('Company Name cannot be empty'),
+            Rule.required().custom((value) => {
+              if (typeof value === 'string' && value.trim() === '') {
+                return 'Company Name cannot be empty'
+              }
+              return true
+            }),
         },
         {
           name: 'year',
@@ -110,9 +130,12 @@ export default {
               type: 'string',
               title: 'Social Media Service Name',
               validation: (Rule) =>
-                Rule.required()
-                  .min(1)
-                  .error('Social Media Serive Name cannot be empty'),
+                Rule.required().custom((value) => {
+                  if (typeof value === 'string' && value.trim() === '') {
+                    return 'Social Media Service Name cannot be empty'
+                  }
+                  return true
+                }),
             },
             {
               name: 'socialMediaServiceURL',

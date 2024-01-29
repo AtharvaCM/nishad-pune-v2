@@ -11,7 +11,12 @@ export default {
       title: 'Title',
       type: 'string',
       validation: (Rule) =>
-        Rule.required().min(1).error('Title cannot be empty'),
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Title cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'slug',
@@ -22,7 +27,12 @@ export default {
         maxLength: 200,
       },
       validation: (Rule) =>
-        Rule.required().min(1).error('Slug cannot be empty'),
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Slug cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'description',
@@ -30,7 +40,12 @@ export default {
       type: 'array',
       of: [{ type: 'block' }],
       validation: (Rule) =>
-        Rule.required().min(1).error('Description cannot be empty'),
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Description cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'extendedDescription',
@@ -46,7 +61,12 @@ export default {
         {
           type: 'string',
           validation: (Rule) =>
-            Rule.required().min(1).error('Theme cannot be empty'),
+            Rule.required().custom((value) => {
+              if (typeof value === 'string' && value.trim() === '') {
+                return 'Theme cannot be empty'
+              }
+              return true
+            }),
         },
       ],
       validation: (Rule) =>

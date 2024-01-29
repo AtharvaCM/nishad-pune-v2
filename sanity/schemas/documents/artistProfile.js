@@ -9,7 +9,12 @@ export default {
       title: 'Name',
       type: 'string',
       validation: (Rule) =>
-        Rule.required().min(1).error('Name cannot be empty'),
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Name cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'slug',
@@ -20,7 +25,12 @@ export default {
         maxLength: 96,
       },
       validation: (Rule) =>
-        Rule.required().min(1).error('Slug cannot be empty'),
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Slug cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'biography',

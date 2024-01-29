@@ -10,7 +10,12 @@ export default {
       title: 'Form Title',
       type: 'string',
       validation: (Rule) =>
-        Rule.required().min(1).error('Form Title cannot be empty'),
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Form Title cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'formDescription',
@@ -30,7 +35,12 @@ export default {
               title: 'Field Name',
               type: 'string',
               validation: (Rule) =>
-                Rule.required().min(1).error('Field Name cannot be empty'),
+                Rule.required().custom((value) => {
+                  if (typeof value === 'string' && value.trim() === '') {
+                    return 'Field Name cannot be empty'
+                  }
+                  return true
+                }),
             },
             {
               name: 'fieldType',
@@ -86,7 +96,12 @@ export default {
               title: 'Membership Type',
               type: 'string',
               validation: (Rule) =>
-                Rule.required().min(1).error('Membership Type cannot be empty'),
+                Rule.required().custom((value) => {
+                  if (typeof value === 'string' && value.trim() === '') {
+                    return 'Membership Type cannot be empty'
+                  }
+                  return true
+                }),
             },
             {
               name: 'fee',

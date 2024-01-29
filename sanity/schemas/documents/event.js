@@ -11,7 +11,12 @@ export default {
       title: 'Event Title',
       type: 'string',
       validation: (Rule) =>
-        Rule.required().min(1).error('Event title cannot be empty'),
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Event Title cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'theme',
@@ -63,7 +68,12 @@ export default {
         ],
       },
       validation: (Rule) =>
-        Rule.required().min(1).error('Event Status cannot be empty'),
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Event Status cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'priority',
