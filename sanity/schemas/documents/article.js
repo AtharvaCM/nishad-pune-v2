@@ -8,7 +8,13 @@ export default {
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Title cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'publicationDate',
@@ -20,7 +26,13 @@ export default {
       name: 'newspaperName',
       title: 'Newspaper Name',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Newspaper Name cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'content',

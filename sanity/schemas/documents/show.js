@@ -10,7 +10,13 @@ export default {
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Title cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'slug',
@@ -20,14 +26,26 @@ export default {
         source: 'title',
         maxLength: 200,
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Slug cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'description',
       title: 'Description',
       type: 'array',
       of: [{ type: 'block' }],
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Description cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'extendedDescription',
@@ -43,7 +61,12 @@ export default {
         {
           type: 'string',
           validation: (Rule) =>
-            Rule.required().min(1).error('Theme cannot be empty'),
+            Rule.required().custom((value) => {
+              if (typeof value === 'string' && value.trim() === '') {
+                return 'Theme cannot be empty'
+              }
+              return true
+            }),
         },
       ],
       validation: (Rule) =>
@@ -120,6 +143,7 @@ export default {
       name: 'isFeatured',
       title: 'Featured Show',
       type: 'boolean',
+      initialValue: false,
       description: 'Check this if the show is to be featured on the main page.',
     },
     // Add any other relevant fields that may be necessary for your shows

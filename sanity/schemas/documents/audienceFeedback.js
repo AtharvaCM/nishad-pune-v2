@@ -9,7 +9,13 @@ export default {
       name: 'authorName',
       title: 'Author Name',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Author Name cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'testimonial',

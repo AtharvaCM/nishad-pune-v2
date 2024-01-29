@@ -9,7 +9,13 @@ export default {
       name: 'sectionName',
       title: 'Section Name',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Section Name cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'mediaItems',

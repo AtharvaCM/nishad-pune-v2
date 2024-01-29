@@ -1,6 +1,7 @@
 import { SchemaTypeDefinition } from 'sanity'
 
 import article from './schemas/documents/article'
+import artistProfile from './schemas/documents/artistProfile'
 import audienceFeedback from './schemas/documents/audienceFeedback'
 import event from './schemas/documents/event'
 import footer from './schemas/documents/footer'
@@ -13,6 +14,7 @@ import show from './schemas/documents/show'
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     article,
+    artistProfile,
     audienceFeedback,
     event,
     footer,

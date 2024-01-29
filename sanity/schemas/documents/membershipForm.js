@@ -9,7 +9,13 @@ export default {
       name: 'formTitle',
       title: 'Form Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Form Title cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'formDescription',
@@ -28,7 +34,13 @@ export default {
               name: 'fieldName',
               title: 'Field Name',
               type: 'string',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) =>
+                Rule.required().custom((value) => {
+                  if (typeof value === 'string' && value.trim() === '') {
+                    return 'Field Name cannot be empty'
+                  }
+                  return true
+                }),
             },
             {
               name: 'fieldType',
@@ -47,6 +59,7 @@ export default {
               name: 'isRequired',
               title: 'Is Required',
               type: 'boolean',
+              initialValue: true,
             },
             {
               name: 'description',
@@ -82,7 +95,13 @@ export default {
               name: 'type',
               title: 'Membership Type',
               type: 'string',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) =>
+                Rule.required().custom((value) => {
+                  if (typeof value === 'string' && value.trim() === '') {
+                    return 'Membership Type cannot be empty'
+                  }
+                  return true
+                }),
             },
             {
               name: 'fee',

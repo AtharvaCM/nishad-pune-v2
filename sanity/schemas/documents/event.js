@@ -10,6 +10,13 @@ export default {
       name: 'title',
       title: 'Event Title',
       type: 'string',
+      validation: (Rule) =>
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Event Title cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'theme',
@@ -60,7 +67,13 @@ export default {
           // add any other statuses as required
         ],
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().custom((value) => {
+          if (typeof value === 'string' && value.trim() === '') {
+            return 'Event Status cannot be empty'
+          }
+          return true
+        }),
     },
     {
       name: 'priority',
@@ -75,6 +88,7 @@ export default {
       title: 'Highlight this event?',
       description: 'Mark if the event is a key past event to be highlighted',
       type: 'boolean',
+      initialValue: false,
     },
     // You can add an image or a gallery of images if you want to display event visuals
     {
