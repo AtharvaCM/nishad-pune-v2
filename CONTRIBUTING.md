@@ -14,6 +14,20 @@ Always prefix both branch names and PR names with the JIRA issue key.
 - Use lowercases only on branch names
 - *Do not prefix/suffix the branch name with any other text content*
 
+### Commit Messages
+
+- Commit messages must adhere to the standards set by commitlint with default settings.
+- Ensure that each commit message provides a clear and concise summary of the changes introduced by the commit.
+- Commit message pattern: `type(scope?): subject`
+- Real world examples:
+  - `chore: run tests on travis ci`
+  - `fix(server): send cors headers`
+  - `feat(blog): add comment section`
+- Use imperative mood in commit messages.
+  - **Good**: "fix: typo in README.md"
+  - **Bad**: "Fixed typo in README.md" or "Fixes typo in README.md"
+- Separate the subject from the body with a blank line if additional explanation is needed.
+
 ### Pull Requests
 
 - Add the title/summary to the PR name.
