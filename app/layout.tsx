@@ -11,8 +11,7 @@ import { draftMode } from 'next/headers'
 import Footer from '@/components/common/footer'
 import Header from '@/components/common/header'
 import { LenisScroller } from '@/components/common/lennis-scroller'
-import Preloader from '@/components/common/preloader'
-import VisualEditing from '@/components/VisualEditiing'
+import VisualEditing from '@/components/VisualEditing'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -31,7 +30,6 @@ export default function RootLayout({
     <html lang="en" className="light">
       <body className={cx('bg-white', inter.variable)}>
         <Theme accentColor="grass" grayColor="olive">
-          <Preloader />
           <Header />
           <div className="container mx-auto">{children}</div>
           {draftMode().isEnabled && <VisualEditing />}
