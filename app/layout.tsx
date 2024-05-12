@@ -1,34 +1,31 @@
-import '@radix-ui/themes/styles.css'
-import './globals.css'
+import '@radix-ui/themes/styles.css';
+import './globals.css';
 
-import { Theme } from '@radix-ui/themes'
-import cx from 'classnames'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Inter } from 'next/font/google'
-import { draftMode } from 'next/headers'
-import { usePathname } from 'next/navigation'
+import { Theme } from '@radix-ui/themes';
+import cx from 'classnames';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Inter } from 'next/font/google';
+import { draftMode } from 'next/headers';
+import { headers } from 'next/headers';
+import { PropsWithChildren } from 'react';
 
-import Footer from '@/components/common/footer'
-import Header from '@/components/common/header'
-import { LenisScroller } from '@/components/common/lennis-scroller'
-import VisualEditing from '@/components/VisualEditing'
+import Footer from '@/components/common/footer';
+import Header from '@/components/common/header';
+import { LenisScroller } from '@/components/common/lennis-scroller';
+import VisualEditing from '@/components/VisualEditing';
 
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
-})
+});
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const path = usePathname()
-  const isSanityRoute = path.startsWith('/sanity')
+export default function RootLayout({ children }: PropsWithChildren) {
+  const pathname = headers().get('x-next-pathname') as string;
+  const isSanityRoute = pathname.startsWith('/sanity');
 
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger);
 
   return (
     <html lang="en" className="light">
@@ -42,5 +39,5 @@ export default function RootLayout({
         </Theme>
       </body>
     </html>
-  )
+  );
 }
