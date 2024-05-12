@@ -1,4 +1,6 @@
-export const FETCH_HEADER = `*[_type == "header"][0] {
+import { groq } from 'next-sanity';
+
+export const FETCH_HEADER = groq`*[_type == "header"][0] {
   logo,
   address,
   phoneNumber,
@@ -14,4 +16,4 @@ export const FETCH_HEADER = `*[_type == "header"][0] {
       href
     }
   }
-}`
+}`;
