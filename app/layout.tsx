@@ -7,6 +7,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Inter } from 'next/font/google'
 import { draftMode } from 'next/headers'
+import { usePathname } from 'next/navigation'
 
 import Footer from '@/components/common/footer'
 import Header from '@/components/common/header'
@@ -24,17 +25,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const path = usePathname()
+  const isSanityRoute = path.startsWith('/sanity')
+
   gsap.registerPlugin(ScrollTrigger)
 
   return (
     <html lang="en" className="light">
       <body className={cx('bg-white', inter.variable)}>
         <Theme accentColor="grass" grayColor="olive">
-          <Header />
+          {!isSanityRoute && <Header />}
           <div className="container mx-auto">{children}</div>
           {draftMode().isEnabled && <VisualEditing />}
-          <Footer />
-          <LenisScroller />
+          {!isSanityRoute && <Footer />}
+          {!isSanityRoute && <LenisScroller />}
         </Theme>
       </body>
     </html>
