@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# Extract Sanity schema and generate TypeScript definitions
+sanity schema extract && sanity typegen generate
+
+# Linting and Formatting
 npx lint-staged
 
