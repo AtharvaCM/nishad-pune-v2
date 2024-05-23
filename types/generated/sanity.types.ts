@@ -616,16 +616,13 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 export declare const internalGroqTypeReferenceTo: unique symbol;
-
 // Source: ./sanity/lib/queries.ts
 // Variable: POSTS_QUERY
 // Query: *[_type == "post" && defined(slug)]
 export type POSTS_QUERYResult = Array<never>;
-
 // Variable: POST_QUERY
 // Query: *[_type == "post" && slug.current == $slug][0]
 export type POST_QUERYResult = null;
-
 // Source: ./sanity/queries/header/fetch-header.ts
 // Variable: FETCH_HEADER
 // Query: *[_type == "header"][0] {  logo,  address,  phoneNumber,  socialLinks[]{    type,    url  },  navigation[]{    text,    href,    dropdownLinks[]{      text,      href    }  }}
