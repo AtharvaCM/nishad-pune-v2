@@ -1,4 +1,5 @@
 'use client';
+import imageUrlBuilder from '@sanity/image-url';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
@@ -9,20 +10,26 @@ import { FETCH_HEADERResult } from '@/types/generated/sanity.types';
 export interface IHeaderProps {}
 
 export default function Header(_props: IHeaderProps) {
-  // const headerData = await client.fetch<FETCH_HEADERResult>(FETCH_HEADER);
-  // FIXME: Remove this log after done with the example
-  // eslint-disable-next-line no-console
-  // console.log('headerData: ', headerData);
   const [isOpen, setIsOpen] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [headerData, setHeaderData] = useState<FETCH_HEADERResult>(null);
+  const [logoUrl, setLogoUrl] = useState('');
 
   useEffect(() => {
     const fetchHeaderData = async () => {
       const headerDataResult = await client.fetch<FETCH_HEADERResult>(FETCH_HEADER);
       setHeaderData(headerDataResult);
+      // FIXME: Remove this log after done with the example
       // eslint-disable-next-line no-console
       // console.log('headerDataResult: ', headerDataResult);
+      const logoAsset = headerDataResult?.logo?.asset;
+      if (logoAsset !== undefined) {
+        const imageUrl = imageUrlBuilder(client).image(logoAsset._ref).url();
+        setLogoUrl(imageUrl);
+      } else {
+        // eslint-disable-next-line no-console
+        console.error('Logo asset is undefined');
+      }
     };
 
     fetchHeaderData();
@@ -36,28 +43,23 @@ export default function Header(_props: IHeaderProps) {
 
   return (
     <nav className="bg-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-1">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <Link href="/">
-                <span className="text-2xl font-bold text-gray-800 cursor-pointer">Logo</span>
-              </Link>
+              <Link href="/">{logoUrl && <img className="h-12 w-12 p-1" src={logoUrl} alt="Logo" />}</Link>
             </div>
           </div>
           <div className="hidden md:flex md:items-center md:ml-auto md:space-x-8">
-            <Link href="/" className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
-              Home
-            </Link>
-            <Link href="/about" className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
-              About
-            </Link>
-            <Link href="/services" className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
-              Services
-            </Link>
-            <Link href="/contact" className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
-              Contact
-            </Link>
+            {headerData?.navigation?.map(({ text, href }) => (
+              <Link
+                key={text}
+                href={`${href?.toString()}`}
+                className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                {text}
+              </Link>
+            ))}
           </div>
           <div className="flex items-center md:hidden">
             <button
@@ -91,18 +93,15 @@ export default function Header(_props: IHeaderProps) {
       {/* TODO: make a seperate BELOW DIV */}
       <div className={`${isOpen ? 'block' : 'hidden'} md:hidden`} id="mobile-menu">
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <Link href="/" className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">
-            Home
-          </Link>
-          <Link href="/about" className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">
-            About
-          </Link>
-          <Link href="/services" className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">
-            Services
-          </Link>
-          <Link href="/contact" className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">
-            Contact
-          </Link>
+          {headerData?.navigation?.map(({ text, href }) => (
+            <Link
+              key={text}
+              href={`${href?.toString()}`}
+              className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
+            >
+              {text}
+            </Link>
+          ))}
         </div>
       </div>
     </nav>
