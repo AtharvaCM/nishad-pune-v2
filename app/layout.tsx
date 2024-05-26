@@ -1,5 +1,4 @@
 import '@radix-ui/themes/styles.css';
-// import '../styles/global.css';
 import './globals.css';
 
 import { Theme } from '@radix-ui/themes';

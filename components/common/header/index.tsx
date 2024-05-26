@@ -1,17 +1,18 @@
 'use client';
-import imageUrlBuilder from '@sanity/image-url';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
 import { client } from '@/sanity/lib/client';
 import { FETCH_HEADER } from '@/sanity/queries/header/fetch-header';
 import { FETCH_HEADERResult } from '@/types/generated/sanity.types';
 
+import { fetchImageURL } from './../../../utils/functions/fetchImageURL';
+
 export interface IHeaderProps {}
 
 export default function Header(_props: IHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [headerData, setHeaderData] = useState<FETCH_HEADERResult>(null);
   const [logoUrl, setLogoUrl] = useState('');
 
@@ -19,23 +20,17 @@ export default function Header(_props: IHeaderProps) {
     const fetchHeaderData = async () => {
       const headerDataResult = await client.fetch<FETCH_HEADERResult>(FETCH_HEADER);
       setHeaderData(headerDataResult);
-      // FIXME: Remove this log after done with the example
-      // eslint-disable-next-line no-console
-      // console.log('headerDataResult: ', headerDataResult);
       const logoAsset = headerDataResult?.logo?.asset;
       if (logoAsset !== undefined) {
-        const imageUrl = imageUrlBuilder(client).image(logoAsset._ref).url();
+        const imageUrl = fetchImageURL(logoAsset._ref);
         setLogoUrl(imageUrl);
       } else {
-        // eslint-disable-next-line no-console
-        console.error('Logo asset is undefined');
+        // TODO: SET BACKUP local IMAGE WITH setLogoUrl(imageUrl);
       }
     };
 
     fetchHeaderData();
   }, []);
-  // eslint-disable-next-line no-console
-  console.log('headerData: ', headerData);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -69,28 +64,12 @@ export default function Header(_props: IHeaderProps) {
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="block h-6 w-6"
-                xmlns="http:www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d={isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16m-7 6h7'}
-                />
-              </svg>
+              {isOpen ? <FaBars /> : <FaTimes />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* TODO: make a seperate BELOW DIV */}
       <div className={`${isOpen ? 'block' : 'hidden'} md:hidden`} id="mobile-menu">
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           {headerData?.navigation?.map(({ text, href }) => (
