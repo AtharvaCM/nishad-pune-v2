@@ -62,7 +62,9 @@ export default function Footer(_props: IFooterProps) {
       </div>
 
       <div className="border-t border-gray-700 py-4 text-center">
-        <p className="text-sm">&copy; {new Date().getFullYear()} Your Company. All rights reserved.</p>
+        <p className="text-sm">
+          &copy; {new Date().getFullYear()} {footerData?.copyrightObject?.companyName}. All rights reserved.
+        </p>
       </div>
     </footer>
   );
