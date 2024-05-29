@@ -623,6 +623,44 @@ export type POSTS_QUERYResult = Array<never>;
 // Variable: POST_QUERY
 // Query: *[_type == "post" && slug.current == $slug][0]
 export type POST_QUERYResult = null;
+// Source: ./sanity/queries/footer/fetch-footer.ts
+// Variable: FETCH_FOOTER
+// Query: *[_type == "footer"][0]{  _id,  _type,  _createdAt,  _updatedAt,  _rev,  usefulLinks[]{    _key,    usefulLinkName,    usefulLinkPath  },  address{    physicalAddress,    emailAddress,    contactNumber  },  copyrightObject{    companyName,    year,    copyrightText  },  socialLinks[]{    _key,    socialMediaServiceLogo{      asset->{        _id,        url      },      hotspot,      crop    },    socialMediaServiceName,    socialMediaServiceURL  }}
+export type FETCH_FOOTERResult = {
+  _id: string;
+  _type: 'footer';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  usefulLinks: Array<{
+    _key: string;
+    usefulLinkName: string | null;
+    usefulLinkPath: string | null;
+  }> | null;
+  address: {
+    physicalAddress: string | null;
+    emailAddress: string | null;
+    contactNumber: string | null;
+  } | null;
+  copyrightObject: {
+    companyName: string | null;
+    year: number | null;
+    copyrightText: string | null;
+  } | null;
+  socialLinks: Array<{
+    _key: string;
+    socialMediaServiceLogo: {
+      asset: {
+        _id: string;
+        url: string | null;
+      } | null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+    } | null;
+    socialMediaServiceName: string | null;
+    socialMediaServiceURL: string | null;
+  }> | null;
+} | null;
 // Source: ./sanity/queries/header/fetch-header.ts
 // Variable: FETCH_HEADER
 // Query: *[_type == "header"][0] {  logo,  address,  phoneNumber,  socialLinks[]{    type,    url  },  navigation[]{    text,    href,    dropdownLinks[]{      text,      href    }  }}
