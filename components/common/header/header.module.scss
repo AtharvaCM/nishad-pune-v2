@@ -1,0 +1,108 @@
+.d-container {
+  @apply bg-white;
+  @apply shadow-md;
+  &__inner {
+    @apply max-w-7xl;
+    @apply mx-auto;
+    @apply px-3;
+    @screen sm {
+      @apply px-6;
+    }
+    @screen lg {
+      @apply px-1;
+    }
+  }
+  &__content {
+    @apply flex;
+    @apply justify-between;
+    @apply h-16;
+  }
+  &__logo-container {
+    @apply flex;
+    @apply items-center;
+  }
+  &__logo {
+    @apply flex-shrink-0;
+  }
+  &__logo-img {
+    @apply h-12;
+    @apply w-12;
+    @apply p-1;
+  }
+  &__navigation {
+    @apply hidden;
+    @screen md {
+      @apply flex;
+      @apply items-center;
+      @apply ml-auto;
+      @apply space-x-8;
+    }
+  }
+  &__nagivation-link {
+    @apply text-gray-800;
+    @apply px-3;
+    @apply py-2;
+    @apply rounded-md;
+    @apply text-sm;
+    @apply font-medium;
+    &:hover {
+      @apply text-gray-600;
+    }
+  }
+  &__menu-button-container {
+    @apply flex;
+    @apply items-center;
+    @screen md {
+      @apply hidden;
+    }
+  }
+  &__menu-button {
+    @apply bg-gray-100;
+    @apply inline-flex;
+    @apply items-center;
+    @apply justify-center;
+    @apply p-2;
+    @apply rounded-md;
+    @apply text-gray-400;
+    &:hover {
+      @apply text-gray-500;
+      @apply bg-gray-200;
+    }
+    &:focus {
+      @apply outline-none;
+      @apply ring-2;
+      @apply ring-inset;
+      @apply ring-gray-300;
+    }
+  }
+  &__mobile-menu {
+    @apply hidden;
+    @screen md {
+      @apply hidden;
+    }
+    &--open {
+      @apply block;
+    }
+  }
+  &__mobile-menu-content {
+    @apply px-2;
+    @apply pt-2;
+    @apply pb-3;
+    @apply space-y-1;
+    @screen sm {
+      @apply px-3;
+    }
+  }
+  &__mobile-menu-link {
+    @apply text-gray-800;
+    &:hover {
+      @apply text-gray-600;
+      @apply block;
+      @apply px-3;
+      @apply py-2;
+      @apply rounded-md;
+      @apply text-base;
+      @apply font-medium;
+    }
+  }
+}
