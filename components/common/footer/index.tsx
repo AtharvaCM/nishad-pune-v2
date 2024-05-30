@@ -6,7 +6,10 @@ import { FaFacebookF, FaYoutube } from 'react-icons/fa';
 
 import { client } from '@/sanity/lib/client';
 import { FETCH_FOOTER } from '@/sanity/queries/footer/fetch-footer';
-import { FETCH_FOOTERResult } from '@/types/generated/sanity.types';
+import { FETCH_HEADER } from '@/sanity/queries/header/fetch-header';
+import { FETCH_FOOTERResult, FETCH_HEADERResult } from '@/types/generated/sanity.types';
+
+import { fetchImageURL } from './../../../utils/functions/fetchImageURL';
 
 export interface IFooterProps {}
 
@@ -17,14 +20,28 @@ interface SocialIconProps {
 
 export default function Footer(_props: IFooterProps) {
   const [footerData, setFooterData] = useState<FETCH_FOOTERResult>();
+  const [logoUrl, setLogoUrl] = useState('');
+  const [headerData, setHeaderData] = useState<FETCH_HEADERResult>(null);
 
   useEffect(() => {
-    const fetchHeaderData = async () => {
+    const fetchFooterData = async () => {
       const footerDataResult = await client.fetch<FETCH_FOOTERResult>(FETCH_FOOTER);
       setFooterData(footerDataResult);
+      const headerDataResult = await client.fetch<FETCH_HEADERResult>(FETCH_HEADER);
+      setHeaderData(headerDataResult);
+      const logoAsset = headerDataResult?.logo?.asset;
+      if (logoAsset !== undefined) {
+        const imageUrl = fetchImageURL(logoAsset._ref);
+        setLogoUrl(imageUrl);
+      } else {
+        // TODO: SET BACKUP local IMAGE WITH setLogoUrl(imageUrl);
+      }
     };
 
-    fetchHeaderData();
+    // eslint-disable-next-line no-console
+    console.log('headerDataResult: ', headerData);
+
+    fetchFooterData();
   }, []);
 
   return (
@@ -32,7 +49,8 @@ export default function Footer(_props: IFooterProps) {
       <div className="container mx-auto px-4 md:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="flex flex-col justify-between items-center md:items-center">
-            <h1 className="text-bold mb-4">Company Logo </h1>
+            <Link href="/">{logoUrl && <img className="h-12 w-12 p-1 mb-4" src={logoUrl} alt="Logo" />}</Link>
+
             <ul className="text-center">
               {footerData?.usefulLinks?.map(({ _key, usefulLinkName, usefulLinkPath }) => (
                 <li key={_key} className="mb-2 mt-1">

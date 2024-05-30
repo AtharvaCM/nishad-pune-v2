@@ -50,7 +50,7 @@ export default function Header(_props: IHeaderProps) {
               <Link
                 key={text}
                 href={`${href?.toString()}`}
-                className="text-gray-800 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium"
+                className="text-gray-800 hover:text-gray-600 hover:underline px-3 py-2 rounded-md text-sm font-medium"
               >
                 {text}
               </Link>
@@ -64,7 +64,7 @@ export default function Header(_props: IHeaderProps) {
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
-              {isOpen ? <FaBars /> : <FaTimes />}
+              {isOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
         </div>
@@ -76,7 +76,7 @@ export default function Header(_props: IHeaderProps) {
             <Link
               key={text}
               href={`${href?.toString()}`}
-              className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
+              className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium hover:underline"
             >
               {text}
             </Link>
