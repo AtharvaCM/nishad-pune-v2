@@ -23,7 +23,7 @@ const inter = Inter({
 
 export default function RootLayout({ children }: PropsWithChildren) {
   const pathname = headers().get('x-next-pathname') as string;
-  const isSanityRoute = pathname.startsWith('/sanity') ? true : false;
+  const isSanityRoute = pathname?.startsWith('/sanity') ? true : false;
 
   gsap.registerPlugin(ScrollTrigger);
 
