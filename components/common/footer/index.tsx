@@ -6,10 +6,9 @@ import { FaFacebookF, FaYoutube } from 'react-icons/fa';
 
 import { client } from '@/sanity/lib/client';
 import { FETCH_FOOTER } from '@/sanity/queries/footer/fetch-footer';
-import { FETCH_HEADER } from '@/sanity/queries/header/fetch-header';
-import { FETCH_FOOTERResult, FETCH_HEADERResult } from '@/types/generated/sanity.types';
+import { FETCH_FOOTERResult } from '@/types/generated/sanity.types';
 
-import { fetchImageURL } from './../../../utils/functions/fetchImageURL';
+import styles from './footer.module.scss';
 
 export interface IFooterProps {}
 
@@ -20,41 +19,44 @@ interface SocialIconProps {
 
 export default function Footer(_props: IFooterProps) {
   const [footerData, setFooterData] = useState<FETCH_FOOTERResult>();
-  const [logoUrl, setLogoUrl] = useState('');
-  const [headerData, setHeaderData] = useState<FETCH_HEADERResult>(null);
 
   useEffect(() => {
     const fetchFooterData = async () => {
       const footerDataResult = await client.fetch<FETCH_FOOTERResult>(FETCH_FOOTER);
       setFooterData(footerDataResult);
-      const headerDataResult = await client.fetch<FETCH_HEADERResult>(FETCH_HEADER);
-      setHeaderData(headerDataResult);
-      const logoAsset = headerDataResult?.logo?.asset;
-      if (logoAsset !== undefined) {
-        const imageUrl = fetchImageURL(logoAsset._ref);
-        setLogoUrl(imageUrl);
-      } else {
-        // TODO: SET BACKUP local IMAGE WITH setLogoUrl(imageUrl);
-      }
     };
-
-    // eslint-disable-next-line no-console
-    console.log('headerDataResult: ', headerData);
 
     fetchFooterData();
   }, []);
 
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 md:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="flex flex-col justify-between items-center md:items-center">
-            <Link href="/">{logoUrl && <img className="h-12 w-12 p-1 mb-4" src={logoUrl} alt="Logo" />}</Link>
+    <footer className={styles.footer}>
+      <div className={styles.footer__container}>
+        <div className={styles.footer__newsletter}>
+          <h3 className={styles.footer__newsletterTitle}>Want us to email you with the latest blockbuster news?</h3>
+          <div className={styles.footer__newsletterForm}>
+            <input type="email" placeholder="nikola@tesla.com" className={styles.footer__newsletterInput} />
+            <button className={styles.footer__newsletterButton}>Subscribe</button>
+          </div>
+        </div>
 
-            <ul className="text-center">
+        <div className={styles.footer__grid}>
+          <div className={styles.footer__column}>
+            <p className={styles.footerText}>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium natus quod eveniet aut perferendis distinctio iusto
+              repudiandae, provident velit earum?
+            </p>
+            <div className={styles.footer__socialIcons}>
+              <SocialIcon href="https://www.facebook.com/chandrashekhar.mahamuni" icon={<FaFacebookF size={'21px'} />} />
+              <SocialIcon href="https://www.youtube.com/user/shekharmahamuni/featured" icon={<FaYoutube size={'21px'} />} />
+            </div>
+          </div>
+
+          <div className={styles.footer__column}>
+            <ul className={styles.footer__links}>
               {footerData?.usefulLinks?.map(({ _key, usefulLinkName, usefulLinkPath }) => (
-                <li key={_key} className="mb-2 mt-1">
-                  <Link className="hover:underline" href={`${usefulLinkPath?.toString()}`}>
+                <li key={_key} className={styles.footer__linkItem}>
+                  <Link className={styles.footer__link} href={`${usefulLinkPath?.toString()}`}>
                     {usefulLinkName}
                   </Link>
                 </li>
@@ -62,25 +64,24 @@ export default function Footer(_props: IFooterProps) {
             </ul>
           </div>
 
-          <div className="text-center">
-            <h3 className="text-lg font-semibold mb-4">Address</h3>
-            <p className="mb-2">{footerData?.address?.physicalAddress}</p>
-            <p className="mb-2">{footerData?.address?.emailAddress}</p>
-            <p>{footerData?.address?.contactNumber}</p>
+          <div className={styles.footer__column}>
+            <h3 className={styles.footer__title}>Address</h3>
+            <p className={styles.footer__text}>{footerData?.address?.physicalAddress}</p>
+            <p className={styles.footer__text}>{footerData?.address?.emailAddress}</p>
+            <p className={styles.footer__text}>{footerData?.address?.contactNumber}</p>
           </div>
 
-          <div className="flex flex-col items-center md:items-center">
-            <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
-            <div className="flex space-x-6">
-              <SocialIcon href="https://www.facebook.com/chandrashekhar.mahamuni" icon={<FaFacebookF size={'25px'} />} />
-              <SocialIcon href="https://www.youtube.com/user/shekharmahamuni/featured" icon={<FaYoutube size={'25px'} />} />
-            </div>
+          <div className={styles.footer__column}>
+            <h3 className={styles.footer__title}>Support</h3>
+            <p className={styles.footer__text}>{footerData?.address?.physicalAddress}</p>
+            <p className={styles.footer__text}>{footerData?.address?.emailAddress}</p>
+            <p className={styles.footer__text}>{footerData?.address?.contactNumber}</p>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-gray-700 py-4 text-center">
-        <p className="text-sm">
+      <div className={styles.footer__bottom}>
+        <p className={styles.footer__bottomText}>
           &copy; {new Date().getFullYear()} {footerData?.copyrightObject?.companyName}. All rights reserved.
         </p>
       </div>
@@ -89,7 +90,7 @@ export default function Footer(_props: IFooterProps) {
 }
 
 const SocialIcon: React.FC<SocialIconProps> = ({ href, icon }) => (
-  <a href={href} className="hover:text-blue-500">
+  <a href={href} className={styles.footer__socialLink}>
     {icon}
   </a>
 );
