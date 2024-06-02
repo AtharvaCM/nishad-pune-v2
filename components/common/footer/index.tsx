@@ -1,5 +1,6 @@
 'use client';
 
+import cx from 'classnames';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { FaFacebookF, FaYoutube } from 'react-icons/fa';
@@ -30,33 +31,33 @@ export default function Footer(_props: IFooterProps) {
   }, []);
 
   return (
-    <footer className={styles.footer}>
-      <div className={styles.footer__container}>
-        <div className={styles.footer__newsletter}>
-          <h3 className={styles.footer__newsletterTitle}>Want us to email you with the latest blockbuster news?</h3>
-          <div className={styles.footer__newsletterForm}>
-            <input type="email" placeholder="nikola@tesla.com" className={styles.footer__newsletterInput} />
-            <button className={styles.footer__newsletterButton}>Subscribe</button>
+    <footer className={cx(styles['footer'])}>
+      <div className={cx(styles['footer__container'])}>
+        <div className={cx(styles['footer__newsletter'])}>
+          <h3 className={cx(styles['footer__newsletter-title'])}>Want us to email you with the latest blockbuster news?</h3>
+          <div className={cx(styles['footer__newsletter-form'])}>
+            <input type="email" placeholder="nikola@tesla.com" className={cx(styles['footer__newsletter-input'])} />
+            <button className={cx(styles['footer__newsletter-button'])}>Subscribe</button>
           </div>
         </div>
 
-        <div className={styles.footer__grid}>
-          <div className={styles.footer__column}>
-            <p className={styles.footerText}>
+        <div className={cx(styles['footer__grid'])}>
+          <div className={cx(styles['footer__column'])}>
+            <p className={cx(styles['footer-text'])}>
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium natus quod eveniet aut perferendis distinctio iusto
               repudiandae, provident velit earum?
             </p>
-            <div className={styles.footer__socialIcons}>
+            <div className={cx(styles['footer__social-icons'])}>
               <SocialIcon href="https://www.facebook.com/chandrashekhar.mahamuni" icon={<FaFacebookF size={'21px'} />} />
               <SocialIcon href="https://www.youtube.com/user/shekharmahamuni/featured" icon={<FaYoutube size={'21px'} />} />
             </div>
           </div>
 
-          <div className={styles.footer__column}>
-            <ul className={styles.footer__links}>
+          <div className={cx(styles['footer__column'])}>
+            <ul className={cx(styles['footer__links'])}>
               {footerData?.usefulLinks?.map(({ _key, usefulLinkName, usefulLinkPath }) => (
-                <li key={_key} className={styles.footer__linkItem}>
-                  <Link className={styles.footer__link} href={`${usefulLinkPath?.toString()}`}>
+                <li key={_key} className={cx(styles['footer__link-item'])}>
+                  <Link className={cx(styles['footer__link'])} href={`${usefulLinkPath?.toString()}`}>
                     {usefulLinkName}
                   </Link>
                 </li>
@@ -64,24 +65,24 @@ export default function Footer(_props: IFooterProps) {
             </ul>
           </div>
 
-          <div className={styles.footer__column}>
-            <h3 className={styles.footer__title}>Address</h3>
-            <p className={styles.footer__text}>{footerData?.address?.physicalAddress}</p>
-            <p className={styles.footer__text}>{footerData?.address?.emailAddress}</p>
-            <p className={styles.footer__text}>{footerData?.address?.contactNumber}</p>
+          <div className={cx(styles['footer__column'])}>
+            <h3 className={cx(styles['footer__title'])}>Address</h3>
+            <p className={cx(styles['footer__text'])}>{footerData?.address?.physicalAddress}</p>
+            <p className={cx(styles['footer__text'])}>{footerData?.address?.emailAddress}</p>
+            <p className={cx(styles['footer__text'])}>{footerData?.address?.contactNumber}</p>
           </div>
 
-          <div className={styles.footer__column}>
-            <h3 className={styles.footer__title}>Support</h3>
-            <p className={styles.footer__text}>{footerData?.address?.physicalAddress}</p>
-            <p className={styles.footer__text}>{footerData?.address?.emailAddress}</p>
-            <p className={styles.footer__text}>{footerData?.address?.contactNumber}</p>
+          <div className={cx(styles['footer__column'])}>
+            <h3 className={cx(styles['footer__title'])}>Support</h3>
+            <p className={cx(styles['footer__text'])}>{footerData?.address?.physicalAddress}</p>
+            <p className={cx(styles['footer__text'])}>{footerData?.address?.emailAddress}</p>
+            <p className={cx(styles['footer__text'])}>{footerData?.address?.contactNumber}</p>
           </div>
         </div>
       </div>
 
-      <div className={styles.footer__bottom}>
-        <p className={styles.footer__bottomText}>
+      <div className={cx(styles['footer__bottom'])}>
+        <p className={cx(styles['footer__bottom-text'])}>
           &copy; {new Date().getFullYear()} {footerData?.copyrightObject?.companyName}. All rights reserved.
         </p>
       </div>
@@ -90,7 +91,7 @@ export default function Footer(_props: IFooterProps) {
 }
 
 const SocialIcon: React.FC<SocialIconProps> = ({ href, icon }) => (
-  <a href={href} className={styles.footer__socialLink}>
+  <a href={href} className={cx(styles['footer__social-link'])}>
     {icon}
   </a>
 );
