@@ -1,7 +1,6 @@
 'use client';
 import cx from 'classnames';
 import Image from 'next/image';
-
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -9,8 +8,8 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { client } from '@/sanity/lib/client';
 import { FETCH_HEADER } from '@/sanity/queries/header/fetch-header';
 import { FETCH_HEADERResult } from '@/types/generated/sanity.types';
-
 import { fetchImageURL } from '@/utils/functions/fetchImageURL';
+
 import styles from './header.module.scss';
 
 export interface IHeaderProps {}
@@ -71,7 +70,7 @@ export default function Header(_props: IHeaderProps) {
           </div>
         </div>
       </div>
-      
+
       <div className={cx(styles['d-container__mobile-menu'], { [styles['d-container__mobile-menu--open']]: isOpen })} id="mobile-menu">
         <div className={cx(styles['d-container__mobile-menu-content'])}>
           {headerData?.navigation?.map(({ text, href }) => (
