@@ -8,8 +8,8 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { client } from '@/sanity/lib/client';
 import { FETCH_HEADER } from '@/sanity/queries/header/fetch-header';
 import { FETCH_HEADERResult } from '@/types/generated/sanity.types';
+import { fetchImageURL } from '@/utils/functions/fetchImageURL';
 
-import { fetchImageURL } from '../../../utils/functions/fetchImageURL';
 import styles from './header.module.scss';
 
 export interface IHeaderProps {}
