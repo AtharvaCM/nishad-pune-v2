@@ -23,7 +23,7 @@ const inter = Inter({
 
 export default function RootLayout({ children }: PropsWithChildren) {
   const pathname = headers().get('x-next-pathname') as string;
-  const isSanityRoute = pathname.startsWith('/sanity');
+  const isSanityRoute = pathname?.startsWith('/sanity') ? true : false;
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -31,11 +31,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="en" className="light">
       <body className={cx('bg-white', inter.variable)}>
         <Theme accentColor="grass" grayColor="olive">
-          {!isSanityRoute && <Header />}
+          {!isSanityRoute ? <Header /> : null}
           <div className="container mx-auto">{children}</div>
           {draftMode().isEnabled && <VisualEditing />}
-          {!isSanityRoute && <Footer />}
-          {!isSanityRoute && <LenisScroller />}
+          {!isSanityRoute ? <Footer /> : null}
+          {!isSanityRoute ? <LenisScroller /> : null}
         </Theme>
       </body>
     </html>
