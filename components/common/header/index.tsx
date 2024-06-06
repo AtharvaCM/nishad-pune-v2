@@ -18,6 +18,7 @@ export default function Header(_props: IHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [headerData, setHeaderData] = useState<FETCH_HEADERResult>(null);
   const [logoUrl, setLogoUrl] = useState('');
+  const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
     const fetchHeaderData = async () => {
@@ -33,6 +34,15 @@ export default function Header(_props: IHeaderProps) {
     };
 
     fetchHeaderData();
+
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const toggleMenu = () => {
@@ -40,7 +50,7 @@ export default function Header(_props: IHeaderProps) {
   };
 
   return (
-    <nav className={cx(styles['d-container'])}>
+    <nav className={cx(styles.dContainer, { [styles.sticky]: isSticky })}>
       <div className={cx(styles['d-container__inner'])}>
         <div className={cx(styles['d-container__content'])}>
           <div className={cx(styles['d-container__logo-container'])}>
