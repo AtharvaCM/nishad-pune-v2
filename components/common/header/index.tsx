@@ -50,7 +50,7 @@ export default function Header(_props: IHeaderProps) {
   };
 
   return (
-    <nav className={cx(styles.dContainer, { [styles.sticky]: isSticky })}>
+    <nav className={cx(styles['d-container'], { [styles['d-container--sticky']]: isSticky })}>
       <div className={cx(styles['d-container__inner'])}>
         <div className={cx(styles['d-container__content'])}>
           <div className={cx(styles['d-container__logo-container'])}>
@@ -75,7 +75,7 @@ export default function Header(_props: IHeaderProps) {
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
-              {isOpen ? <FaBars /> : <FaTimes />}
+              {isOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
         </div>
