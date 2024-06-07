@@ -28,6 +28,7 @@
     "@sanity/overlays": "^2.3.8",
     "@sanity/react-loader": "^1.8.0",
     "@sanity/vision": "^3.26.1",
+    "@uidotdev/usehooks": "^2.4.1",
     "classnames": "^2.5.1",
     "gsap": "^3.12.5",
     "lenis": "^1.0.45",
