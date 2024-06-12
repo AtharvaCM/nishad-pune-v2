@@ -1,6 +1,29 @@
 .d-container {
-  @apply bg-white;
+  @apply z-20;
+  @apply w-full;
+  @apply transition-all;
+  @apply bg-transparent;
+  @apply sticky;
+  @apply top-[0];
   @apply shadow-md;
+  @apply bg-white;
+  &--enable-fixed-pos {
+    @apply fixed;
+  }
+  &--enable-bg-transparent {
+    @apply bg-transparent;
+    @apply shadow-none;
+    .d-container__navigation-link {
+      @apply text-white;
+      &:hover {
+        @apply text-gray-300;
+      }
+      &--active {
+        @apply border-b-2;
+        @apply border-white;
+      }
+    }
+  }
   &__inner {
     @apply max-w-7xl;
     @apply mx-auto;
@@ -38,15 +61,18 @@
       @apply space-x-8;
     }
   }
-  &__nagivation-link {
+  &__navigation-link {
     @apply text-gray-800;
     @apply px-3;
     @apply py-2;
-    @apply rounded-md;
     @apply text-sm;
     @apply font-medium;
     &:hover {
       @apply text-gray-600;
+    }
+    &--active {
+      @apply border-b-2;
+      @apply border-gray-600;
     }
   }
   &__menu-button-container {
@@ -75,6 +101,8 @@
       @apply ring-gray-300;
     }
   }
+
+  // mobile styles
   &__mobile-menu {
     @apply hidden;
     @screen md {
@@ -86,23 +114,23 @@
   }
   &__mobile-menu-content {
     @apply px-2;
-    @apply pt-2;
-    @apply pb-3;
+    @apply py-4;
     @apply space-y-1;
+    @apply bg-white;
     @screen sm {
       @apply px-3;
     }
+    @screen md {
+      @apply hidden;
+    }
   }
   &__mobile-menu-link {
-    @apply text-gray-800;
-    &:hover {
-      @apply text-gray-600;
-      @apply block;
-      @apply px-3;
-      @apply py-2;
-      @apply rounded-md;
-      @apply text-base;
-      @apply font-medium;
+    p {
+      @apply text-gray-800;
+      @apply mb-2;
+      &:hover {
+        @apply font-bold;
+      }
     }
   }
 }

@@ -1,7 +1,10 @@
 'use client';
+import { Text } from '@radix-ui/themes';
+import { useWindowScroll } from '@uidotdev/usehooks';
 import cx from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
@@ -18,6 +21,11 @@ export default function Header(_props: IHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [headerData, setHeaderData] = useState<FETCH_HEADERResult>(null);
   const [logoUrl, setLogoUrl] = useState('');
+
+  const pathname = usePathname();
+  const [{ y }] = useWindowScroll();
+  const enableFixedPos = pathname === '/';
+  const enableBgTransparent = enableFixedPos ? y !== null && y < 100 && !isOpen : false;
 
   useEffect(() => {
     const fetchHeaderData = async () => {
@@ -40,7 +48,12 @@ export default function Header(_props: IHeaderProps) {
   };
 
   return (
-    <nav className={cx(styles['d-container'])}>
+    <nav
+      className={cx(styles['d-container'], {
+        [styles['d-container--enable-fixed-pos']]: enableFixedPos,
+        [styles['d-container--enable-bg-transparent']]: enableBgTransparent,
+      })}
+    >
       <div className={cx(styles['d-container__inner'])}>
         <div className={cx(styles['d-container__content'])}>
           <div className={cx(styles['d-container__logo-container'])}>
@@ -52,7 +65,13 @@ export default function Header(_props: IHeaderProps) {
           </div>
           <div className={cx(styles['d-container__navigation'])}>
             {headerData?.navigation?.map(({ text, href }) => (
-              <Link key={text} href={`${href?.toString()}`} className={cx(styles['d-container__navigation-link'])}>
+              <Link
+                key={text}
+                href={`${href?.toString()}`}
+                className={cx(styles['d-container__navigation-link'], {
+                  [styles['d-container__navigation-link--active']]: pathname === href,
+                })}
+              >
                 {text}
               </Link>
             ))}
@@ -65,7 +84,7 @@ export default function Header(_props: IHeaderProps) {
               aria-controls="mobile-menu"
               aria-expanded="false"
             >
-              {isOpen ? <FaBars /> : <FaTimes />}
+              {isOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
         </div>
@@ -75,7 +94,9 @@ export default function Header(_props: IHeaderProps) {
         <div className={cx(styles['d-container__mobile-menu-content'])}>
           {headerData?.navigation?.map(({ text, href }) => (
             <Link key={text} href={`${href?.toString()}`} className={cx(styles['d-container__mobile-menu-link'])}>
-              {text}
+              <Text as="p" weight={'medium'}>
+                {text}
+              </Text>
             </Link>
           ))}
         </div>

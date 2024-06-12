@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import { SanityDocument } from 'next-sanity'
+import Link from 'next/link';
+import { SanityDocument } from 'next-sanity';
 
-export default function Posts({ posts }: { posts: SanityDocument[] }) {
+export default function Posts({ posts }: Readonly<{ posts: SanityDocument[] }>) {
   return (
     <main className="container mx-auto grid grid-cols-1 divide-y divide-blue-100">
       {posts?.length > 0 ? (
@@ -14,5 +14,5 @@ export default function Posts({ posts }: { posts: SanityDocument[] }) {
         <div className="p-4 text-red-500">No posts found</div>
       )}
     </main>
-  )
+  );
 }
