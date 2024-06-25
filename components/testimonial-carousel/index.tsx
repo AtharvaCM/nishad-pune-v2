@@ -1,45 +1,22 @@
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+import { Box } from '@radix-ui/themes';
 import cx from 'classnames';
-import React from 'react';
+import Image from 'next/image';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 
-import styles from './slider-carousel.module.scss';
+import homepageTestimonials from '@/utils/constants/homepage-testimonials.json';
 
-const testimonials = [
-  {
-    name: 'Missy Limana',
-    role: 'Engineer',
-    image: 'https://randomuser.me/api/portraits/women/74.jpg',
-    feedback: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat.',
-  },
-  {
-    name: 'Max Brown',
-    role: 'Project Lead',
-    image: 'https://randomuser.me/api/portraits/men/71.jpg',
-    feedback: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat.',
-  },
-  {
-    name: 'Hanna Lisem',
-    role: 'Project Manager',
-    image: 'https://randomuser.me/api/portraits/women/73.jpg',
-    feedback: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat.',
-  },
-  {
-    name: 'Peter Zenetti',
-    role: 'Sopftware Developer',
-    image: 'https://randomuser.me/api/portraits/men/72.jpg',
-    feedback: 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat.',
-  },
-];
+import styles from './slider-carousel.module.scss';
 
 export default function TestimonialCarousel() {
   const settings = {
     className: 'center',
     centerMode: true,
     infinite: true,
-    centerPadding: '60px',
+    centerPadding: '0px',
     slidesToShow: 3,
     speed: 700,
     autoplay: true,
@@ -60,22 +37,36 @@ export default function TestimonialCarousel() {
     ],
   };
 
+  const [currentSlideNumber, setCurrentSlideNumber] = useState<number>(0);
+
   return (
-    <div className={cx(styles['d-container'])}>
-      <div className={cx(styles['d-container__inner'])}>
-        <Slider {...settings}>
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className={cx(styles['d-container__slide'])}>
-              <div className={cx(styles['testimonial'])}>
-                <img src={testimonial.image} alt={testimonial.name} className={cx(styles['testimonial__image'])} />
-                <h3 className={cx(styles['testimonial__name'])}>{testimonial.name}</h3>
-                <p className={cx(styles['testimonial__role'])}>{testimonial.role}</p>
-                <p className={cx(styles['testimonial__feedback'])}>{testimonial.feedback}</p>
-              </div>
-            </div>
+    <Box className={cx(styles['d-container'])}>
+      <Box className={cx(styles['d-container__inner'])}>
+        <Slider {...settings} beforeChange={(currentSlide: number, nextSlide: number) => setCurrentSlideNumber(nextSlide)}>
+          {homepageTestimonials.map((testimonial) => (
+            <Box key={testimonial.id} className={cx(styles['d-container__slide'])}>
+              <Box
+                className={cx(styles['d-container__card'], {
+                  [styles['d-container__card--current']]: currentSlideNumber + 1 === testimonial.id,
+                })}
+              >
+                <Box className={cx(styles['d-container__image-wrapper'])}>
+                  <Image
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className={cx(styles['d-container__image'])}
+                    width={96}
+                    height={96}
+                  />
+                </Box>
+                <h3 className={cx(styles['d-container__name'])}>{testimonial.name}</h3>
+                <p className={cx(styles['d-container__role'])}>{testimonial.role}</p>
+                <p className={cx(styles['d-container__feedback'])}>{testimonial.feedback}</p>
+              </Box>
+            </Box>
           ))}
         </Slider>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
