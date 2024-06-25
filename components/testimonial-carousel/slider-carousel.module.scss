@@ -5,17 +5,28 @@
   @apply overflow-hidden;
   @apply bg-gray-700;
   @apply py-10;
+
   @screen 2xl {
     @apply w-[calc(100vw-8px)];
   }
+
   &__inner {
     @apply max-w-screen-xl;
     @apply mx-auto;
     @apply my-8;
   }
+
   &__slide {
     @apply px-4;
+    @apply transition-all;
+    @apply duration-300;
+
+    &--blurred {
+      @apply filter blur-sm;
+      @apply opacity-50;
+    }
   }
+
   &__card {
     @apply bg-white;
     @apply p-6;
@@ -25,29 +36,35 @@
     @apply scale-75;
     @apply transition-all;
     @apply duration-300;
+
     &--current {
       @apply scale-100;
     }
   }
+
   &__image-wrapper {
     @apply w-24;
     @apply h-24;
     @apply mx-auto;
   }
+
   &__image {
     @apply w-full;
     @apply h-auto;
     @apply rounded-full;
     @apply mb-4;
   }
+
   &__name {
     @apply text-lg;
     @apply font-semibold;
     @apply text-blue-700;
   }
+
   &__role {
     @apply text-gray-500;
   }
+
   &__feedback {
     @apply mt-4;
     @apply text-gray-600;

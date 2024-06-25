@@ -21,6 +21,7 @@ export default function TestimonialCarousel() {
     speed: 700,
     autoplay: true,
     autoplaySpeed: 2000,
+    beforeChange: (currentSlide: number, nextSlide: number) => setCurrentSlideNumber(nextSlide),
     responsive: [
       {
         breakpoint: 1024,
@@ -42,9 +43,14 @@ export default function TestimonialCarousel() {
   return (
     <Box className={cx(styles['d-container'])}>
       <Box className={cx(styles['d-container__inner'])}>
-        <Slider {...settings} beforeChange={(currentSlide: number, nextSlide: number) => setCurrentSlideNumber(nextSlide)}>
+        <Slider {...settings}>
           {homepageTestimonials.map((testimonial) => (
-            <Box key={testimonial.id} className={cx(styles['d-container__slide'])}>
+            <Box
+              key={testimonial.id}
+              className={cx(styles['d-container__slide'], {
+                [styles['d-container__slide--blurred']]: currentSlideNumber + 1 !== testimonial.id,
+              })}
+            >
               <Box
                 className={cx(styles['d-container__card'], {
                   [styles['d-container__card--current']]: currentSlideNumber + 1 === testimonial.id,
