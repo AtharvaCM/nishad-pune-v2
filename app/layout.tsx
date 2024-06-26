@@ -1,13 +1,14 @@
 import '@radix-ui/themes/styles.css';
 import './globals.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import { Theme } from '@radix-ui/themes';
 import cx from 'classnames';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Inter } from 'next/font/google';
-import { draftMode } from 'next/headers';
-import { headers } from 'next/headers';
+import { draftMode, headers } from 'next/headers';
 import { PropsWithChildren } from 'react';
 
 import Footer from '@/components/common/footer';
@@ -21,9 +22,9 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
   const pathname = headers().get('x-next-pathname') as string;
-  const isSanityRoute = pathname?.startsWith('/sanity') ? true : false;
+  const isSanityRoute = !!pathname?.startsWith('/sanity');
 
   gsap.registerPlugin(ScrollTrigger);
 
