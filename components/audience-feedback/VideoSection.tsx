@@ -27,7 +27,7 @@ const VideoSection: React.FC = () => (
           title={`${video.title}`}
           author={`${video.author}`}
           info={`${video.info}`}
-          bgGray={index % 2 === 0 ? 'bg-gray-200' : 'bg-white'}
+          bgGray={index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-200'}
         />
       ))}
     </div>
