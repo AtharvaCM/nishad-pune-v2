@@ -6,12 +6,16 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
       },
+      {
+        protocol: 'https',
+        hostname: 'randomuser.me',
+      },
     ],
   },
   experimental: {
     taint: true,
   },
   // ...other config settings
-}
+};
 
-export default nextConfig
+export default nextConfig;

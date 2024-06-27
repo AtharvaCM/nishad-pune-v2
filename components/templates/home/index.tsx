@@ -1,6 +1,7 @@
 'use client';
 
 import HeroSection from '@/components/home/hero-section';
+import TestimonialCarousel from '@/components/testimonial-carousel';
 
 import AudienceFeedback from './../../audience-feedback/index';
 
@@ -12,6 +13,7 @@ export default function HomePageTemplate(_props: IHomePageTemplateProps) {
       <HeroSection />
       <h1 className="text-4xl font-bold text-center my-8">Audience Feedback</h1>
       <AudienceFeedback />
+      <TestimonialCarousel />
     </div>
   );
 }
