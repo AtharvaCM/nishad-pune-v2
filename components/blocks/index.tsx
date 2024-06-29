@@ -1,17 +1,13 @@
 import { FC } from 'react';
 
+import { Homepage } from '@/types/generated/sanity.types';
+
 import TestimonialCarousel from '../testimonial-carousel';
 import AudienceFeedbackBlock from './audience-feedback-block';
 import HeroBlock from './hero-block';
 
-type TBlocks = {
-  _type: string;
-  _key: string;
-  [key: string]: unknown;
-};
-
-function renderBlocks(blocks: TBlocks[]) {
-  return blocks.map((block, index) => {
+function renderBlocks(blocks: Homepage['blocks']) {
+  return blocks?.map((block, index) => {
     switch (block._type) {
       case 'heroBlock':
         return <HeroBlock key={index} {...block} />;
@@ -26,8 +22,7 @@ function renderBlocks(blocks: TBlocks[]) {
 }
 
 interface IBlocksProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  blocks: any;
+  blocks: Homepage['blocks'];
 }
 
 const Blocks: FC<IBlocksProps> = ({ blocks }) => <>{renderBlocks(blocks)}</>;

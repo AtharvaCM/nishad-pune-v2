@@ -8,8 +8,8 @@ import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
+import { urlForImage } from '@/sanity/lib/image';
 import { FETCH_HEADERResult } from '@/types/generated/sanity.types';
-import { fetchImageURL } from '@/utils/functions/fetchImageURL';
 
 import styles from './header.module.scss';
 
@@ -28,7 +28,7 @@ export default function Header(props: IHeaderProps) {
   const enableBgTransparent = enableFixedPos ? y !== null && y < 100 && !isOpen : false;
 
   const logoAsset = headerData?.logo?.asset;
-  const logoUrl = logoAsset && fetchImageURL(logoAsset._ref);
+  const logoUrl = logoAsset && urlForImage(logoAsset);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);

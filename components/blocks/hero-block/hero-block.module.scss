@@ -18,13 +18,18 @@
     background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45));
     z-index: 1;
   }
-  &__bg-video {
+  &__bg-media {
     @apply absolute;
     @apply top-0;
     @apply left-0;
     @apply w-full;
     @apply h-full;
     @apply object-cover;
+  }
+  &__bg-media-image {
+    @apply border;
+    @apply w-full;
+    @apply h-full;
   }
   &__overlay {
     @apply absolute;
