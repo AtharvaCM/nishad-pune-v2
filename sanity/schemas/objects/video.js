@@ -11,9 +11,9 @@ export default {
       validation: (Rule) =>
         Rule.required().custom((value) => {
           if (typeof value === 'string' && value.trim() === '') {
-            return 'Video Label cannot be empty'
+            return 'Video Label cannot be empty';
           }
-          return true
+          return true;
         }),
     },
     {
@@ -22,4 +22,4 @@ export default {
       title: 'URL',
     },
   ],
-}
+};

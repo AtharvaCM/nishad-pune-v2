@@ -5,43 +5,30 @@ import cx from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
-import { client } from '@/sanity/lib/client';
-import { FETCH_HEADER } from '@/sanity/queries/header/fetch-header';
 import { FETCH_HEADERResult } from '@/types/generated/sanity.types';
 import { fetchImageURL } from '@/utils/functions/fetchImageURL';
 
 import styles from './header.module.scss';
 
-export interface IHeaderProps {}
+export interface IHeaderProps {
+  headerData: FETCH_HEADERResult;
+}
 
-export default function Header(_props: IHeaderProps) {
+export default function Header(props: IHeaderProps) {
+  const { headerData } = props;
+
   const [isOpen, setIsOpen] = useState(false);
-  const [headerData, setHeaderData] = useState<FETCH_HEADERResult>(null);
-  const [logoUrl, setLogoUrl] = useState('');
 
   const pathname = usePathname();
   const [{ y }] = useWindowScroll();
   const enableFixedPos = pathname === '/';
   const enableBgTransparent = enableFixedPos ? y !== null && y < 100 && !isOpen : false;
 
-  useEffect(() => {
-    const fetchHeaderData = async () => {
-      const headerDataResult = await client.fetch<FETCH_HEADERResult>(FETCH_HEADER);
-      setHeaderData(headerDataResult);
-      const logoAsset = headerDataResult?.logo?.asset;
-      if (logoAsset !== undefined) {
-        const imageUrl = fetchImageURL(logoAsset._ref);
-        setLogoUrl(imageUrl);
-      } else {
-        // TODO: SET BACKUP local IMAGE WITH setLogoUrl(imageUrl);
-      }
-    };
-
-    fetchHeaderData();
-  }, []);
+  const logoAsset = headerData?.logo?.asset;
+  const logoUrl = logoAsset && fetchImageURL(logoAsset._ref);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);

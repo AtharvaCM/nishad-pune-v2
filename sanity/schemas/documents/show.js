@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import ticketTier from '../common/ticketTier'
+import ticketTier from '../objects/ticketTier';
 
 export default {
   name: 'show',
@@ -13,9 +13,9 @@ export default {
       validation: (Rule) =>
         Rule.required().custom((value) => {
           if (typeof value === 'string' && value.trim() === '') {
-            return 'Title cannot be empty'
+            return 'Title cannot be empty';
           }
-          return true
+          return true;
         }),
     },
     {
@@ -29,9 +29,9 @@ export default {
       validation: (Rule) =>
         Rule.required().custom((value) => {
           if (typeof value === 'string' && value.trim() === '') {
-            return 'Slug cannot be empty'
+            return 'Slug cannot be empty';
           }
-          return true
+          return true;
         }),
     },
     {
@@ -42,9 +42,9 @@ export default {
       validation: (Rule) =>
         Rule.required().custom((value) => {
           if (typeof value === 'string' && value.trim() === '') {
-            return 'Description cannot be empty'
+            return 'Description cannot be empty';
           }
-          return true
+          return true;
         }),
     },
     {
@@ -63,14 +63,13 @@ export default {
           validation: (Rule) =>
             Rule.required().custom((value) => {
               if (typeof value === 'string' && value.trim() === '') {
-                return 'Theme cannot be empty'
+                return 'Theme cannot be empty';
               }
-              return true
+              return true;
             }),
         },
       ],
-      validation: (Rule) =>
-        Rule.required().min(1).error('At least one theme is required'),
+      validation: (Rule) => Rule.required().min(1).error('At least one theme is required'),
     },
     {
       name: 'images',
@@ -155,13 +154,13 @@ export default {
       date: 'date',
     },
     prepare(selection) {
-      const { title, media, date } = selection
-      const subtitle = date ? new Date(date).toDateString() : 'Date TBA'
+      const { title, media, date } = selection;
+      const subtitle = date ? new Date(date).toDateString() : 'Date TBA';
       return {
         title: title,
         media: media,
         subtitle: subtitle,
-      }
+      };
     },
   },
-}
+};

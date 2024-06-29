@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import callToAction from './callToAction'
+import callToAction from './callToAction';
 
 export default {
   name: 'heroWithCTA',
@@ -40,4 +40,4 @@ export default {
     },
     callToAction,
   ],
-}
+};

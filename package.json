@@ -29,10 +29,13 @@
     "@sanity/react-loader": "^1.8.0",
     "@sanity/vision": "^3.26.1",
     "@uidotdev/usehooks": "^2.4.1",
+    "class-variance-authority": "^0.7.0",
     "classnames": "^2.5.1",
+    "clsx": "^2.1.1",
     "gsap": "^3.12.5",
     "lenis": "^1.0.45",
     "lodash": "^4.17.21",
+    "lucide-react": "^0.399.0",
     "next": "^14.2.3",
     "next-sanity": "^9.0.15",
     "react": "^18",
@@ -42,7 +45,9 @@
     "sanity": "^3.26.1",
     "sass": "^1.70.0",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
