@@ -11,5 +11,5 @@ export default function HomePageTemplate(props: IHomePageTemplateProps) {
   const { data } = props;
   const blocks = data?.blocks;
 
-  return <div>{blocks !== undefined ? <Blocks blocks={blocks} /> : null}</div>;
+  return <div>{blocks !== undefined && blocks !== null ? <Blocks blocks={blocks} /> : null}</div>;
 }

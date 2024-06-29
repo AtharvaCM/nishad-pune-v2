@@ -22,7 +22,8 @@ function renderBlocks(blocks: Homepage['blocks']) {
 }
 
 interface IBlocksProps {
-  blocks: Homepage['blocks'];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  blocks: any;
 }
 
 const Blocks: FC<IBlocksProps> = ({ blocks }) => <>{renderBlocks(blocks)}</>;
