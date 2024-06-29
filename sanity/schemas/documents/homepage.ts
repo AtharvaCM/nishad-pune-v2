@@ -14,7 +14,7 @@ const homepage = defineType({
       type: 'string',
     }),
     defineField({
-      name: 'content',
+      name: 'blocks',
       title: 'Page Content',
       type: 'array',
       of: blockTypes,

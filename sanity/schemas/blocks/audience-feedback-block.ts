@@ -52,7 +52,6 @@ const audienceFeedback = defineType({
               options: {
                 hotspot: true,
               },
-              validation: (Rule) => Rule.required(),
             }),
           ],
           preview: {

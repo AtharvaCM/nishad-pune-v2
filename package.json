@@ -8,7 +8,8 @@
     "lint:fix": "npm run format && npm run lint -- --fix",
     "prepare": "husky install",
     "start": "next start",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "generate": "sanity schema extract && sanity typegen generate"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

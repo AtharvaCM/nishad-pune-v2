@@ -192,7 +192,7 @@ export type Homepage = {
   _updatedAt: string;
   _rev: string;
   title?: string;
-  content?: Array<
+  blocks?: Array<
     | ({
         _key: string;
       } & HeroBlock)
@@ -770,6 +770,97 @@ export type FETCH_HEADERResult = {
     }> | null;
   }> | null;
 } | null;
+// Source: ./sanity/queries/home/get-home-page.ts
+// Variable: GET_HOME_PAGE
+// Query: *[_type == "homepage"][0]{  title,    blocks[]{    _type == "heroBlock" =>   {    _type,    heading,    tagline,    content,    mediaType,    backgroundImage,    backgroundVideo  },    _type == "testimonialBlock" =>   {    _type,    title,    testimonials[]{      name,      image,      designation,      testimonialText    }  },    _type == "audienceFeedbackBlock" =>   {    _type,    title,    feedbacks[]{      title,      caption,      videoUrl,      thumbnail    }  }  }}
+export type GET_HOME_PAGEResult = {
+  title: string | null;
+  blocks: Array<
+    | {
+        _type: 'audienceFeedbackBlock';
+        title: string | null;
+        feedbacks: Array<{
+          title: string | null;
+          caption: string | null;
+          videoUrl: string | null;
+          thumbnail: {
+            asset?: {
+              _ref: string;
+              _type: 'reference';
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: 'image';
+          } | null;
+        }> | null;
+      }
+    | {
+        _type: 'heroBlock';
+        heading: string | null;
+        tagline: string | null;
+        content: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: 'span';
+            _key: string;
+          }>;
+          style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+          listItem?: 'bullet' | 'number';
+          markDefs?: Array<{
+            href?: string;
+            _type: 'link';
+            _key: string;
+          }>;
+          level?: number;
+          _type: 'block';
+          _key: string;
+        }> | null;
+        mediaType: 'image' | 'video' | null;
+        backgroundImage: {
+          asset?: {
+            _ref: string;
+            _type: 'reference';
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          caption?: string;
+          metadata?: {
+            author?: string;
+            copyright?: string;
+            source?: string;
+          };
+          _type: 'customImage';
+        } | null;
+        backgroundVideo: CustomVideo | null;
+      }
+    | {
+        _type: 'testimonialBlock';
+        title: string | null;
+        testimonials: Array<{
+          name: string | null;
+          image: {
+            asset?: {
+              _ref: string;
+              _type: 'reference';
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+            };
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            _type: 'image';
+          } | null;
+          designation: string | null;
+          testimonialText: string | null;
+        }> | null;
+      }
+  > | null;
+} | null;
 // Source: ./sanity/queries/page/get-page.ts
 // Variable: GET_PAGE
 // Query: *[_type == "page" && slug.current == $slug][0] {  _id,  _createdAt,  title,  "slug": slug.current,  content}
@@ -806,3 +897,35 @@ export type GET_PAGESResult = Array<{
   title: string | null;
   slug: string | null;
 }>;
+// Source: ./sanity/queries/fragments/blocks/audience-feedback-fragment.ts
+// Variable: audienceFeedbackFragment
+// Query:   {    _type,    title,    feedbacks[]{      title,      caption,      videoUrl,      thumbnail    }  }
+export type AudienceFeedbackFragmentResult = {
+  _type: never;
+  title: never;
+  feedbacks: never;
+};
+// Source: ./sanity/queries/fragments/blocks/hero-block-fragment.ts
+// Variable: heroFragment
+// Query:   {    _type,    heading,    tagline,    content,    mediaType,    backgroundImage,    backgroundVideo  }
+export type HeroFragmentResult = {
+  _type: never;
+  heading: never;
+  tagline: never;
+  content: never;
+  mediaType: never;
+  backgroundImage: never;
+  backgroundVideo: never;
+};
+// Source: ./sanity/queries/fragments/blocks/index.ts
+// Variable: blocksFragment
+// Query:   blocks[]{    _type == "heroBlock" =>   {    _type,    heading,    tagline,    content,    mediaType,    backgroundImage,    backgroundVideo  },    _type == "testimonialBlock" =>   {    _type,    title,    testimonials[]{      name,      image,      designation,      testimonialText    }  },    _type == "audienceFeedbackBlock" =>   {    _type,    title,    feedbacks[]{      title,      caption,      videoUrl,      thumbnail    }  }  }
+export type BlocksFragmentResult = never;
+// Source: ./sanity/queries/fragments/blocks/testimonial-block-fragment.ts
+// Variable: testimonialFragment
+// Query:   {    _type,    title,    testimonials[]{      name,      image,      designation,      testimonialText    }  }
+export type TestimonialFragmentResult = {
+  _type: never;
+  title: never;
+  testimonials: never;
+};

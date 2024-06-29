@@ -1220,7 +1220,7 @@
         },
         "optional": true
       },
-      "content": {
+      "blocks": {
         "type": "objectAttribute",
         "value": {
           "type": "array",

@@ -1,15 +1,15 @@
 'use client';
 
-import HeroSection from '@/components/home/hero-section';
-import TestimonialCarousel from '@/components/testimonial-carousel';
+import Blocks from '@/components/blocks';
+import { GET_HOME_PAGEResult } from '@/types/generated/sanity.types';
 
-export interface IHomePageTemplateProps {}
+export interface IHomePageTemplateProps {
+  data: GET_HOME_PAGEResult;
+}
 
-export default function HomePageTemplate(_props: IHomePageTemplateProps) {
-  return (
-    <div>
-      <HeroSection />
-      <TestimonialCarousel />
-    </div>
-  );
+export default function HomePageTemplate(props: IHomePageTemplateProps) {
+  const { data } = props;
+  const blocks = data?.blocks;
+
+  return <div>{blocks !== undefined ? <Blocks blocks={blocks} /> : null}</div>;
 }
