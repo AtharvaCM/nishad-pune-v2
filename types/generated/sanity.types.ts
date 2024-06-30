@@ -740,36 +740,6 @@ export type FETCH_FOOTERResult = {
     socialMediaServiceURL: string | null;
   }> | null;
 } | null;
-// Source: ./sanity/queries/header/fetch-header.ts
-// Variable: FETCH_HEADER
-// Query: *[_type == "header"][0] {  logo,  address,  phoneNumber,  socialLinks[]{    type,    url  },  navigation[]{    text,    href,    dropdownLinks[]{      text,      href    }  }}
-export type FETCH_HEADERResult = {
-  logo: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: 'image';
-  } | null;
-  address: string | null;
-  phoneNumber: string | null;
-  socialLinks: Array<{
-    type: 'facebook' | 'instagram' | 'twitter' | 'youtube' | null;
-    url: string | null;
-  }> | null;
-  navigation: Array<{
-    text: string | null;
-    href: string | null;
-    dropdownLinks: Array<{
-      text: string | null;
-      href: string | null;
-    }> | null;
-  }> | null;
-} | null;
 // Source: ./sanity/queries/home/get-home-page.ts
 // Variable: GET_HOME_PAGE
 // Query: *[_type == "homepage"][0]{  title,    blocks[]{    _type == "heroBlock" =>   {    _type,    heading,    tagline,    content,    mediaType,    backgroundImage,    backgroundVideo  },    _type == "testimonialBlock" =>   {    _type,    title,    testimonials[]{      name,      image,      designation,      testimonialText    }  },    _type == "audienceFeedbackBlock" =>   {    _type,    title,    feedbacks[]{      title,      caption,      videoUrl,      thumbnail    }  }  }}
@@ -860,6 +830,36 @@ export type GET_HOME_PAGEResult = {
         }> | null;
       }
   > | null;
+} | null;
+// Source: ./sanity/queries/header/fetch-header.ts
+// Variable: FETCH_HEADER
+// Query: *[_type == "header"][0] {  logo,  address,  phoneNumber,  socialLinks[]{    type,    url  },  navigation[]{    text,    href,    dropdownLinks[]{      text,      href    }  }}
+export type FETCH_HEADERResult = {
+  logo: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  } | null;
+  address: string | null;
+  phoneNumber: string | null;
+  socialLinks: Array<{
+    type: 'facebook' | 'instagram' | 'twitter' | 'youtube' | null;
+    url: string | null;
+  }> | null;
+  navigation: Array<{
+    text: string | null;
+    href: string | null;
+    dropdownLinks: Array<{
+      text: string | null;
+      href: string | null;
+    }> | null;
+  }> | null;
 } | null;
 // Source: ./sanity/queries/page/get-page.ts
 // Variable: GET_PAGE
