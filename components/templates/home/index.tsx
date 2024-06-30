@@ -10,6 +10,7 @@ export interface IHomePageTemplateProps {
 export default function HomePageTemplate(props: Readonly<IHomePageTemplateProps>) {
   const { data } = props;
   const blocks = data?.blocks;
+  console.log('blocks: ', blocks);
 
   return <div>{blocks !== undefined && blocks !== null ? <Blocks blocks={blocks} /> : null}</div>;
 }

@@ -8,6 +8,8 @@ async function getHomePageData() {
   return client.fetch<GET_HOME_PAGEResult>(GET_HOME_PAGE);
 }
 
+export const revalidate = process.env.REVALIDATE_DURATION ?? 86400;
+
 export default async function Page() {
   const data = await getHomePageData();
 
