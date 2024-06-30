@@ -7,7 +7,7 @@ export interface IHomePageTemplateProps {
   data: GET_HOME_PAGEResult;
 }
 
-export default function HomePageTemplate(props: IHomePageTemplateProps) {
+export default function HomePageTemplate(props: Readonly<IHomePageTemplateProps>) {
   const { data } = props;
   const blocks = data?.blocks;
 
