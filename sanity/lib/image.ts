@@ -8,14 +8,4 @@ const imageBuilder = createImageUrlBuilder({
   dataset: dataset || '',
 });
 
-export const urlForImage = (source: Image | undefined) => {
-  // Ensure that source image contains a valid reference
-  if (!source?.asset?._ref) {
-    return undefined;
-  }
-
-  return imageBuilder?.image(source).auto('format').fit('max');
-};
-export function urlForOpenGraphImage(image: Image | undefined) {
-  return urlForImage(image)?.width(1200).height(627).fit('crop').url();
-}
+export const urlForImage = (source: Image) => imageBuilder?.image(source).auto('format').fit('max').url();
