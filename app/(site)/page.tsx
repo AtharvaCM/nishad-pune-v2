@@ -1,11 +1,11 @@
 import HomePageTemplate from 'components/templates/home';
 
-import { client } from '@/sanity/lib/client';
+import { sanityFetch } from '@/sanity/lib/client';
 import { GET_HOME_PAGE } from '@/sanity/queries/home/get-home-page';
 import { GET_HOME_PAGEResult } from '@/types/generated/sanity.types';
 
 async function getHomePageData() {
-  return client.fetch<GET_HOME_PAGEResult>(GET_HOME_PAGE);
+  return await sanityFetch<GET_HOME_PAGEResult>({ query: GET_HOME_PAGE, tags: ['homepage'] });
 }
 
 export const revalidate = process.env.REVALIDATE_DURATION ? +process.env.REVALIDATE_DURATION : 86400;
