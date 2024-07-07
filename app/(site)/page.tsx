@@ -8,8 +8,6 @@ async function getHomePageData() {
   return await sanityFetch<GET_HOME_PAGEResult>({ query: GET_HOME_PAGE, tags: ['homepage'] });
 }
 
-export const revalidate = process.env.REVALIDATE_DURATION ? +process.env.REVALIDATE_DURATION : 86400;
-
 export default async function Page() {
   const data = await getHomePageData();
 
