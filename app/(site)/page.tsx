@@ -1,6 +1,6 @@
 import HomePageTemplate from 'components/templates/home';
 
-import { sanityFetch } from '@/sanity/lib/client';
+import { sanityFetch } from '@/sanity/lib/fetch';
 import { GET_HOME_PAGE } from '@/sanity/queries/home/get-home-page';
 import { GET_HOME_PAGEResult } from '@/types/generated/sanity.types';
 
