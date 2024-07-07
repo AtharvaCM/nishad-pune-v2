@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import ticketTier from '../common/ticketTier'
+import ticketTier from '../objects/ticketTier';
 
 export default {
   name: 'event',
@@ -13,9 +13,9 @@ export default {
       validation: (Rule) =>
         Rule.required().custom((value) => {
           if (typeof value === 'string' && value.trim() === '') {
-            return 'Event Title cannot be empty'
+            return 'Event Title cannot be empty';
           }
-          return true
+          return true;
         }),
     },
     {
@@ -70,17 +70,16 @@ export default {
       validation: (Rule) =>
         Rule.required().custom((value) => {
           if (typeof value === 'string' && value.trim() === '') {
-            return 'Event Status cannot be empty'
+            return 'Event Status cannot be empty';
           }
-          return true
+          return true;
         }),
     },
     {
       name: 'priority',
       title: 'Priority',
       type: 'number',
-      description:
-        'Optional field to set the priority for featured events, lower numbers indicate higher priority.',
+      description: 'Optional field to set the priority for featured events, lower numbers indicate higher priority.',
       hidden: ({ parent, value }) => !value && parent?.status !== 'past', // Only show this field for past events if a value is set
     },
     {
@@ -110,12 +109,12 @@ export default {
       media: 'image',
     },
     prepare(selection) {
-      const { title, date, location, media } = selection
+      const { title, date, location, media } = selection;
       return {
         title: title,
         subtitle: `${date} - ${location}`,
         media: media,
-      }
+      };
     },
   },
-}
+};

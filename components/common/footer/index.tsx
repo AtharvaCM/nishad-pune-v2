@@ -1,34 +1,22 @@
-'use client';
-
 import cx from 'classnames';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { FaFacebookF, FaYoutube } from 'react-icons/fa';
 
-import { client } from '@/sanity/lib/client';
-import { FETCH_FOOTER } from '@/sanity/queries/footer/fetch-footer';
 import { FETCH_FOOTERResult } from '@/types/generated/sanity.types';
 
 import styles from './footer.module.scss';
 
-export interface IFooterProps {}
+export interface IFooterProps {
+  footerData: FETCH_FOOTERResult;
+}
 
 interface SocialIconProps {
   href: string;
   icon: JSX.Element;
 }
 
-export default function Footer(_props: IFooterProps) {
-  const [footerData, setFooterData] = useState<FETCH_FOOTERResult>();
-
-  useEffect(() => {
-    const fetchFooterData = async () => {
-      const footerDataResult = await client.fetch<FETCH_FOOTERResult>(FETCH_FOOTER);
-      setFooterData(footerDataResult);
-    };
-
-    fetchFooterData();
-  }, []);
+export default function Footer(props: IFooterProps) {
+  const { footerData } = props;
 
   return (
     <footer className={cx(styles['footer'])}>
