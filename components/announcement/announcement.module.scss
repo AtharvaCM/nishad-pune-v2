@@ -1,0 +1,21 @@
+.d-container {
+  @apply flex;
+  @apply items-center;
+  @apply justify-center;
+  @apply gap-x-4;
+  @apply p-2;
+  @apply text-center;
+  @apply max-md:text-sm;
+  @screen md {
+    @apply gap-x-6;
+  }
+  &__text-wrapper {
+    // @apply anim-fade-to-r;
+    @apply text-balance;
+  }
+  &__cta {
+    // @apply link;
+    // @apply anim-fade-to-l;
+    @apply shrink-0;
+  }
+}

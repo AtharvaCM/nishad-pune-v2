@@ -1,15 +1,36 @@
-import HomePageTemplate from 'components/templates/home';
+import { groq } from 'next-sanity';
 
+import Modules from '@/components/modules';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { GET_HOME_PAGE } from '@/sanity/queries/home/get-home-page';
-import { GET_HOME_PAGEResult } from '@/types/generated/sanity.types';
+import { modulesQuery } from '@/sanity/lib/queries';
+import processMetadata from '@/utils/process-metadata';
 
-async function getHomePageData() {
-  return await sanityFetch<GET_HOME_PAGEResult>({ query: GET_HOME_PAGE, tags: ['homepage'] });
+async function getPage() {
+  const page = await sanityFetch<Sanity.Page>({
+    query: groq`*[_type == 'page' && metadata.slug.current == 'index'][0]{
+			...,
+			modules[]{ ${modulesQuery} },
+			metadata {
+				...,
+				'ogimage': image.asset->url
+			}
+		}`,
+
+    tags: ['homepage'],
+  });
+
+  if (!page) throw new Error('Missing "page" document with metadata.slug "index" in Sanity Studio');
+
+  return page;
+}
+
+export async function generateMetadata() {
+  const page = await getPage();
+  return processMetadata(page);
 }
 
 export default async function Page() {
-  const data = await getHomePageData();
+  const page = await getPage();
 
-  return <HomePageTemplate data={data} />;
+  return <Modules modules={page?.modules} />;
 }

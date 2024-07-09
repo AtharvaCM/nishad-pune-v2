@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import plugin from 'tailwindcss/plugin';
 
 const config = {
   darkMode: ['class'],
@@ -67,9 +68,19 @@ const config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      maxHeight: {
+        fold: 'calc(100svh - var(--header-height))',
+      },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    plugin(function ({ addVariant }) {
+      addVariant('header-open', 'body:has(#header-open:checked) &');
+      addVariant('header-closed', 'body:has(#header-open:not(:checked)) &');
+    }),
+  ],
+  safelist: [{ pattern: /action.*/ }, 'ghost'],
 } satisfies Config;
 
 export default config;

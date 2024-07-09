@@ -1,14 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Heading, Section, Text } from '@radix-ui/themes';
 import cx from 'classnames';
 import Image from 'next/image';
 import { FC } from 'react';
 
 import { urlForImage } from '@/sanity/lib/image';
-import { HeroBlock as HeroBlockProps } from '@/types/generated/sanity.types';
 
 import styles from './hero-block.module.scss';
 
-const HeroBlock: FC<HeroBlockProps> = (props) => {
+const HeroBlock: FC<any> = (props) => {
   const { heading, tagline, mediaType, backgroundImage } = props;
 
   if (!backgroundImage?.asset) return null;
