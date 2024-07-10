@@ -11,7 +11,7 @@ import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel';
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from './sanity/env';
-import { deskStructure } from './sanity/lib/deskStructure';
+import { deskStructure, getDefaultDocumentNode } from './sanity/lib/deskStructure';
 import { locate } from './sanity/presentation/locate';
 import { schemaTypes } from './sanity/schemas';
 
@@ -28,7 +28,7 @@ export default defineConfig({
     templates: (templates) => templates.filter(({ schemaType }) => !singletonTypes.includes(schemaType)),
   },
   plugins: [
-    structureTool({ title: 'Content', structure: deskStructure }),
+    structureTool({ title: 'Content', structure: deskStructure, defaultDocumentNode: getDefaultDocumentNode }),
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ title: 'GROQ', defaultApiVersion: apiVersion }),

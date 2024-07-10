@@ -1,3 +1,5 @@
+import { DeadLinks, Preflight } from '@planetary/sanity-plugin-preflight';
+import { RocketIcon } from '@sanity/icons';
 import { BsDatabaseAdd } from 'react-icons/bs';
 import { VscServerProcess } from 'react-icons/vsc';
 import { StructureBuilder } from 'sanity/structure';
@@ -27,3 +29,30 @@ export const deskStructure = (S: StructureBuilder) =>
         S.documentTypeListItem('testimonial').title('Testimonials'),
       ]).icon(BsDatabaseAdd),
     ]);
+
+export const getDefaultDocumentNode = (S: StructureBuilder, { schemaType }: { schemaType: string }) => {
+  // Only show the Preflight plugin on selected document types
+  if (['blog.post', 'page'].includes(schemaType)) {
+    return S.document().views([
+      // Include the default content editor
+      S.view.form(),
+
+      // Add Preflight plugin
+      S.view
+        .component(
+          Preflight({
+            plugins: [
+              DeadLinks({
+                content: 'modules',
+              }),
+            ],
+          }),
+        )
+        .title('Preflight')
+        .icon(RocketIcon),
+    ]);
+  }
+
+  // Otherwise render the default content editor
+  return S.document().views([S.view.form()]);
+};
