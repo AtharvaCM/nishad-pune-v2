@@ -1,3 +1,4 @@
+import { FcDocument } from 'react-icons/fc';
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
@@ -45,6 +46,7 @@ export default defineType({
     prepare: ({ title, slug }) => ({
       title,
       subtitle: slug && (slug === 'index' ? '/' : `/${slug}`),
+      media: FcDocument,
     }),
   },
 });
