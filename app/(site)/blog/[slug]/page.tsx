@@ -6,7 +6,7 @@ import { client } from '@/sanity/lib/client';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import processMetadata from '@/utils/process-metadata';
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: Readonly<Props>) {
   const post = await getPost(params);
   if (!post) notFound();
   return <Post post={post} />;

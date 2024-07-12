@@ -7,7 +7,7 @@ import { sanityFetch } from '@/sanity/lib/fetch';
 import { modulesQuery } from '@/sanity/lib/queries';
 import processMetadata from '@/utils/process-metadata';
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: Readonly<Props>) {
   const page = await getPage(params);
   if (!page) notFound();
   return <Modules modules={page?.modules} page={page} />;
