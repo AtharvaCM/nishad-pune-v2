@@ -41,19 +41,19 @@ function Icon({ url, ...props }: { url?: string } & React.HTMLProps<SVGElement>)
     return null; // Return null if the URL is invalid
   }
 
-  return url?.includes('facebook.com') ? (
+  return hostname === 'facebook.com' ? (
     <FaFacebookF {...props} />
-  ) : hostname.includes('github.com') ? (
+  ) : hostname === 'github.com' ? (
     <FaGithub {...props} />
-  ) : hostname.includes('instagram.com') ? (
+  ) : hostname === 'instagram.com' ? (
     <FaInstagram {...props} />
-  ) : hostname.includes('linkedin.com') ? (
+  ) : hostname === 'linkedin.com' ? (
     <FaLinkedinIn {...props} />
-  ) : hostname.includes('tiktok.com') ? (
+  ) : hostname === 'tiktok.com' ? (
     <FaTiktok {...props} />
-  ) : hostname.includes('twitter.com') || hostname.includes('x.com') ? (
+  ) : hostname === 'twitter.com' || hostname.includes('x.com') ? (
     <FaXTwitter {...props} />
-  ) : hostname.includes('youtube.com') ? (
+  ) : hostname === 'youtube.com' ? (
     <FaYoutube {...props} />
   ) : (
     <IoIosLink {...props} />
