@@ -24,4 +24,5 @@ function assertValue<T>(v: T | undefined, errorMessage: string): T {
 export const dev = process.env.NODE_ENV === 'development' || process.env.ENABLE_PREVIEW === 'true';
 
 export const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL ?? (process.env.NEXT_PUBLIC_VERCEL_URL && new URL('/', process.env.NEXT_PUBLIC_VERCEL_URL).toString());
+  process.env.NEXT_PUBLIC_BASE_URL ??
+  (process.env.NEXT_PUBLIC_VERCEL_URL && new URL('/', `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`).toString());
