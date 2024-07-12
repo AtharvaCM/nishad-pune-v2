@@ -57,4 +57,9 @@ export default defineConfig({
         ? input.filter(({ action }) => action && ['publish', 'discardChanges', 'restore'].includes(action))
         : input,
   },
+  beta: {
+    treeArrayEditing: {
+      enabled: true,
+    },
+  },
 });
