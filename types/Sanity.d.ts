@@ -91,7 +91,7 @@ declare global {
 
     type CTA = {
       link?: Link;
-      style?: 'link' | 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | null | undefined;
+      style?: 'link' | 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | undefined;
     };
 
     type Image = SanityImageObject &
