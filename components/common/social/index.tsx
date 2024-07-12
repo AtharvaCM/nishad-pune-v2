@@ -34,19 +34,26 @@ export default async function Social({ className }: React.HTMLProps<HTMLDivEleme
 function Icon({ url, ...props }: { url?: string } & React.HTMLProps<SVGElement>) {
   if (!url) return null;
 
+  let hostname: string;
+  try {
+    hostname = new URL(url).hostname;
+  } catch (e) {
+    return null; // Return null if the URL is invalid
+  }
+
   return url?.includes('facebook.com') ? (
     <FaFacebookF {...props} />
-  ) : url?.includes('github.com') ? (
+  ) : hostname.includes('github.com') ? (
     <FaGithub {...props} />
-  ) : url?.includes('instagram.com') ? (
+  ) : hostname.includes('instagram.com') ? (
     <FaInstagram {...props} />
-  ) : url?.includes('linkedin.com') ? (
+  ) : hostname.includes('linkedin.com') ? (
     <FaLinkedinIn {...props} />
-  ) : url?.includes('tiktok.com') ? (
+  ) : hostname.includes('tiktok.com') ? (
     <FaTiktok {...props} />
-  ) : url?.includes('twitter.com') || url?.includes('x.com') ? (
+  ) : hostname.includes('twitter.com') || hostname.includes('x.com') ? (
     <FaXTwitter {...props} />
-  ) : url?.includes('youtube.com') ? (
+  ) : hostname.includes('youtube.com') ? (
     <FaYoutube {...props} />
   ) : (
     <IoIosLink {...props} />
