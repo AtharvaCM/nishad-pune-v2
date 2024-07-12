@@ -1,5 +1,7 @@
 import { defineField, defineType } from 'sanity';
 
+import StringInput from '../fragments/input/StringInput';
+
 export default defineType({
   name: 'metadata',
   title: 'Metadata',
@@ -17,13 +19,15 @@ export default defineType({
     defineField({
       name: 'title',
       type: 'string',
-      validation: (Rule) => Rule.max(60).warning(),
+      validation: (Rule) => Rule.max(60).warning('The SEO Meta Title should be between 50 and 60 characters.'),
+      components: { input: StringInput },
     }),
     defineField({
       name: 'description',
       type: 'text',
       rows: 3,
-      validation: (Rule) => Rule.max(160).warning(),
+      validation: (Rule) => Rule.max(160).warning('The SEO Meta Description should be between 50 and 160 characters.'),
+      components: { input: StringInput },
     }),
     defineField({
       name: 'image',

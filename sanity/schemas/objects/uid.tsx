@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Text, TextInput } from '@sanity/ui';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { VscCheck, VscCopy } from 'react-icons/vsc';
 import { defineType } from 'sanity';
 
@@ -10,7 +10,7 @@ export default defineType({
   type: 'string',
   validation: (Rule) => Rule.regex(/^[a-zA-Z0-9-]+$/g).error('Must not contain spaces or special characters'),
   components: {
-    input: ({ elementProps, path }) => {
+    input: ({ elementProps, path }): ReactNode => {
       const indexOfModule = path.indexOf('modules');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const moduleKey = (path[indexOfModule + 1] as any)?._key;
