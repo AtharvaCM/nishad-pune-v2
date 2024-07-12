@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { BASE_URL } from '@/sanity/env';
 import { processUrl } from '@/sanity/lib/url';
 import { getSiteData } from '@/sanity/utils/get-site-data';
 
@@ -10,7 +11,7 @@ export default async function processMetadata(page: Sanity.Page | Sanity.BlogPos
   const { title, description, ogimage, noIndex } = page.metadata;
 
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
+    metadataBase: new URL(BASE_URL!),
     title,
     description,
     openGraph: {

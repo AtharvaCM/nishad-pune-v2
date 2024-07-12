@@ -2,6 +2,7 @@ import { escapeHTML, toHTML } from '@portabletext/to-html';
 import { Feed } from 'feed';
 import { groq } from 'next-sanity';
 
+import { BASE_URL } from '@/sanity/env';
 import { sanityFetch } from '@/sanity/lib/fetch';
 import { urlFor } from '@/sanity/lib/image';
 import { processUrl } from '@/sanity/lib/url';
@@ -42,7 +43,7 @@ export async function GET() {
     link: url,
     id: url,
     copyright,
-    favicon: process.env.NEXT_PUBLIC_BASE_URL + 'favicon.ico',
+    favicon: BASE_URL + '/favicon.ico',
     language: 'en',
     generator: 'https://github.com/nuotsu/sanitypress',
   });

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { groq } from 'next-sanity';
 
+import { BASE_URL } from '@/sanity/env';
 import { sanityFetch } from '@/sanity/lib/fetch';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -25,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			}
 		}`,
     params: {
-      baseUrl: process.env.NEXT_PUBLIC_BASE_URL + '/',
+      baseUrl: BASE_URL + '/',
     },
   });
 
