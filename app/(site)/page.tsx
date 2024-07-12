@@ -6,6 +6,7 @@ import { modulesQuery } from '@/sanity/lib/queries';
 import processMetadata from '@/utils/process-metadata';
 
 async function getPage() {
+  // TODO: Separate query into it's own var
   const page = await sanityFetch<Sanity.Page>({
     query: groq`*[_type == 'page' && metadata.slug.current == 'index'][0]{
 			...,

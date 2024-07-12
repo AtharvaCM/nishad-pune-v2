@@ -20,3 +20,5 @@ function assertValue<T>(v: T | undefined, errorMessage: string): T {
 
   return v;
 }
+
+export const dev = process.env.NODE_ENV === 'development' || process.env.ENABLE_PREVIEW === 'true';

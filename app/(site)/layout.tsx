@@ -12,6 +12,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { draftMode } from 'next/headers';
+import { VisualEditing } from 'next-sanity';
 import { PropsWithChildren } from 'react';
 
 import Announcement from '@/components/announcement';
@@ -19,7 +20,6 @@ import { LenisScroller } from '@/components/common/lennis-scroller';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import SkipToContent from '@/components/skip-to-content';
-import VisualEditing from '@/components/VisualEditing';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -43,7 +43,7 @@ export default async function RootLayout({ children }: Readonly<PropsWithChildre
           <SkipToContent />
           <Announcement />
           <Header />
-          <main role="main" id="main-content" tabIndex={-1} className="container mx-auto">
+          <main role="main" id="main-content" tabIndex={-1} className="mx-auto">
             {children}
           </main>
           <Footer />
