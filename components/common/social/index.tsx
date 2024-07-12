@@ -51,7 +51,7 @@ function Icon({ url, ...props }: { url?: string } & React.HTMLProps<SVGElement>)
     <FaLinkedinIn {...props} />
   ) : hostname === 'tiktok.com' ? (
     <FaTiktok {...props} />
-  ) : hostname === 'twitter.com' || hostname.includes('x.com') ? (
+  ) : hostname === 'twitter.com' || hostname === 'x.com' ? (
     <FaXTwitter {...props} />
   ) : hostname === 'youtube.com' ? (
     <FaYoutube {...props} />
