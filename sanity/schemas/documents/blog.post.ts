@@ -1,3 +1,5 @@
+import { LuRocket } from 'react-icons/lu';
+import { RiPagesFill } from 'react-icons/ri';
 import { VscEdit } from 'react-icons/vsc';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
@@ -8,10 +10,24 @@ export default defineType({
   title: 'Blog post',
   icon: VscEdit,
   type: 'document',
+  groups: [
+    {
+      title: 'Main Content',
+      name: 'mainContent',
+      icon: RiPagesFill,
+      default: true,
+    },
+    {
+      title: 'SEO',
+      name: 'seo',
+      icon: LuRocket,
+    },
+  ],
   fields: [
     defineField({
       name: 'body',
       type: 'array',
+      group: 'mainContent',
       of: [
         { type: 'block' },
         imageBlock,
@@ -26,6 +42,7 @@ export default defineType({
     defineField({
       name: 'categories',
       type: 'array',
+      group: 'mainContent',
       of: [
         {
           type: 'reference',
@@ -36,11 +53,13 @@ export default defineType({
     defineField({
       name: 'publishDate',
       type: 'date',
+      group: 'mainContent',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'metadata',
       type: 'metadata',
+      group: 'seo',
     }),
   ],
   preview: {

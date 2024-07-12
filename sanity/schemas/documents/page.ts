@@ -1,18 +1,35 @@
 import { FcDocument } from 'react-icons/fc';
+import { LuRocket } from 'react-icons/lu';
+import { RiPagesFill } from 'react-icons/ri';
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'page',
   title: 'Page',
   type: 'document',
+  groups: [
+    {
+      title: 'Main Content',
+      name: 'mainContent',
+      icon: RiPagesFill,
+      default: true,
+    },
+    {
+      title: 'SEO',
+      name: 'seo',
+      icon: LuRocket,
+    },
+  ],
   fields: [
     defineField({
       name: 'title',
       type: 'string',
+      group: 'mainContent',
     }),
     defineField({
       name: 'modules',
       type: 'array',
+      group: 'mainContent',
       of: [
         { type: 'accordion-list' },
         { type: 'blog-list' },
@@ -66,6 +83,7 @@ export default defineType({
               of: ['testimonial-list', 'testimonial.featured'],
             },
           ],
+          // TODO: Add screenshots of each block
           // views: [{ name: 'list' }, { name: 'grid', previewImageUrl: (schemaTypeName) => `/assets/${schemaTypeName}.png` }],
         },
       },
@@ -73,6 +91,7 @@ export default defineType({
     defineField({
       name: 'metadata',
       type: 'metadata',
+      group: 'seo',
     }),
   ],
   preview: {
