@@ -39,6 +39,7 @@ export default function Img({
       alt={stegaClean(image.alt) || alt}
       loading={stegaClean(image.loading) || 'lazy'}
       decoding="async"
+      blurDataURL={urlFor(image).width(24).height(24).blur(10).url()}
       {...props}
     />
   );

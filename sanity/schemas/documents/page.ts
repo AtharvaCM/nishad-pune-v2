@@ -32,6 +32,43 @@ export default defineType({
         { type: 'testimonial-list' },
         { type: 'testimonial.featured' },
       ],
+      options: {
+        insertMenu: {
+          groups: [
+            {
+              name: 'intro',
+              title: 'Intro',
+              of: ['hero', 'hero.saas', 'hero.split'],
+            },
+            {
+              name: 'content',
+              title: 'Content',
+              of: ['accordion-list', 'blog-list', 'richtext-module', 'custom-html'],
+            },
+            {
+              name: 'navigation',
+              title: 'Navigation',
+              of: ['breadcrumbs'],
+            },
+            {
+              name: 'media',
+              title: 'Media',
+              of: ['callout', 'creative-module', 'flag-list'],
+            },
+            {
+              name: 'listings',
+              title: 'Listings',
+              of: ['logo-list', 'pricing-list', 'stat-list', 'step-list'],
+            },
+            {
+              name: 'testimonials',
+              title: 'Testimonials',
+              of: ['testimonial-list', 'testimonial.featured'],
+            },
+          ],
+          // views: [{ name: 'list' }, { name: 'grid', previewImageUrl: (schemaTypeName) => `/assets/${schemaTypeName}.png` }],
+        },
+      },
     }),
     defineField({
       name: 'metadata',
