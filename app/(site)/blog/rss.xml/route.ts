@@ -43,7 +43,7 @@ export async function GET() {
     link: url,
     id: url,
     copyright,
-    favicon: BASE_URL + '/favicon.ico',
+    favicon: BASE_URL + 'favicon.ico',
     language: 'en',
     generator: 'https://github.com/nuotsu/sanitypress',
   });
