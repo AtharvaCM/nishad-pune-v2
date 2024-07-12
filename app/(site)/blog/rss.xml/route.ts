@@ -47,6 +47,7 @@ export async function GET() {
     language: 'en',
     generator: 'https://github.com/nuotsu/sanitypress',
   });
+  console.log('BASE_URL: ', BASE_URL);
 
   posts.map((post) =>
     feed.addItem({
