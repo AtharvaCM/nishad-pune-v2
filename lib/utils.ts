@@ -13,7 +13,7 @@ export function nl2br(str?: string) {
 export function slug(str: string) {
   return str
     .toLowerCase()
-    .replace(/[\s\W]+/g, '-')
-    .replace(/^-+/, '')
-    .replace(/-+$/, '');
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with a single hyphen
+    .replace(/^-+|-+$/g, ''); // Remove leading and trailing hyphens
 }
