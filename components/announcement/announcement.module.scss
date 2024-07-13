@@ -10,12 +10,12 @@
     @apply gap-x-6;
   }
   &__text-wrapper {
-    @apply anim-fade-to-r;
+    // @apply anim-fade-to-r;
     @apply text-balance;
   }
   &__cta {
-    @apply link;
-    @apply anim-fade-to-l;
+    // @apply link;
+    // @apply anim-fade-to-l;
     @apply shrink-0;
   }
 }

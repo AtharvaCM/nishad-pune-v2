@@ -1,3 +1,5 @@
+import { SlugValidationContext } from 'sanity';
+
 export async function isUniqueOtherThanLanguage(slug: string, context: SlugValidationContext) {
   const { document, getClient } = context;
   if (!document?.language) {

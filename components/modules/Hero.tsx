@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import CTAList from '../common/cta-list';
 import Img, { Source } from '../common/img';
 import Pretitle from '../common/pretitle';
-import css from './Hero.module.css';
+import styles from './Hero.module.scss';
 
 export default function Hero({
   pretitle,
@@ -17,21 +17,23 @@ export default function Hero({
   bgImageMobile,
   textAlign = 'center',
   alignItems,
-}: Partial<{
-  pretitle: string;
-  content: any;
-  ctas: Sanity.CTA[];
-  bgImage: Sanity.Image;
-  bgImageMobile: Sanity.Image;
-  textAlign: React.CSSProperties['textAlign'];
-  alignItems: React.CSSProperties['alignItems'];
-}>) {
+}: Readonly<
+  Partial<{
+    pretitle: string;
+    content: any;
+    ctas: Sanity.CTA[];
+    bgImage: Sanity.Image;
+    bgImageMobile: Sanity.Image;
+    textAlign: React.CSSProperties['textAlign'];
+    alignItems: React.CSSProperties['alignItems'];
+  }>
+>) {
   const hasImage = !!bgImage?.asset;
 
   return (
     <section className={cn(hasImage && 'grid overflow-hidden bg-background text-background *:col-span-full *:row-span-full')}>
       {bgImage?.asset && (
-        <picture>
+        <picture className={cn(styles['d-section__picture'])}>
           <Source image={bgImageMobile} imageWidth={1200} />
           <Img className="size-full max-h-fold object-cover" image={bgImage} imageWidth={1800} draggable={false} />
         </picture>
@@ -43,7 +45,6 @@ export default function Hero({
             className={cn(
               'richtext relative isolate max-w-xl [&_:is(h1,h2)]:text-balance',
               bgImage?.asset && 'text-shadow',
-              hasImage && css.txt,
               {
                 'mb-8': stegaClean(alignItems) === 'start',
                 'my-auto': stegaClean(alignItems) === 'center',

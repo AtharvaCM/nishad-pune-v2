@@ -969,12 +969,141 @@ export type BlogCategory = {
   title?: string;
 };
 
+export type Site = {
+  _id: string;
+  _type: 'site';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  logo?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'logo';
+  };
+  announcements?: Array<{
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: 'announcement';
+  }>;
+  ctas?: Array<
+    {
+      _key: string;
+    } & Cta
+  >;
+  copyright?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
+  headerMenu?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'navigation';
+  };
+  footerMenu?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'navigation';
+  };
+  social?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'navigation';
+  };
+  ogimage?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
+};
+
+export type Navigation = {
+  _id: string;
+  _type: 'navigation';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  items?: Array<
+    | ({
+        _key: string;
+      } & Link)
+    | ({
+        _key: string;
+      } & LinkList)
+  >;
+};
+
+export type Document = {
+  _type: 'reference';
+  _ref: string;
+  _weak?: boolean;
+};
+
+export type TranslationMetadata = {
+  _id: string;
+  _type: 'translation.metadata';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  translations?: Array<
+    {
+      _key: string;
+    } & InternationalizedArrayReferenceValue
+  >;
+  schemaTypes?: Array<string>;
+};
+
+export type InternationalizedArrayReferenceValue = {
+  _type: 'internationalizedArrayReferenceValue';
+  value?:
+    | {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'page';
+      }
+    | {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'blog.post';
+      };
+};
+
 export type BlogPost = {
   _id: string;
   _type: 'blog.post';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   body?: Array<
     | {
         children?: Array<{
@@ -1032,6 +1161,7 @@ export type Page = {
   _updatedAt: string;
   _rev: string;
   orderRank?: string;
+  language?: string;
   title?: string;
   modules?: Array<
     | ({
@@ -1108,80 +1238,6 @@ export type Metadata = {
   noIndex?: boolean;
 };
 
-export type Site = {
-  _id: string;
-  _type: 'site';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  logo?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'logo';
-  };
-  announcements?: Array<{
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: 'announcement';
-  }>;
-  ctas?: Array<
-    {
-      _key: string;
-    } & Cta
-  >;
-  copyright?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: 'span';
-      _key: string;
-    }>;
-    style?: 'normal';
-    listItem?: 'bullet' | 'number';
-    markDefs?: Array<{
-      href?: string;
-      _type: 'link';
-      _key: string;
-    }>;
-    level?: number;
-    _type: 'block';
-    _key: string;
-  }>;
-  headerMenu?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'navigation';
-  };
-  footerMenu?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'navigation';
-  };
-  social?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'navigation';
-  };
-  ogimage?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: 'image';
-  };
-};
-
 export type SanityImageCrop = {
   _type: 'sanity.imageCrop';
   top?: number;
@@ -1239,28 +1295,11 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type Navigation = {
-  _id: string;
-  _type: 'navigation';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  items?: Array<
-    | ({
-        _key: string;
-      } & Link)
-    | ({
-        _key: string;
-      } & LinkList)
-  >;
-};
-
-export type Document = {
-  _type: 'reference';
-  _ref: string;
-  _weak?: boolean;
-};
+export type InternationalizedArrayReference = Array<
+  {
+    _key: string;
+  } & InternationalizedArrayReferenceValue
+>;
 
 export type Code = {
   _type: 'code';

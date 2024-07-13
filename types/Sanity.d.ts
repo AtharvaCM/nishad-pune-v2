@@ -40,6 +40,7 @@ declare global {
     type Page = PageBase & {
       readonly _type: 'page';
       modules?: Module[];
+      language?: string;
     };
 
     type BlogPost = PageBase & {
@@ -98,6 +99,7 @@ declare global {
       Partial<{
         alt: string;
         loading: 'lazy' | 'eager';
+        overlay: boolean;
       }>;
 
     type Link = {

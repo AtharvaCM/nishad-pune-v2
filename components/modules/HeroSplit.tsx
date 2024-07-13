@@ -12,12 +12,14 @@ export default function HeroSplit({
   content,
   ctas,
   image,
-}: Partial<{
-  pretitle: string;
-  content: any;
-  ctas: Sanity.CTA[];
-  image: Sanity.Image & { onRight?: boolean };
-}>) {
+}: Readonly<
+  Partial<{
+    pretitle: string;
+    content: any;
+    ctas: Sanity.CTA[];
+    image: Sanity.Image & { onRight?: boolean };
+  }>
+>) {
   return (
     <section className="section grid items-center gap-8 md:grid-cols-2 md:gap-x-12">
       <figure className={cn('max-md:full-bleed', image?.onRight && 'md:order-1')}>

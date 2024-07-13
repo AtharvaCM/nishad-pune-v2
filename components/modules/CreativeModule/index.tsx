@@ -17,17 +17,19 @@ export default function CreativeModule({
   bordered,
   textAlign,
   alignItems,
-}: Partial<{
-  intro: any;
-  modules: Partial<{
-    subModules: Array<CTAsSubModuleType | CustomHTMLSubmoduleType | IconSubModuleType | ImageSubModuleType | RichtextSubModuleType>;
-    colSpan: number;
-  }>[];
-  columns: number;
-  bordered: boolean;
-  textAlign: React.CSSProperties['textAlign'];
-  alignItems: React.CSSProperties['alignItems'];
-}>) {
+}: Readonly<
+  Partial<{
+    intro: any;
+    modules: Partial<{
+      subModules: Array<CTAsSubModuleType | CustomHTMLSubmoduleType | IconSubModuleType | ImageSubModuleType | RichtextSubModuleType>;
+      colSpan: number;
+    }>[];
+    columns: number;
+    bordered: boolean;
+    textAlign: React.CSSProperties['textAlign'];
+    alignItems: React.CSSProperties['alignItems'];
+  }>
+>) {
   const imageWidth = Math.round((1200 / (modules?.length || 1)) * 1.5);
 
   return (

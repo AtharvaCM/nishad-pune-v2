@@ -16,7 +16,7 @@ import StepList from './StepList';
 import TestimonialFeatured from './TestimonialFeatured';
 import TestimonialList from './TestimonialList';
 
-export default function Modules({ modules, page }: { modules?: Sanity.Module[]; page?: Sanity.Page }) {
+export default function Modules({ modules, page }: Readonly<{ modules?: Sanity.Module[]; page?: Sanity.Page }>) {
   return (
     <>
       {modules?.map((module) => {

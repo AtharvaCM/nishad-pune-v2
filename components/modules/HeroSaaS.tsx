@@ -12,14 +12,16 @@ export default function HeroSaaS({
   content,
   ctas,
   image,
-}: Partial<{
-  pretitle: string;
-  content: any;
-  ctas: Sanity.CTA[];
-  image: Sanity.Image & {
-    faded?: boolean;
-  };
-}>) {
+}: Readonly<
+  Partial<{
+    pretitle: string;
+    content: any;
+    ctas: Sanity.CTA[];
+    image: Sanity.Image & {
+      faded?: boolean;
+    };
+  }>
+>) {
   return (
     <section className="section space-y-8 text-center">
       <div className="richtext mx-auto max-w-2xl text-balance">

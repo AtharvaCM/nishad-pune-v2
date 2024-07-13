@@ -2,6 +2,7 @@ import '@radix-ui/themes/styles.css';
 import '@/styles/app.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import 'node_modules/flag-icons/css/flag-icons.min.css';
 
 import { Theme } from '@radix-ui/themes';
 import { Analytics } from '@vercel/analytics/react';

@@ -51,6 +51,13 @@ export default defineType({
           },
           initialValue: 'lazy',
         }),
+        defineField({
+          name: 'overlay',
+          type: 'boolean',
+          title: 'Dark Overlay',
+          initialValue: true,
+          description: 'Adds a dark overlay to the image to improve text readability.',
+        }),
       ],
       group: 'image',
     }),

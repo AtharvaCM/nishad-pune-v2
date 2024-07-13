@@ -11,15 +11,17 @@ export default function RichtextModule({
   tableOfContents,
   tocPosition = 'right',
   headings,
-}: Partial<{
-  content: any;
-  tableOfContents: boolean;
-  tocPosition: 'left' | 'right';
-  headings: {
-    style: string;
-    text: string;
-  }[];
-}>) {
+}: Readonly<
+  Partial<{
+    content: any;
+    tableOfContents: boolean;
+    tocPosition: 'left' | 'right';
+    headings: {
+      style: string;
+      text: string;
+    }[];
+  }>
+>) {
   return (
     <section className="section grid gap-8 lg:grid-cols-[1fr,auto]">
       {tableOfContents && (

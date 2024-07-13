@@ -1,0 +1,25 @@
+/* Figure out why can I delete this file */
+.txt::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  z-index: -1;
+  mask-image: radial-gradient(ellipse at center, black 25%, transparent 50%);
+
+  @apply backdrop-brightness-75;
+}
+
+.d-section {
+  &__picture {
+    @apply relative;
+    &:before {
+      content: '';
+      @apply absolute;
+      @apply top-0;
+      @apply left-0;
+      @apply right-0;
+      @apply bottom-0;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+    }
+  }
+}

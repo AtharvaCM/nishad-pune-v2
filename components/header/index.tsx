@@ -6,6 +6,7 @@ import { getSiteData } from '@/sanity/utils/get-site-data';
 import CTAList from '../common/cta-list';
 import Img from '../common/img';
 import css from './Header.module.css';
+import LanguageDropdown from './LanguageDropdown';
 import Navigation from './Navigation';
 import Toggle from './Toggle';
 import Wrapper from './Wrapper';
@@ -30,6 +31,7 @@ export default async function Header() {
 
         <Navigation />
 
+        <LanguageDropdown />
         <CTAList ctas={ctas} className="[grid-area:ctas] max-md:*:w-full max-md:header-closed:hidden md:ml-auto" />
 
         <Toggle />
