@@ -1,5 +1,6 @@
+import { SearchIcon } from '@sanity/icons';
+import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list';
 import { FcDocument } from 'react-icons/fc';
-import { LuRocket } from 'react-icons/lu';
 import { RiPagesFill } from 'react-icons/ri';
 import { defineField, defineType } from 'sanity';
 
@@ -7,6 +8,7 @@ export default defineType({
   name: 'page',
   title: 'Page',
   type: 'document',
+  orderings: [orderRankOrdering],
   groups: [
     {
       title: 'Main Content',
@@ -17,10 +19,11 @@ export default defineType({
     {
       title: 'SEO',
       name: 'seo',
-      icon: LuRocket,
+      icon: SearchIcon,
     },
   ],
   fields: [
+    orderRankField({ type: 'page' }),
     defineField({
       name: 'title',
       type: 'string',

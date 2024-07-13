@@ -1031,6 +1031,7 @@ export type Page = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  orderRank?: string;
   title?: string;
   modules?: Array<
     | ({
