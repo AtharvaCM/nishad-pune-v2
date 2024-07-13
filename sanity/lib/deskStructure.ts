@@ -1,20 +1,29 @@
 import { DeadLinks, Preflight } from '@planetary/sanity-plugin-preflight';
-import { RocketIcon } from '@sanity/icons';
-import { FolderIcon } from '@sanity/icons';
-import { EditIcon } from '@sanity/icons';
+import { EditIcon, FolderIcon, RocketIcon } from '@sanity/icons';
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
 import { BsDatabaseAdd } from 'react-icons/bs';
 import { VscServerProcess } from 'react-icons/vsc';
-import { StructureBuilder, StructureContext } from 'sanity/structure';
+import { StructureBuilder, StructureResolverContext } from 'sanity/structure';
 
 import { group, singleton } from '../utils';
 
-export const deskStructure = (S: StructureBuilder, context: StructureContext) =>
+export const deskStructure = (S: StructureBuilder, context: StructureResolverContext) =>
   S.list()
     .title('Nishad Pune Content')
     .items([
       singleton(S, 'site').icon(VscServerProcess),
-      orderableDocumentListDeskItem({ type: 'page', title: 'Pages', icon: FolderIcon, id: 'orderable-en-pages', S, context }),
+      orderableDocumentListDeskItem({
+        type: 'page',
+        title: 'Pages',
+        icon: FolderIcon,
+        id: 'orderable-en-pages',
+        filter: 'language == $lang',
+        params: {
+          lang: 'en',
+        },
+        S,
+        context,
+      }),
       S.divider(),
 
       S.documentTypeListItem('navigation'),

@@ -1,5 +1,7 @@
 import { defineField, defineType } from 'sanity';
 
+import { isUniqueOtherThanLanguage } from '@/sanity/utils/is-unique-other-than-language';
+
 import StringInput from '../fragments/input/StringInput';
 
 export default defineType({
@@ -14,6 +16,7 @@ export default defineType({
       options: {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         source: (doc: any) => doc.metadata.title || doc.name || doc.title,
+        isUnique: isUniqueOtherThanLanguage,
       },
       validation: (Rule) => Rule.required().error('The slug is requried.'),
     }),
@@ -21,7 +24,6 @@ export default defineType({
       name: 'title',
       type: 'string',
       description: 'The SEO Meta Title, ideally between 50 and 60 characters.',
-      rows: 3,
       validation: (Rule) => Rule.max(60).warning('The SEO Meta Title should be between 50 and 60 characters.'),
       components: { input: StringInput },
     }),

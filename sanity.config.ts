@@ -3,7 +3,9 @@
  */
 import { codeInput } from '@sanity/code-input';
 import { dashboardTool, projectInfoWidget, projectUsersWidget } from '@sanity/dashboard';
+import { DeleteTranslationAction, documentInternationalization } from '@sanity/document-internationalization';
 import { visionTool } from '@sanity/vision';
+import { PencilIcon } from 'lucide-react';
 import { defineConfig } from 'sanity';
 import { presentationTool } from 'sanity/presentation';
 import { structureTool } from 'sanity/structure';
@@ -16,6 +18,7 @@ import { locate } from './sanity/presentation/locate';
 import { schemaTypes } from './sanity/schemas';
 
 const singletonTypes = ['site'];
+const internationalizationTypes = ['page', 'blog.post'];
 
 export default defineConfig({
   title: 'Nishad Pune',
@@ -25,10 +28,18 @@ export default defineConfig({
   // Add and edit the content schema in the './sanity/schema' folder
   schema: {
     types: schemaTypes,
-    templates: (templates) => templates.filter(({ schemaType }) => !singletonTypes.includes(schemaType)),
+    templates: (templates) =>
+      templates
+        .filter(({ schemaType }) => !singletonTypes.includes(schemaType))
+        .filter((template) => !internationalizationTypes.includes(template.id)),
   },
   plugins: [
-    structureTool({ title: 'Content', structure: deskStructure, defaultDocumentNode: getDefaultDocumentNode }),
+    structureTool({
+      title: 'Content',
+      structure: (S, context) => deskStructure(S, context),
+      defaultDocumentNode: getDefaultDocumentNode,
+      icon: PencilIcon,
+    }),
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ title: 'GROQ', defaultApiVersion: apiVersion }),
@@ -50,12 +61,26 @@ export default defineConfig({
       widgets: [projectInfoWidget(), projectUsersWidget(), vercelWidget()],
     }),
     codeInput(),
+    documentInternationalization({
+      supportedLanguages: [
+        { id: 'en', title: '🇺🇸 English' },
+        { id: 'mr', title: '🇮🇳 Marathi' },
+      ],
+      schemaTypes: ['page', 'blog.post'],
+    }),
   ],
   document: {
-    actions: (input, { schemaType }) =>
-      singletonTypes.includes(schemaType)
+    actions: (input, { schemaType }) => {
+      const docActionComponents = singletonTypes.includes(schemaType)
         ? input.filter(({ action }) => action && ['publish', 'discardChanges', 'restore'].includes(action))
-        : input,
+        : input;
+
+      if (internationalizationTypes.includes(schemaType)) {
+        return [...input, DeleteTranslationAction];
+      }
+
+      return docActionComponents;
+    },
   },
   beta: {
     treeArrayEditing: {

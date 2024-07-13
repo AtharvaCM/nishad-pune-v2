@@ -25,6 +25,12 @@ export default defineType({
   ],
   fields: [
     defineField({
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    }),
+    defineField({
       name: 'body',
       type: 'array',
       group: 'mainContent',
