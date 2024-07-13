@@ -1,4 +1,4 @@
-import { LuRocket } from 'react-icons/lu';
+import { SearchIcon } from '@sanity/icons';
 import { RiPagesFill } from 'react-icons/ri';
 import { VscEdit } from 'react-icons/vsc';
 import { defineArrayMember, defineField, defineType } from 'sanity';
@@ -20,7 +20,7 @@ export default defineType({
     {
       title: 'SEO',
       name: 'seo',
-      icon: LuRocket,
+      icon: SearchIcon,
     },
   ],
   fields: [

@@ -10,15 +10,18 @@ export default defineType({
     defineField({
       name: 'slug',
       type: 'slug',
+      description: 'URL-friendly identifier generated from the title or name.',
       options: {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         source: (doc: any) => doc.metadata.title || doc.name || doc.title,
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().error('The slug is requried.'),
     }),
     defineField({
       name: 'title',
       type: 'string',
+      description: 'The SEO Meta Title, ideally between 50 and 60 characters.',
+      rows: 3,
       validation: (Rule) => Rule.max(60).warning('The SEO Meta Title should be between 50 and 60 characters.'),
       components: { input: StringInput },
     }),
@@ -31,11 +34,13 @@ export default defineType({
     }),
     defineField({
       name: 'image',
+      title: 'Image',
       description: 'Used for social sharing previews',
       type: 'image',
     }),
     defineField({
       name: 'noIndex',
+      title: 'No Index',
       description: 'Prevent search engines from indexing this page.',
       type: 'boolean',
       initialValue: false,
