@@ -2920,6 +2920,13 @@
                 },
                 "optional": true
               },
+              "overlay": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "boolean"
+                },
+                "optional": true
+              },
               "_type": {
                 "type": "objectAttribute",
                 "value": {

@@ -384,6 +384,7 @@ export type Hero = {
     crop?: SanityImageCrop;
     alt?: string;
     loading?: 'lazy' | 'eager';
+    overlay?: boolean;
     _type: 'image';
   };
   bgImageMobile?: {
