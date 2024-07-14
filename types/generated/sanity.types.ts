@@ -373,6 +373,7 @@ export type Hero = {
       _key: string;
     } & Cta
   >;
+  bgType?: 'image' | 'video';
   bgImage?: {
     asset?: {
       _ref: string;
@@ -388,6 +389,28 @@ export type Hero = {
     _type: 'image';
   };
   bgImageMobile?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
+  bgVideo?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
+    };
+    alt?: string;
+    overlay?: boolean;
+    _type: 'file';
+  };
+  bgVideoThumbnail?: {
     asset?: {
       _ref: string;
       _type: 'reference';
@@ -672,85 +695,6 @@ export type AccordionList = {
   }>;
   layout?: 'vertical' | 'horizontal';
   uid?: string;
-};
-
-export type CustomVideo = {
-  _type: 'customVideo';
-  title?: string;
-  description?: string;
-  videoFile?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
-    };
-    _type: 'file';
-  };
-  thumbnail?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    caption?: string;
-    metadata?: {
-      author?: string;
-      copyright?: string;
-      source?: string;
-    };
-    _type: 'customImage';
-  };
-  metadata?: {
-    author?: string;
-    copyright?: string;
-    source?: string;
-  };
-};
-
-export type SanityFileAsset = {
-  _id: string;
-  _type: 'sanity.fileAsset';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
-
-export type CustomImage = {
-  _type: 'customImage';
-  asset?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-  };
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
-  caption?: string;
-  metadata?: {
-    author?: string;
-    copyright?: string;
-    source?: string;
-  };
 };
 
 export type Slug = {
@@ -1237,6 +1181,28 @@ export type Metadata = {
     _type: 'image';
   };
   noIndex?: boolean;
+};
+
+export type SanityFileAsset = {
+  _id: string;
+  _type: 'sanity.fileAsset';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
 };
 
 export type SanityImageCrop = {
