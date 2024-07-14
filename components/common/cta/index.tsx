@@ -10,7 +10,7 @@ export default function CTA({ link, style, className, children, ...rest }: Sanit
   const ariaLabel = link?.label || link?.internal?.title || link?.external || 'Link';
 
   const props = {
-    className: cn(buttonVariants({ variant: style ?? 'link' }), className) || undefined,
+    className: cn(buttonVariants({ variant: style ?? 'link', size: 'link' }), className) || undefined,
     children: linkContent,
     'aria-label': ariaLabel,
     ...rest,

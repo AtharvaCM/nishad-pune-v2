@@ -105,6 +105,7 @@ declare global {
 
     type Link = {
       readonly _type: 'link';
+      readonly _key: string;
       label: string;
       type: 'internal' | 'external';
       internal?: Page | BlogPost;

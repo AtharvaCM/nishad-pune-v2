@@ -21,12 +21,12 @@ export default function InteractiveDetails({
   safeAreaOnHover?: boolean;
   closeAfterNavigate?: boolean;
 }) {
-  const [$open, set$open] = useState(false);
+  const [open, setopen] = useState(false);
 
   const events = !isMobile
     ? {
-        onMouseEnter: () => set$open(true),
-        onMouseLeave: () => set$open(false),
+        onMouseEnter: () => setopen(true),
+        onMouseLeave: () => setopen(false),
       }
     : {};
 
@@ -34,8 +34,8 @@ export default function InteractiveDetails({
   const pathname = usePathname();
 
   useEffect(() => {
-    if (closeAfterNavigate) set$open(false);
+    if (closeAfterNavigate) setopen(false);
   }, [closeAfterNavigate, pathname]);
 
-  return <details className={cn(safeAreaOnHover && css.safearea, className)} open={$open} {...events} {...props} />;
+  return <details className={cn(safeAreaOnHover && css.safearea, className)} open={open} {...events} {...props} />;
 }
