@@ -5,9 +5,11 @@ import Img from '../common/img';
 
 export default function TestimonialFeatured({
   testimonial,
-}: Partial<{
-  testimonial: Sanity.Testimonial;
-}>) {
+}: Readonly<
+  Partial<{
+    testimonial: Sanity.Testimonial;
+  }>
+>) {
   if (!testimonial) return null;
 
   return (

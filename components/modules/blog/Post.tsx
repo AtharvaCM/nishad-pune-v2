@@ -11,7 +11,7 @@ import Categories from './Categories';
 import css from './Post.module.css';
 import ReadTime from './ReadTime';
 
-export default async function Post({ post }: { post: Sanity.BlogPost }) {
+export default async function Post({ post }: Readonly<{ post: Sanity.BlogPost }>) {
   const crumbs = await sanityFetch<Sanity.Page[]>({
     query: groq`*[_type == 'page' && metadata.slug.current in ['index', 'blog']]{
 			title,

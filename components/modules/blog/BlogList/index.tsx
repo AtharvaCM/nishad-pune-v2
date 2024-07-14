@@ -15,13 +15,15 @@ export default async function BlogList({
   limit = 100,
   displayFilters,
   predefinedFilters,
-}: Partial<{
-  intro: any;
-  layout: 'grid' | 'carousel';
-  limit: number;
-  displayFilters: boolean;
-  predefinedFilters: Sanity.BlogCategory[];
-}>) {
+}: Readonly<
+  Partial<{
+    intro: any;
+    layout: 'grid' | 'carousel';
+    limit: number;
+    displayFilters: boolean;
+    predefinedFilters: Sanity.BlogCategory[];
+  }>
+>) {
   const posts = await sanityFetch<Sanity.BlogPost[]>({
     query: groq`*[_type == 'blog.post'][0...$limit]|order(publishDate desc){
 			...,

@@ -9,7 +9,7 @@ import Category from '../Category';
 import { categoryStore } from '../store';
 import css from './Filtering.module.css';
 
-export default function Filter({ label, value = 'All' }: { label: string; value?: 'All' | string }) {
+export default function Filter({ label, value = 'All' }: Readonly<{ label: string; value?: string }>) {
   const { selected, setSelected, reset } = categoryStore();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

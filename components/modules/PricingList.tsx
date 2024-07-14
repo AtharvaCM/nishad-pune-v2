@@ -9,10 +9,12 @@ import Pretitle from '../common/pretitle';
 export default function PricingList({
   intro,
   tiers,
-}: Partial<{
-  intro: any;
-  tiers: Sanity.Pricing[];
-}>) {
+}: Readonly<
+  Partial<{
+    intro: any;
+    tiers: Sanity.Pricing[];
+  }>
+>) {
   return (
     <section className="section space-y-8">
       {intro && (

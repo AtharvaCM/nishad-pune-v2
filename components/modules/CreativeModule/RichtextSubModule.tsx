@@ -6,7 +6,7 @@ export type RichtextSubModuleType = Sanity.Module<'richtext'> &
     content: any;
   }>;
 
-export default function RichtextSubModule({ module }: { module: RichtextSubModuleType }) {
+export default function RichtextSubModule({ module }: Readonly<{ module: RichtextSubModuleType }>) {
   return (
     <div className="richtext">
       <PortableText value={module.content} />

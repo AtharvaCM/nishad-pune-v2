@@ -47,7 +47,7 @@ declare global {
       readonly _type: 'blog.post';
       body: any;
       readTime: number;
-      headings?: { style: string; text: string }[];
+      headings?: { style: string; text: string; _key: string }[];
       categories: BlogCategory[];
       publishDate: string;
     };
@@ -59,6 +59,7 @@ declare global {
     // miscellaneous
 
     type Logo = SanityDocument<{
+      readonly _key: string;
       name: string;
       image?: Partial<{
         default: Image;
@@ -80,6 +81,7 @@ declare global {
     }>;
 
     type Testimonial = SanityDocument<{
+      readonly _key: string;
       content: any;
       author?: {
         name: string;

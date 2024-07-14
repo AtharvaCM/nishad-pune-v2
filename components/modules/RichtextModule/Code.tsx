@@ -5,14 +5,14 @@ import css from './Code.module.css';
 
 export default async function Code({
   value,
-}: {
+}: Readonly<{
   value?: {
     language: string;
     code: string;
     filename?: string;
     highlightedLines?: number[];
   };
-}) {
+}>) {
   if (!value?.code) return null;
 
   const html = await codeToHtml(stegaClean(value.code), {

@@ -16,6 +16,7 @@ export default function AccordionList({
       summary: string;
       content: any;
       open?: boolean;
+      _key: string;
     }[];
     layout: 'vertical' | 'horizontal';
   }>) {
@@ -31,14 +32,14 @@ export default function AccordionList({
       </header>
 
       <div className="mx-auto w-full max-w-screen-md">
-        {items?.map(({ summary, content, open }, key) => (
+        {items?.map(({ summary, content, open, _key }) => (
           <details
             className="accordion border-b border-border"
             open={open}
             itemScope
             itemProp="mainEntity"
             itemType="https://schema.org/Question"
-            key={key}
+            key={_key}
           >
             <summary className="py-4 font-bold" itemProp="name">
               {summary}

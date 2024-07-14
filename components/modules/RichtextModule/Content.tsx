@@ -7,31 +7,38 @@ import AnchoredHeading from './AnchoredHeading';
 import Code from './Code';
 import Image from './Image';
 
+// Block components
+const HeadingComponent = (as: 'h2' | 'h3' | 'h4' | 'h5' | 'h6') => {
+  const Component = (node: any) => <AnchoredHeading as={as} {...node} />;
+  Component.displayName = `HeadingComponent(${as})`;
+  return Component;
+};
+
+const BlockquoteComponent = ({ children }: { children?: React.ReactNode }) => (
+  <blockquote className="border-l-2 pl-4">
+    <p>{children}</p>
+  </blockquote>
+);
+
+const components = {
+  block: {
+    h2: HeadingComponent('h2'),
+    h3: HeadingComponent('h3'),
+    h4: HeadingComponent('h4'),
+    h5: HeadingComponent('h5'),
+    h6: HeadingComponent('h6'),
+    blockquote: BlockquoteComponent,
+  },
+  types: {
+    image: Image,
+    code: Code,
+  },
+};
+
 export default function Content({ value, className, children }: { value: any } & React.HTMLProps<HTMLDivElement>) {
   return (
     <div className={cn('richtext mx-auto w-full space-y-[1em] [&>:first-child]:!mt-0', className)}>
-      <PortableText
-        value={value}
-        components={{
-          block: {
-            h2: (node) => <AnchoredHeading as="h2" {...node} />,
-            h3: (node) => <AnchoredHeading as="h3" {...node} />,
-            h4: (node) => <AnchoredHeading as="h4" {...node} />,
-            h5: (node) => <AnchoredHeading as="h5" {...node} />,
-            h6: (node) => <AnchoredHeading as="h6" {...node} />,
-            blockquote: ({ children }) => (
-              <blockquote className="border-l-2 pl-4">
-                <p>{children}</p>
-              </blockquote>
-            ),
-          },
-          types: {
-            image: Image,
-            code: Code,
-          },
-        }}
-      />
-
+      <PortableText value={value} components={components} />
       {children}
     </div>
   );

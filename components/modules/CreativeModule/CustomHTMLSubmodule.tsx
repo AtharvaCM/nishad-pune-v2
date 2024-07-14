@@ -7,6 +7,6 @@ export type CustomHTMLSubmoduleType = Sanity.Module<'custom-html'> &
     };
   }>;
 
-export default function CustomHTMLSubmodule({ module }: { module: CustomHTMLSubmoduleType }) {
+export default function CustomHTMLSubmodule({ module }: Readonly<{ module: CustomHTMLSubmoduleType }>) {
   return <CustomHTML html={module?.html} />;
 }

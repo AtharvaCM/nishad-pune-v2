@@ -6,10 +6,12 @@ import Img from '../common/img';
 export default function TestimonialList({
   intro,
   testimonials,
-}: Partial<{
-  intro: any;
-  testimonials: Sanity.Testimonial[];
-}>) {
+}: Readonly<
+  Partial<{
+    intro: any;
+    testimonials: Sanity.Testimonial[];
+  }>
+>) {
   return (
     <section className="section space-y-8 text-center">
       {intro && (
@@ -19,8 +21,8 @@ export default function TestimonialList({
       )}
 
       <div className="carousel max-xl:full-bleed overflow-fade items-center gap-x-8 pb-4 before:m-auto after:m-auto">
-        {testimonials?.map((testimonial, key) => (
-          <article className="!basis-[min(450px,70vw)]" key={key}>
+        {testimonials?.map((testimonial) => (
+          <article className="!basis-[min(450px,70vw)]" key={testimonial._key}>
             <blockquote className="space-y-6">
               <div className="richtext text-balance">
                 <PortableText value={testimonial.content} />

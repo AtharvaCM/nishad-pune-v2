@@ -15,13 +15,15 @@ export default async function LogoList({
   logos,
   logoType = 'default',
   autoScroll,
-}: Partial<{
-  pretitle: string;
-  intro: any;
-  logos: Sanity.Logo[];
-  logoType: 'default' | 'light' | 'dark';
-  autoScroll?: boolean;
-}>) {
+}: Readonly<
+  Partial<{
+    pretitle: string;
+    intro: any;
+    logos: Sanity.Logo[];
+    logoType: 'default' | 'light' | 'dark';
+    autoScroll?: boolean;
+  }>
+>) {
   const allLogos = logos || (await sanityFetch<Sanity.Logo[]>({ query: groq`*[_type == 'logo']` }));
 
   return (
@@ -50,7 +52,7 @@ export default async function LogoList({
             style={{ '--index': key } as React.CSSProperties}
             image={logo.image?.[logoType]}
             imageWidth={400}
-            key={key}
+            key={logo._key}
           />
         ))}
       </figure>

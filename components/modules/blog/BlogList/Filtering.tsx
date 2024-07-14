@@ -6,7 +6,7 @@ import { sanityFetch } from '@/sanity/lib/fetch';
 import Filter from './Filter';
 import css from './Filtering.module.css';
 
-export default async function Filtering({ predefinedFilters }: { predefinedFilters?: Sanity.BlogCategory[] }) {
+export default async function Filtering({ predefinedFilters }: Readonly<{ predefinedFilters?: Sanity.BlogCategory[] }>) {
   const categories = await sanityFetch<Sanity.BlogCategory[]>({
     query: groq`*[
 			_type == 'blog.category' &&
@@ -27,7 +27,7 @@ export default async function Filtering({ predefinedFilters }: { predefinedFilte
       <div className={cn(css.list, 'filtering group flex flex-wrap gap-1')}>
         <Filter label="All" />
 
-        {filtered?.map((category, key) => <Filter label={category.title} value={category._id} key={key} />)}
+        {filtered?.map((category) => <Filter label={category.title} value={category._id} key={category._id} />)}
       </div>
     </fieldset>
   );

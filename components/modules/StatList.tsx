@@ -6,15 +6,18 @@ export default function StatList({
   intro,
   stats,
   textAlign = 'center',
-}: Partial<{
-  intro: any;
-  stats: {
-    value: string;
-    subValue?: string;
-    text: string;
-  }[];
-  textAlign: React.CSSProperties['textAlign'];
-}>) {
+}: Readonly<
+  Partial<{
+    intro: any;
+    stats: {
+      readonly _key: string;
+      value: string;
+      subValue?: string;
+      text: string;
+    }[];
+    textAlign: React.CSSProperties['textAlign'];
+  }>
+>) {
   return (
     <section className="section space-y-8" style={{ textAlign: stegaClean(textAlign) }}>
       {intro && (
@@ -24,8 +27,8 @@ export default function StatList({
       )}
 
       <dl className="mx-auto flex items-start justify-center gap-x-12 gap-y-6 max-md:max-w-max max-md:flex-col">
-        {stats?.map((stat, key) => (
-          <div className="w-full max-w-[250px] space-y-2" key={key}>
+        {stats?.map((stat) => (
+          <div className="w-full max-w-[250px] space-y-2" key={stat._key}>
             <dt className="font-bold">
               <span className="text-gradient text-6xl">{stat.value}</span>
               {stat.subValue && <small className="text-xl text-gray-500">{stat.subValue}</small>}

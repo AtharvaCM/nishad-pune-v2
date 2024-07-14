@@ -6,15 +6,17 @@ import CtaLink from '../common/cta';
 export default async function Breadcrumbs({
   crumbs,
   currentPage,
-}: Partial<{
-  crumbs: Sanity.Link[];
-  currentPage: Sanity.Page | Sanity.BlogPost;
-}>) {
+}: Readonly<
+  Partial<{
+    crumbs: Sanity.Link[];
+    currentPage: Sanity.Page | Sanity.BlogPost;
+  }>
+>) {
   return (
     <nav className="section py-4 text-sm">
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1" itemScope itemType="https://schema.org/BreadcrumbList">
         {crumbs?.map((crumb, key) => (
-          <Fragment key={key}>
+          <Fragment key={crumb._key}>
             <Crumb link={crumb} position={key + 1} />
 
             <li className="opacity-20" role="presentation">
@@ -23,7 +25,7 @@ export default async function Breadcrumbs({
           </Fragment>
         ))}
 
-        <Crumb position={(crumbs?.length || 0) + 2}>{currentPage?.title || currentPage?.metadata.title}</Crumb>
+        <Crumb position={(crumbs?.length ?? 0) + 2}>{currentPage?.title || currentPage?.metadata.title}</Crumb>
       </ol>
     </nav>
   );
