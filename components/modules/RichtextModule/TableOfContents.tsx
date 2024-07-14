@@ -58,7 +58,7 @@ function handleIntersect(entries: IntersectionObserverEntry[], textSlug: string)
   });
 }
 
-function TableOfContentsList({ headings }: { headings?: Heading[] }) {
+function TableOfContentsList({ headings }: Readonly<{ headings?: Heading[] }>) {
   return (
     <ol className="anim-fade-to-b mt-2 leading-tight">
       {headings?.map(({ text, style, _key }) => <TableOfContentsItem key={_key} text={text} style={style} />)}
@@ -66,7 +66,7 @@ function TableOfContentsList({ headings }: { headings?: Heading[] }) {
   );
 }
 
-function TableOfContentsItem({ text, style }: { text: string; style: string }) {
+function TableOfContentsItem({ text, style }: Readonly<{ text: string; style: string }>) {
   return (
     <li className="border-l transition-all" data-toc-item={slug(text)}>
       <a

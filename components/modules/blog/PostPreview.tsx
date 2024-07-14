@@ -6,7 +6,7 @@ import { processUrl } from '@/sanity/lib/url';
 
 import Categories from './Categories';
 
-export default function PostPreview({ post }: { post: Sanity.BlogPost }) {
+export default function PostPreview({ post }: Readonly<{ post: Sanity.BlogPost }>) {
   return (
     <Link className="group block space-y-2" href={processUrl(post, { base: false })}>
       <figure className="aspect-video overflow-hidden bg-gray-500">

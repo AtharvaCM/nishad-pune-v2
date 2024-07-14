@@ -29,8 +29,6 @@ import testimonialFeatured from './modules/testimonial.featured';
 import testimonialList from './modules/testimonial-list';
 // objects
 import cta from './objects/cta';
-import customImage from './objects/custom-image';
-import customVideo from './objects/custom-video';
 import link from './objects/link';
 import linkList from './objects/link.list';
 import metadata from './objects/metadata';
@@ -55,8 +53,6 @@ export const schemaTypes = [
   link,
   linkList,
   metadata,
-  customImage,
-  customVideo,
 
   // modules
   accordionList,

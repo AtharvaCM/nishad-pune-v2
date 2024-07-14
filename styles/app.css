@@ -78,11 +78,6 @@
     display: none !important;
   }
 
-  :target:is(h1, h2, h3, h4, h5, h6) {
-    scroll-margin-top: var(--header-height);
-    animation: target 2s ease-in-out forwards;
-  }
-
   @keyframes target {
     0%,
     50% {

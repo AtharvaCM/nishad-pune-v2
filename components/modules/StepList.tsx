@@ -4,13 +4,15 @@ import { PortableText } from '@portabletext/react';
 export default function StepList({
   intro,
   steps,
-}: Partial<{
-  intro: any;
-  steps: {
-    readonly _key: string;
-    content: any;
-  }[];
-}>) {
+}: Readonly<
+  Partial<{
+    intro: any;
+    steps: {
+      readonly _key: string;
+      content: any;
+    }[];
+  }>
+>) {
   return (
     <section className="section space-y-8">
       {intro && (
