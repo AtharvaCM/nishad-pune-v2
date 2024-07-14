@@ -26,6 +26,13 @@ export function getLocale(request: NextRequest) {
 export function middleware(request: NextRequest) {
   // Check if there is any supported locale in the pathname
   const { pathname } = request.nextUrl;
+
+  // Exclude /studio routes from locale handling
+  if (pathname.startsWith('/studio')) {
+    return NextResponse.next();
+  }
+
+  // Check if there is any supported locale in the pathname
   const pathnameHasLocale = supportedLocales.some((locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`);
 
   if (pathnameHasLocale) return;
@@ -35,13 +42,14 @@ export function middleware(request: NextRequest) {
   request.nextUrl.pathname = `/${locale}${pathname}`;
   // e.g. incoming request is /products
   // The new URL is now /en-US/products
-  console.log('request.nextUrl: ', request.nextUrl);
   return NextResponse.redirect(request.nextUrl);
 }
 
 export const config = {
   matcher: [
     // Skip all internal paths (_next)
-    '/((?!_next).*)',
+    '/((?!_next|studio).*)',
+    // Optional: only run on root (/) URL
+    // '/'
   ],
 };
