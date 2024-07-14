@@ -31,7 +31,7 @@ export default function Img({
   return (
     <Image
       src={src}
-      srcSet={generateSrcset(image, { width: imageWidth, sizes: imageSizes }) || src}
+      srcSet={generateSrcset(image, { width: imageWidth, sizes: imageSizes }) ?? src}
       // @ts-expect-error width
       width={width}
       // @ts-expect-error height
@@ -51,13 +51,13 @@ export function Source({
   imageSizes = SIZES,
   options,
   media = '(max-width: 768px)',
-}: {
+}: Readonly<{
   image: Sanity.Image | undefined;
   imageWidth?: number;
   imageSizes?: number[];
   options?: UseNextSanityImageOptions;
   media?: string;
-}) {
+}>) {
   const { src, width, height } = useNextSanityImage(
     client,
     image ?? '',
@@ -67,7 +67,7 @@ export function Source({
   if (!image) return null;
 
   return (
-    <source srcSet={generateSrcset(image, { width: imageWidth, sizes: imageSizes }) || src} width={width} height={height} media={media} />
+    <source srcSet={generateSrcset(image, { width: imageWidth, sizes: imageSizes }) ?? src} width={width} height={height} media={media} />
   );
 }
 
