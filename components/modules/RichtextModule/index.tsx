@@ -17,6 +17,7 @@ export default function RichtextModule({
     tableOfContents: boolean;
     tocPosition: 'left' | 'right';
     headings: {
+      readonly _key: string;
       style: string;
       text: string;
     }[];
