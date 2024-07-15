@@ -1,10 +1,10 @@
-import { LuDollarSign } from 'react-icons/lu';
+import { LuIndianRupee } from 'react-icons/lu';
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'pricing',
   title: 'Pricing tier',
-  icon: LuDollarSign,
+  icon: LuIndianRupee,
   type: 'document',
   fields: [
     defineField({

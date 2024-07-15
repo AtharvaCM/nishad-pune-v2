@@ -59,7 +59,7 @@ export default function PricingList({
 
 const { format } = new Intl.NumberFormat('en-US', {
   style: 'currency',
-  currency: 'USD',
+  currency: 'INR',
 });
 
 function formatPrice(value: number) {

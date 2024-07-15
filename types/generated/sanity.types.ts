@@ -721,6 +721,37 @@ export type Cta = {
   style?: 'link' | 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost';
 };
 
+export type Event = {
+  _id: string;
+  _type: 'event';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  theme?: string;
+  date?: string;
+  location?: string;
+  googleMapsLink?: string;
+  contactInfo?: {
+    phone?: string;
+    email?: string;
+  };
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    loading?: 'lazy' | 'eager';
+    overlay?: boolean;
+    _type: 'image';
+  };
+};
+
 export type Testimonial = {
   _id: string;
   _type: 'testimonial';

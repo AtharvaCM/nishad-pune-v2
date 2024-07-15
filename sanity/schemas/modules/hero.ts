@@ -92,6 +92,7 @@ export default defineType({
       options: {
         hotspot: true,
       },
+      validation: (Rule) => Rule.required(),
       hidden: ({ parent }) => parent?.bgType !== 'image',
       group: 'media',
     }),

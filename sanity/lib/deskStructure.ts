@@ -31,6 +31,9 @@ export const deskStructure = (S: StructureBuilder, context: StructureResolverCon
       S.documentTypeListItem('redirect').title('Redirects'),
       S.divider(),
 
+      S.documentTypeListItem('event').title('Events'),
+      S.divider(),
+
       S.documentTypeListItem('blog.post').title('Blog posts'),
       S.documentTypeListItem('blog.category').title('Blog categories'),
       S.divider(),

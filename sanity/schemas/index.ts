@@ -2,6 +2,7 @@
 import announcement from './documents/announcement';
 import blogCategory from './documents/blog.category';
 import blogPost from './documents/blog.post';
+import event from './documents/event';
 import logo from './documents/logo';
 import navigation from './documents/navigation';
 import page from './documents/page';
@@ -46,6 +47,7 @@ export const schemaTypes = [
   logo,
   pricing,
   testimonial,
+  event,
 
   // objects
   cta,
