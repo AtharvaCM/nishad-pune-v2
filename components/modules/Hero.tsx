@@ -53,7 +53,7 @@ export default function Hero({
     if (bgType === 'video' && bgVideo?.asset?._ref) {
       const fetchVideoUrl = async () => {
         const videoAsset = await client.getDocument(bgVideo.asset._ref);
-        if (videoAsset && videoAsset.url) {
+        if (videoAsset?.url) {
           setVideoUrl(videoAsset.url);
         }
       };
