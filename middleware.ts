@@ -28,7 +28,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Exclude /studio routes from locale handling
-  if (pathname.startsWith('/studio')) {
+  if (pathname.startsWith('/studio') || pathname.startsWith('/api')) {
     return NextResponse.next();
   }
 
@@ -48,7 +48,7 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Skip all internal paths (_next)
-    '/((?!_next|studio).*)',
+    '/((?!_next|studio|api).*)',
     // Optional: only run on root (/) URL
     // '/'
   ],

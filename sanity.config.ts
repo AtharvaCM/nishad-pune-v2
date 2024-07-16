@@ -10,6 +10,7 @@ import { defineConfig } from 'sanity';
 import { presentationTool } from 'sanity/presentation';
 import { structureTool } from 'sanity/structure';
 import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel';
+import { media } from 'sanity-plugin-media';
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from './sanity/env';
@@ -61,6 +62,7 @@ export default defineConfig({
       widgets: [projectInfoWidget(), projectUsersWidget(), vercelWidget()],
     }),
     codeInput(),
+    media(),
     documentInternationalization({
       supportedLanguages: [
         { id: 'en', title: '🇺🇸 English' },
