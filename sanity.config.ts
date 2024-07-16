@@ -12,6 +12,7 @@ import { structureTool } from 'sanity/structure';
 import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel';
 import { media } from 'sanity-plugin-media';
 
+import LogoIcon from './components/LogoIcon';
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from './sanity/env';
 import { deskStructure, getDefaultDocumentNode } from './sanity/lib/deskStructure';
@@ -24,6 +25,7 @@ const internationalizationTypes = ['page', 'blog.post'];
 export default defineConfig({
   title: 'Nishad Pune',
   basePath: '/studio',
+  icon: LogoIcon,
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schema' folder
