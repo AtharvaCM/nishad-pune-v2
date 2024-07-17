@@ -2,14 +2,12 @@
  * This configuration is used to for the Sanity Studio that’s mounted on the `/app/studio/[[...index]]/page.tsx` route
  */
 import { codeInput } from '@sanity/code-input';
-import { dashboardTool, projectInfoWidget, projectUsersWidget } from '@sanity/dashboard';
 import { DeleteTranslationAction, documentInternationalization } from '@sanity/document-internationalization';
 import { visionTool } from '@sanity/vision';
 import { PencilIcon } from 'lucide-react';
 import { defineConfig } from 'sanity';
 import { presentationTool } from 'sanity/presentation';
 import { structureTool } from 'sanity/structure';
-import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel';
 import { media } from 'sanity-plugin-media';
 
 import LogoIcon from './components/LogoIcon';
@@ -58,10 +56,6 @@ export default defineConfig({
           disable: '/api/disable-draft',
         },
       },
-    }),
-    dashboardTool({
-      title: 'Deployment',
-      widgets: [projectInfoWidget(), projectUsersWidget(), vercelWidget()],
     }),
     codeInput(),
     media(),
