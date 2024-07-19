@@ -33,28 +33,30 @@ import cta from './objects/cta';
 import link from './objects/link';
 import linkList from './objects/link.list';
 import metadata from './objects/metadata';
+import modules from './objects/modules';
 import uid from './objects/uid';
 
 export const schemaTypes = [
   // documents
-  site,
-  page,
-  blogPost,
-  blogCategory,
-  navigation,
   announcement,
-  redirect,
-  logo,
-  pricing,
-  testimonial,
+  blogCategory,
+  blogPost,
   event,
+  logo,
+  navigation,
+  page,
+  pricing,
+  redirect,
+  site,
+  testimonial,
 
   // objects
   cta,
-  uid,
   link,
   linkList,
   metadata,
+  modules,
+  uid,
 
   // modules
   accordionList,
