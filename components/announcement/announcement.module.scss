@@ -6,6 +6,8 @@
   @apply p-2;
   @apply text-center;
   @apply max-md:text-sm;
+  @apply bg-primary;
+  @apply text-primary-foreground;
   @screen md {
     @apply gap-x-6;
   }

@@ -697,6 +697,62 @@ export type AccordionList = {
   uid?: string;
 };
 
+export type Uid = string;
+
+export type Modules = Array<
+  | ({
+      _key: string;
+    } & AccordionList)
+  | ({
+      _key: string;
+    } & BlogList)
+  | ({
+      _key: string;
+    } & Breadcrumbs)
+  | ({
+      _key: string;
+    } & Callout)
+  | ({
+      _key: string;
+    } & CreativeModule)
+  | ({
+      _key: string;
+    } & CustomHtml)
+  | ({
+      _key: string;
+    } & FlagList)
+  | ({
+      _key: string;
+    } & Hero)
+  | ({
+      _key: string;
+    } & HeroSaas)
+  | ({
+      _key: string;
+    } & HeroSplit)
+  | ({
+      _key: string;
+    } & LogoList)
+  | ({
+      _key: string;
+    } & PricingList)
+  | ({
+      _key: string;
+    } & RichtextModule)
+  | ({
+      _key: string;
+    } & StatList)
+  | ({
+      _key: string;
+    } & StepList)
+  | ({
+      _key: string;
+    } & TestimonialList)
+  | ({
+      _key: string;
+    } & TestimonialFeatured)
+>;
+
 export type LinkList = {
   _type: 'link.list';
   link?: Link;
@@ -707,43 +763,10 @@ export type LinkList = {
   >;
 };
 
-export type Uid = string;
-
 export type Cta = {
   _type: 'cta';
   link?: Link;
   style?: 'link' | 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost';
-};
-
-export type Event = {
-  _id: string;
-  _type: 'event';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  theme?: string;
-  date?: string;
-  location?: string;
-  googleMapsLink?: string;
-  contactInfo?: {
-    phone?: string;
-    email?: string;
-  };
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    loading?: 'lazy' | 'eager';
-    overlay?: boolean;
-    _type: 'image';
-  };
 };
 
 export type Testimonial = {
@@ -785,158 +808,6 @@ export type Testimonial = {
       _type: 'image';
     };
   };
-};
-
-export type Pricing = {
-  _id: string;
-  _type: 'pricing';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  highlight?: string;
-  price?: {
-    base?: number;
-    strikethrough?: number;
-    suffix?: string;
-  };
-  ctas?: Array<
-    {
-      _key: string;
-    } & Cta
-  >;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: 'span';
-      _key: string;
-    }>;
-    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
-    listItem?: 'bullet' | 'number';
-    markDefs?: Array<{
-      href?: string;
-      _type: 'link';
-      _key: string;
-    }>;
-    level?: number;
-    _type: 'block';
-    _key: string;
-  }>;
-};
-
-export type Logo = {
-  _id: string;
-  _type: 'logo';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  image?: {
-    default?: {
-      asset?: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: 'image';
-    };
-    light?: {
-      asset?: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: 'image';
-    };
-    dark?: {
-      asset?: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: 'image';
-    };
-  };
-};
-
-export type Redirect = {
-  _id: string;
-  _type: 'redirect';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  source?: string;
-  destination?: string;
-  permanent?: boolean;
-};
-
-export type Announcement = {
-  _id: string;
-  _type: 'announcement';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: 'span';
-      _key: string;
-    }>;
-    style?: 'normal';
-    listItem?: 'bullet' | 'number';
-    markDefs?: Array<{
-      href?: string;
-      _type: 'link';
-      _key: string;
-    }>;
-    level?: number;
-    _type: 'block';
-    _key: string;
-  }>;
-  cta?: Link;
-  start?: string;
-  end?: string;
-};
-
-export type Link = {
-  _type: 'link';
-  label?: string;
-  type?: 'internal' | 'external';
-  internal?:
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'page';
-      }
-    | {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'blog.post';
-      };
-  external?: string;
-  params?: string;
-};
-
-export type BlogCategory = {
-  _id: string;
-  _type: 'blog.category';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
 };
 
 export type Site = {
@@ -1013,6 +884,61 @@ export type Site = {
   };
 };
 
+export type Document = {
+  _type: 'reference';
+  _ref: string;
+  _weak?: boolean;
+};
+
+export type Redirect = {
+  _id: string;
+  _type: 'redirect';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  source?: string;
+  destination?: string;
+  permanent?: boolean;
+};
+
+export type Pricing = {
+  _id: string;
+  _type: 'pricing';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  highlight?: string;
+  price?: {
+    base?: number;
+    strikethrough?: number;
+    suffix?: string;
+  };
+  ctas?: Array<
+    {
+      _key: string;
+    } & Cta
+  >;
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
+};
+
 export type Navigation = {
   _id: string;
   _type: 'navigation';
@@ -1030,10 +956,138 @@ export type Navigation = {
   >;
 };
 
-export type Document = {
-  _type: 'reference';
-  _ref: string;
-  _weak?: boolean;
+export type Logo = {
+  _id: string;
+  _type: 'logo';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  image?: {
+    default?: {
+      asset?: {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+    };
+    light?: {
+      asset?: {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+    };
+    dark?: {
+      asset?: {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+    };
+  };
+};
+
+export type Event = {
+  _id: string;
+  _type: 'event';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  theme?: string;
+  date?: string;
+  location?: string;
+  googleMapsLink?: string;
+  contactInfo?: {
+    phone?: string;
+    email?: string;
+  };
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    loading?: 'lazy' | 'eager';
+    overlay?: boolean;
+    _type: 'image';
+  };
+};
+
+export type BlogCategory = {
+  _id: string;
+  _type: 'blog.category';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+};
+
+export type Announcement = {
+  _id: string;
+  _type: 'announcement';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
+  cta?: Link;
+  start?: string;
+  end?: string;
+};
+
+export type Link = {
+  _type: 'link';
+  label?: string;
+  type?: 'internal' | 'external';
+  internal?:
+    | {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'page';
+      }
+    | {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'blog.post';
+      };
+  external?: string;
+  params?: string;
 };
 
 export type TranslationMetadata = {
@@ -1133,59 +1187,7 @@ export type Page = {
   orderRank?: string;
   language?: string;
   title?: string;
-  modules?: Array<
-    | ({
-        _key: string;
-      } & AccordionList)
-    | ({
-        _key: string;
-      } & BlogList)
-    | ({
-        _key: string;
-      } & Breadcrumbs)
-    | ({
-        _key: string;
-      } & Callout)
-    | ({
-        _key: string;
-      } & CreativeModule)
-    | ({
-        _key: string;
-      } & CustomHtml)
-    | ({
-        _key: string;
-      } & FlagList)
-    | ({
-        _key: string;
-      } & Hero)
-    | ({
-        _key: string;
-      } & HeroSaas)
-    | ({
-        _key: string;
-      } & HeroSplit)
-    | ({
-        _key: string;
-      } & LogoList)
-    | ({
-        _key: string;
-      } & PricingList)
-    | ({
-        _key: string;
-      } & RichtextModule)
-    | ({
-        _key: string;
-      } & StatList)
-    | ({
-        _key: string;
-      } & StepList)
-    | ({
-        _key: string;
-      } & TestimonialList)
-    | ({
-        _key: string;
-      } & TestimonialFeatured)
-  >;
+  modules?: Modules;
   metadata?: Metadata;
 };
 
