@@ -1,10 +1,12 @@
-import { DeadLinks, Preflight } from '@planetary/sanity-plugin-preflight';
 import { EditIcon, FolderIcon, RocketIcon } from '@sanity/icons';
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
 import { BsDatabaseAdd } from 'react-icons/bs';
+import { LuFileJson } from 'react-icons/lu';
 import { VscServerProcess } from 'react-icons/vsc';
 import { StructureBuilder, StructureResolverContext } from 'sanity/structure';
 
+import JsonPreview from '../plugins/sanity-plugin-json-preview/src/JsonPreview';
+import { DeadLinks, Preflight } from '../plugins/sanity-plugin-preflight/src';
 import { group, singleton } from '../utils';
 
 export const deskStructure = (S: StructureBuilder, context: StructureResolverContext) =>
@@ -52,7 +54,7 @@ export const getDefaultDocumentNode = (S: StructureBuilder, { schemaType }: { sc
       // Include the default content editor
       S.view.form().icon(EditIcon),
 
-      // Add Preflight plugin
+      // Add Preflight component
       S.view
         .component(
           Preflight({
@@ -65,9 +67,12 @@ export const getDefaultDocumentNode = (S: StructureBuilder, { schemaType }: { sc
         )
         .title('Preflight')
         .icon(RocketIcon),
+
+      // Add JSON Preview component
+      S.view.component(JsonPreview).title('JSON').icon(LuFileJson),
     ]);
   }
 
   // Otherwise render the default content editor
-  return S.document().views([S.view.form()]);
+  return S.document().views([S.view.form(), S.view.component(JsonPreview).title('JSON').icon(LuFileJson)]);
 };
