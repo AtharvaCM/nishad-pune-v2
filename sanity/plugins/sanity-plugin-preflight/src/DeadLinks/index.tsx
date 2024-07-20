@@ -60,7 +60,9 @@ const DeadLinksPlugin = ({ config, ...props }: Props & { config: Config }) => {
         title="Links"
         badge={isInitial ? `Found ${resultsArray.length} link(s)` : `${successCount}/${resultsArray.length} links are valid`}
         action={{
-          handleClick: checkAllLinks,
+          handleClick: () => {
+            checkAllLinks().catch(console.error);
+          },
           title: 'Check all links',
           icon: <RefreshIcon />,
         }}
