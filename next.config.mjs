@@ -15,6 +15,11 @@ const nextConfig = {
   experimental: {
     taint: true,
   },
+  logging: {
+    fetches: {
+      fullUrl: false,
+    },
+  },
   // ...other config settings
 };
 

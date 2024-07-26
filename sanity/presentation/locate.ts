@@ -1,37 +1,30 @@
-import { map } from 'rxjs'
-import { DocumentLocationResolver } from 'sanity/presentation'
+import { map } from 'rxjs';
+import { DocumentLocationResolver } from 'sanity/presentation';
 
 // Pass 'context' as the second argument
 export const locate: DocumentLocationResolver = (params, context) => {
-  // Set up locations for post documents
-  if (params.type === 'post') {
-    // Subscribe to the latest slug and title
-    const doc$ = context.documentStore.listenQuery(
-      '*[_id == $id][0]{slug,title}',
-      params,
-      { perspective: 'previewDrafts' }, // returns a draft article if it exists
-    )
-    // Return a streaming list of locations
+  if (['page', 'blog.post'].includes(params.type)) {
+    const doc$ = context.documentStore.listenQuery('*[_id == $id][0]{title,metadata}', params, { perspective: 'previewDrafts' });
+
     return doc$.pipe(
       map((doc) => {
-        // If the document doesn't exist or have a slug, return null
-        if (!doc || !doc.slug?.current) {
-          return null
-        }
+        if (!doc?.metadata?.slug?.current) return null;
+
+        const directory = params.type === 'blog.post' ? '/blog' : '';
+        const slug = doc.metadata.slug.current;
+        const path = slug === 'index' ? '' : `/${slug}`;
+
         return {
           locations: [
             {
-              title: doc.title || 'Untitled',
-              href: `/${doc.slug.current}`,
-            },
-            {
-              title: 'Posts',
-              href: '/',
+              title: doc.title || doc.metadata.title || 'Untitled',
+              href: [directory, path].filter(Boolean).join(''),
             },
           ],
-        }
+        };
       }),
-    )
+    );
   }
-  return null
-}
+
+  return null;
+};

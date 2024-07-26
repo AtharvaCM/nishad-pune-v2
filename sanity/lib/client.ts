@@ -1,6 +1,6 @@
-import { createClient } from '@sanity/client'
+import { createClient } from '@sanity/client';
 
-import { apiVersion, dataset, projectId, useCdn } from '../env'
+import { apiVersion, dataset, projectId, useCdn } from '../env';
 
 export const client = createClient({
   apiVersion,
@@ -11,5 +11,13 @@ export const client = createClient({
   stega: {
     enabled: false,
     studioUrl: '/studio',
+    logger: console,
+    filter: (props) => {
+      if (props.sourcePath.at(-1) === 'title') {
+        return true;
+      }
+
+      return props.filterDefault(props);
+    },
   },
-})
+});

@@ -13,6 +13,10 @@ import { NextStudio } from 'next-sanity/studio';
 
 import config from '@/sanity.config';
 
+export const dynamic = 'force-static';
+
+export const maxDuration = 60;
+
 export default function StudioPage() {
   return <NextStudio config={config} />;
 }

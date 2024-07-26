@@ -9,3 +9,7 @@ const imageBuilder = createImageUrlBuilder({
 });
 
 export const urlForImage = (source: Image) => imageBuilder?.image(source).auto('format').fit('max').url();
+
+export function urlFor(image: Sanity.Image) {
+  return imageBuilder.image(image);
+}

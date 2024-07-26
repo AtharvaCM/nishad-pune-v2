@@ -1,0 +1,10 @@
+.d-link {
+  @apply absolute;
+  @apply left-0;
+  @apply top-0;
+  @apply z-20;
+  @apply -translate-x-full;
+  &:focus {
+    @apply translate-x-0;
+  }
+}
