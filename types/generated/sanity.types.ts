@@ -483,6 +483,8 @@ export type FlagList = {
 
 export type CustomHtml = {
   _type: 'custom-html';
+  uid?: string;
+  className?: string;
   html?: Code;
 };
 
@@ -618,6 +620,11 @@ export type Breadcrumbs = {
   >;
 };
 
+export type BlogPostContent = {
+  _type: 'blog-post-content';
+  uid?: string;
+};
+
 export type BlogList = {
   _type: 'blog-list';
   intro?: Array<{
@@ -706,6 +713,9 @@ export type Modules = Array<
   | ({
       _key: string;
     } & BlogList)
+  | ({
+      _key: string;
+    } & BlogPostContent)
   | ({
       _key: string;
     } & Breadcrumbs)
@@ -835,24 +845,6 @@ export type Site = {
       _key: string;
     } & Cta
   >;
-  copyright?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: 'span';
-      _key: string;
-    }>;
-    style?: 'normal';
-    listItem?: 'bullet' | 'number';
-    markDefs?: Array<{
-      href?: string;
-      _type: 'link';
-      _key: string;
-    }>;
-    level?: number;
-    _type: 'block';
-    _key: string;
-  }>;
   headerMenu?: {
     _ref: string;
     _type: 'reference';
@@ -871,6 +863,24 @@ export type Site = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: 'navigation';
   };
+  copyright?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
   ogimage?: {
     asset?: {
       _ref: string;
@@ -1175,6 +1185,8 @@ export type BlogPost = {
     [internalGroqTypeReferenceTo]?: 'blog.category';
   }>;
   publishDate?: string;
+  featured?: boolean;
+  hideTableOfContents?: boolean;
   metadata?: Metadata;
 };
 
@@ -1363,24 +1375,6 @@ export type GET_SITEResult = {
       params?: string;
     } | null;
   }> | null;
-  copyright?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: 'span';
-      _key: string;
-    }>;
-    style?: 'normal';
-    listItem?: 'bullet' | 'number';
-    markDefs?: Array<{
-      href?: string;
-      _type: 'link';
-      _key: string;
-    }>;
-    level?: number;
-    _type: 'block';
-    _key: string;
-  }>;
   headerMenu: {
     title: string | null;
     items: Array<
@@ -1561,5 +1555,23 @@ export type GET_SITEResult = {
         }
     > | null;
   } | null;
+  copyright?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
   ogimage: string | null;
 } | null;

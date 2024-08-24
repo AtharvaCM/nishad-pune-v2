@@ -67,6 +67,8 @@ export default defineConfig({
       schemaTypes: ['page', 'blog.post'],
     }),
   ],
+  tasks: { enabled: false },
+  scheduledPublishing: { enabled: false },
   document: {
     actions: (input, { schemaType }) => {
       const docActionComponents = singletonTypes.includes(schemaType)
@@ -78,11 +80,6 @@ export default defineConfig({
       }
 
       return docActionComponents;
-    },
-  },
-  beta: {
-    treeArrayEditing: {
-      enabled: true,
     },
   },
 });

@@ -13,6 +13,7 @@ import testimonial from './documents/testimonial';
 // modules
 import accordionList from './modules/accordion-list';
 import blogList from './modules/blog-list';
+import blogPostContent from './modules/blog-post-content';
 import breadcrumbs from './modules/breadcrumbs';
 import callout from './modules/callout';
 import creativeModule from './modules/creative';
@@ -61,6 +62,7 @@ export const schemaTypes = [
   // modules
   accordionList,
   blogList,
+  blogPostContent,
   breadcrumbs,
   callout,
   creativeModule,

@@ -7,12 +7,13 @@ import StringInput from '../fragments/input/StringInput';
 export default defineType({
   name: 'metadata',
   title: 'Metadata',
+  description: 'For search engines',
   type: 'object',
   fields: [
     defineField({
       name: 'slug',
       type: 'slug',
-      description: 'URL-friendly identifier generated from the title or name.',
+      description: 'URL path / permalink. Use "index" for the homepage.',
       options: {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         source: (doc: any) => doc.metadata.title || doc.name || doc.title,
@@ -43,7 +44,7 @@ export default defineType({
     defineField({
       name: 'noIndex',
       title: 'No Index',
-      description: 'Prevent search engines from indexing this page.',
+      description: 'Prevent search engines from indexing this page',
       type: 'boolean',
       initialValue: false,
     }),

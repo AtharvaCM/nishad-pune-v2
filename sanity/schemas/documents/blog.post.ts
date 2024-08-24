@@ -17,6 +17,8 @@ export default defineType({
       icon: RiPagesFill,
       default: true,
     },
+    { name: 'options' },
+
     {
       title: 'SEO',
       name: 'seo',
@@ -63,6 +65,18 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'featured',
+      type: 'boolean',
+      group: 'options',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'hideTableOfContents',
+      type: 'boolean',
+      group: 'options',
+      initialValue: false,
+    }),
+    defineField({
       name: 'metadata',
       type: 'metadata',
       group: 'seo',
@@ -70,10 +84,16 @@ export default defineType({
   ],
   preview: {
     select: {
+      featured: 'featured',
       title: 'metadata.title',
       subtitle: 'publishDate',
       media: 'metadata.image',
     },
+    prepare: ({ title, subtitle, media, featured }) => ({
+      title: [featured && '★', title].filter(Boolean).join(' '),
+      subtitle,
+      media,
+    }),
   },
   orderings: [
     {

@@ -8,6 +8,15 @@ export default defineType({
   type: 'object',
   fields: [
     defineField({
+      name: 'uid',
+      title: 'Unique Identifier',
+      type: 'uid',
+    }),
+    defineField({
+      name: 'className',
+      type: 'string',
+    }),
+    defineField({
       name: 'html',
       title: 'HTML',
       type: 'code',

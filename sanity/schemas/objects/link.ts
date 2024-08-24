@@ -34,6 +34,7 @@ export default defineType({
     defineField({
       name: 'external',
       type: 'url',
+      placeholder: 'https://example.com',
       validation: (Rule) =>
         Rule.uri({
           scheme: ['http', 'https', 'mailto', 'tel'],
@@ -43,8 +44,9 @@ export default defineType({
     }),
     defineField({
       name: 'params',
-      title: 'URL params',
+      title: 'URL parameters',
       type: 'string',
+      placeholder: 'e.g. #jump-link or ?foo=bar',
       hidden: ({ parent }) => parent?.type !== 'internal',
     }),
   ],
