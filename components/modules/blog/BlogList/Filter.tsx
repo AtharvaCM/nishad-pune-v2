@@ -16,7 +16,10 @@ export default function Filter({ label, value = 'All' }: Readonly<{ label: strin
   useEffect(reset, [usePathname()]);
 
   return (
-    <button className={cn(css.filter, '!py-1', selected === value ? 'action *:text-white/50' : 'ghost')} onClick={() => setSelected(value)}>
+    <button
+      className={cn(css.filter, '!py-1', selected === value ? 'action *:text-white/50' : 'ghost border border-transparent')}
+      onClick={() => setSelected(value)}
+    >
       <Category label={label} />
     </button>
   );

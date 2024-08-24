@@ -3,7 +3,7 @@ import Category from './Category';
 export default function Categories({
   categories,
   ...props
-}: Readonly<{ categories?: Sanity.BlogCategory[] } & React.HTMLProps<HTMLUListElement>>) {
+}: Readonly<{ categories?: Sanity.BlogCategory[] } & React.ComponentProps<'ul'>>) {
   if (!categories?.length) return null;
 
   return (

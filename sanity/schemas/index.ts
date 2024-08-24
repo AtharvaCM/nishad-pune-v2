@@ -8,6 +8,7 @@ import navigation from './documents/navigation';
 import page from './documents/page';
 import pricing from './documents/pricing';
 import redirect from './documents/redirect';
+import reputation from './documents/reputation';
 import site from './documents/site';
 import testimonial from './documents/testimonial';
 // modules
@@ -48,6 +49,7 @@ export const schemaTypes = [
   page,
   pricing,
   redirect,
+  reputation,
   site,
   testimonial,
 

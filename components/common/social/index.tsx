@@ -7,7 +7,7 @@ import { getSiteData } from '@/sanity/utils/get-site-data';
 
 import CTALink from '../cta';
 
-export default async function Social({ className }: React.HTMLProps<HTMLDivElement>) {
+export default async function Social({ className }: Readonly<React.ComponentProps<'div'>>) {
   const { social } = await getSiteData();
 
   if (!social?.items?.length) return null;
@@ -29,7 +29,7 @@ export default async function Social({ className }: React.HTMLProps<HTMLDivEleme
   );
 }
 
-const iconMap: { [key: string]: React.ComponentType<React.HTMLProps<SVGElement>> } = {
+const iconMap: { [key: string]: React.ComponentType<React.ComponentProps<'svg'>> } = {
   'facebook.com': FaFacebookF,
   'github.com': FaGithub,
   'instagram.com': FaInstagram,
@@ -40,7 +40,7 @@ const iconMap: { [key: string]: React.ComponentType<React.HTMLProps<SVGElement>>
   'youtube.com': FaYoutube,
 };
 
-function Icon({ url, ...props }: { url?: string } & React.HTMLProps<SVGElement>) {
+function Icon({ url, ...props }: { url?: string } & React.ComponentProps<'svg'>) {
   if (!url) return null;
 
   let hostname: string;

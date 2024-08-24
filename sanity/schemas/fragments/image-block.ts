@@ -32,6 +32,7 @@ export default defineArrayMember({
       name: 'loading',
       type: 'string',
       options: {
+        layout: 'radio',
         list: ['lazy', 'eager'],
       },
       initialValue: 'lazy',

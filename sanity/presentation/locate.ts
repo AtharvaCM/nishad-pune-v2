@@ -10,7 +10,7 @@ export const locate: DocumentLocationResolver = (params, context) => {
       map((doc) => {
         if (!doc?.metadata?.slug?.current) return null;
 
-        const directory = params.type === 'blog.post' ? '/blog' : '';
+        const segment = params.type === 'blog.post' ? '/blog' : '';
         const slug = doc.metadata.slug.current;
         const path = slug === 'index' ? '' : `/${slug}`;
 
@@ -18,7 +18,7 @@ export const locate: DocumentLocationResolver = (params, context) => {
           locations: [
             {
               title: doc.title || doc.metadata.title || 'Untitled',
-              href: [directory, path].filter(Boolean).join(''),
+              href: [segment, path].filter(Boolean).join(''),
             },
           ],
         };

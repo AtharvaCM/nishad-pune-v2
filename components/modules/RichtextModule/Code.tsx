@@ -1,6 +1,9 @@
 import { stegaClean } from '@sanity/client/stega';
 import { codeToHtml, splitLines } from 'shiki';
 
+import ClickToCopy from '@/components/common/click-to-cpoy';
+import { cn } from '@/lib/utils';
+
 import css from './Code.module.css';
 
 export default async function Code({
@@ -32,13 +35,23 @@ export default async function Code({
   });
 
   return (
-    <article className="relative !mb-2 !mt-6 rounded bg-gray-500">
+    <article className="group relative !mb-2 !mt-6 rounded bg-gray-500">
       {value.filename && (
         <div className="-mb-1 rounded-t bg-[#1E1E1E]/90 px-2 py-1 font-mono text-xs text-background">
           <span className="inline-block rounded-t border-b border-blue-400 bg-[#1E1E1E] px-3 py-2">📁 {value.filename}</span>
         </div>
       )}
-      <div className={css.code} dangerouslySetInnerHTML={{ __html: html }} />
+      <div className="relative">
+        <div className={css.code} dangerouslySetInnerHTML={{ __html: html }} />
+
+        <ClickToCopy
+          value={stegaClean(value.code)}
+          className={cn(
+            'anim-fade-to-l absolute right-0 top-0 m-1 hidden rounded p-[.3em] text-lg text-white',
+            'hover:bg-white/10 active:scale-95 active:bg-white/20 group-hover:block',
+          )}
+        />
+      </div>
     </article>
   );
 }

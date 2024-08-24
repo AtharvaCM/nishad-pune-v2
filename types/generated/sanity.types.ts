@@ -73,6 +73,7 @@ export type TestimonialList = {
     _key: string;
     [internalGroqTypeReferenceTo]?: 'testimonial';
   }>;
+  layout?: 'grid' | 'carousel';
 };
 
 export type TestimonialFeatured = {
@@ -289,6 +290,12 @@ export type HeroSplit = {
       _key: string;
     } & Cta
   >;
+  reputation?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'reputation';
+  };
   image?: {
     asset?: {
       _ref: string;
@@ -300,6 +307,7 @@ export type HeroSplit = {
     crop?: SanityImageCrop;
     alt?: string;
     onRight?: boolean;
+    onBottom?: boolean;
     loading?: 'lazy' | 'eager';
     _type: 'image';
   };
@@ -331,6 +339,12 @@ export type HeroSaas = {
       _key: string;
     } & Cta
   >;
+  reputation?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'reputation';
+  };
   image?: {
     asset?: {
       _ref: string;
@@ -373,6 +387,12 @@ export type Hero = {
       _key: string;
     } & Cta
   >;
+  reputation?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'reputation';
+  };
   bgType?: 'image' | 'video';
   bgImage?: {
     asset?: {
@@ -900,6 +920,30 @@ export type Document = {
   _weak?: boolean;
 };
 
+export type Reputation = {
+  _id: string;
+  _type: 'reputation';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  subtitle?: string;
+  repo?: string;
+  limit?: number;
+  avatars?: Array<{
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+    _key: string;
+  }>;
+};
+
 export type Redirect = {
   _id: string;
   _type: 'redirect';
@@ -1176,6 +1220,9 @@ export type BlogPost = {
     | ({
         _key: string;
       } & Code)
+    | ({
+        _key: string;
+      } & CustomHtml)
   >;
   categories?: Array<{
     _ref: string;

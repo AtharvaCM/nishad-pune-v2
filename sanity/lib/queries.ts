@@ -7,12 +7,15 @@ export const linkQuery = groq`
 `;
 
 // @sanity-typegen-ignore
+export const ctaQuery = groq`
+	...,
+	link{ ${linkQuery} }
+`;
+
+// @sanity-typegen-ignore
 export const modulesQuery = groq`
 	...,
-	ctas[]{
-		...,
-		link{ ${linkQuery} }
-	},
+	ctas[]{ ${ctaQuery} },
 	_type == 'blog-list' => { predefinedFilters[]-> },
 	_type == 'breadcrumbs' => { crumbs[]{ ${linkQuery} } },
 	_type == 'creative-module' => {
@@ -20,15 +23,20 @@ export const modulesQuery = groq`
 			...,
 			subModules[]{
 				...,
-				ctas[]{
-					...,
-					link{ ${linkQuery} }
-				}
+				ctas[]{ ${ctaQuery} },
 			}
 		}
 	},
+	_type == 'hero' => { reputation-> },
+	_type == 'hero.saas' => { reputation-> },
+	_type == 'hero.split' => { reputation-> },
 	_type == 'logo-list' => { logos[]-> },
-	_type == 'pricing-list' => { tiers[]-> },
+	_type == 'pricing-list' => {
+		tiers[]->{
+			...,
+			ctas[]{ ${ctaQuery} }
+		}
+	},
 	_type == 'richtext-module' => {
 		'headings': select(
 			tableOfContents => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{

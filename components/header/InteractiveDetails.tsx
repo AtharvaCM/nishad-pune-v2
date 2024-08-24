@@ -9,8 +9,8 @@ import { cn } from '@/lib/utils';
 import css from './InteractiveDetails.module.css';
 
 /**
- * @param safeAreaOnHover - Adds a safe area around the details element to prevent it from closing when the mouse leaves the element.
- * @param closeAfterNavigate - Closes the details element after a navigation event.
+ * @param safeAreaOnHover - Adds a safe area around the details element to prevent it from closing when the mouse leaves the element
+ * @param closeAfterNavigate - Closes the details element after a navigation event
  */
 export default function InteractiveDetails({
   safeAreaOnHover,

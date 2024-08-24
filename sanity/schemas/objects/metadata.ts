@@ -16,7 +16,7 @@ export default defineType({
       description: 'URL path / permalink. Use "index" for the homepage.',
       options: {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        source: (doc: any) => doc.metadata.title || doc.name || doc.title,
+        source: (doc: any) => doc.metadata.title || doc.title,
         isUnique: isUniqueOtherThanLanguage,
       },
       validation: (Rule) => Rule.required().error('The slug is requried.'),

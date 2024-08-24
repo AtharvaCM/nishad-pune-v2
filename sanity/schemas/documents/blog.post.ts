@@ -10,21 +10,7 @@ export default defineType({
   title: 'Blog post',
   icon: VscEdit,
   type: 'document',
-  groups: [
-    {
-      title: 'Main Content',
-      name: 'mainContent',
-      icon: RiPagesFill,
-      default: true,
-    },
-    { name: 'options' },
-
-    {
-      title: 'SEO',
-      name: 'seo',
-      icon: SearchIcon,
-    },
-  ],
+  groups: [{ name: 'content', icon: RiPagesFill, default: true }, { name: 'options' }, { name: 'seo', title: 'SEO', icon: SearchIcon }],
   fields: [
     defineField({
       name: 'language',
@@ -35,7 +21,6 @@ export default defineType({
     defineField({
       name: 'body',
       type: 'array',
-      group: 'mainContent',
       of: [
         { type: 'block' },
         imageBlock,
@@ -45,24 +30,26 @@ export default defineType({
             withFilename: true,
           },
         }),
+        { type: 'custom-html' },
       ],
+      group: 'content',
     }),
     defineField({
       name: 'categories',
       type: 'array',
-      group: 'mainContent',
       of: [
         {
           type: 'reference',
           to: [{ type: 'blog.category' }],
         },
       ],
+      group: 'content',
     }),
     defineField({
       name: 'publishDate',
       type: 'date',
-      group: 'mainContent',
       validation: (Rule) => Rule.required(),
+      group: 'content',
     }),
     defineField({
       name: 'featured',

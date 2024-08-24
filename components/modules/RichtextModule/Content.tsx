@@ -3,6 +3,7 @@ import { PortableText } from '@portabletext/react';
 
 import { cn } from '@/lib/utils';
 
+import CustomHTML from '../CustomHTML';
 import AnchoredHeading from './AnchoredHeading';
 import Code from './Code';
 import Image from './Image';
@@ -32,10 +33,11 @@ const components = {
   types: {
     image: Image,
     code: Code,
+    'custom-html': ({ value }: { value: any }) => <CustomHTML {...value} />,
   },
 };
 
-export default function Content({ value, className, children }: { value: any } & React.HTMLProps<HTMLDivElement>) {
+export default function Content({ value, className, children }: { value: any } & React.ComponentProps<'div'>) {
   return (
     <div className={cn('richtext mx-auto w-full space-y-[1em] [&>:first-child]:!mt-0', className)}>
       <PortableText value={value} components={components} />

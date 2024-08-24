@@ -34,6 +34,12 @@ export default defineType({
       group: 'content',
     }),
     defineField({
+      name: 'reputation',
+      type: 'reference',
+      to: [{ type: 'reputation' }],
+      group: 'content',
+    }),
+    defineField({
       name: 'bgType',
       title: 'Background Type',
       description: 'Select the type of background (image or video).',
