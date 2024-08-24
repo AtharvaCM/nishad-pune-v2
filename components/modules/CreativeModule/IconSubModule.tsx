@@ -11,7 +11,7 @@ export default function IconSubModule({
   ...props
 }: {
   module: IconSubModuleType;
-} & React.HTMLAttributes<HTMLDivElement>) {
+} & React.ComponentProps<'figure'>) {
   return (
     <figure {...props}>
       <Img className="w-auto" image={module.icon} style={{ maxHeight: module.size }} imageWidth={module.size} />

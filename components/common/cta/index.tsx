@@ -5,7 +5,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { processUrl } from '@/sanity/lib/url';
 
-export default function CTA({ link, style, className, children, ...rest }: Sanity.CTA & React.HTMLAttributes<HTMLAnchorElement>) {
+export default function CTA({ link, style, className, children, ...rest }: Sanity.CTA & React.ComponentProps<'a'>) {
   const linkContent = children || link?.label || link?.internal?.title || link?.external;
   const ariaLabel = link?.label ?? link?.internal?.title ?? link?.external ?? 'Link';
 

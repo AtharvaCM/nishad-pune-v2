@@ -13,7 +13,7 @@ export default function List({
 }: {
   posts: Sanity.BlogPost[];
   predefinedFilters?: Sanity.BlogCategory[];
-} & React.HTMLAttributes<HTMLUListElement>) {
+} & React.ComponentProps<'ul'>) {
   const { selected, reset } = categoryStore();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

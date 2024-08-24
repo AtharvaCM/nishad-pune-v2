@@ -6,7 +6,19 @@ export default defineType({
   title: 'Custom HTML',
   icon: VscCode,
   type: 'object',
+  groups: [{ name: 'content', default: true }, { name: 'options' }],
   fields: [
+    defineField({
+      name: 'uid',
+      title: 'Unique Identifier',
+      type: 'uid',
+      group: 'options',
+    }),
+    defineField({
+      name: 'className',
+      type: 'string',
+      group: 'options',
+    }),
     defineField({
       name: 'html',
       title: 'HTML',
@@ -15,6 +27,7 @@ export default defineType({
         language: 'html',
         languageAlternatives: [{ title: 'HTML', value: 'html' }],
       },
+      group: 'content',
     }),
   ],
   preview: {

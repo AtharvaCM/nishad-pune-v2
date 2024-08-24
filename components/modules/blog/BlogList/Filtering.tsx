@@ -24,9 +24,8 @@ export default async function Filtering({ predefinedFilters }: Readonly<{ predef
     <fieldset>
       <legend className="sr-only">Filter by category</legend>
 
-      <div className={cn(css.list, 'filtering group flex flex-wrap gap-1')}>
+      <div className={cn(css.list, 'filtering group flex flex-wrap gap-1 max-sm:justify-center')}>
         <Filter label="All" />
-
         {filtered?.map((category) => <Filter label={category.title} value={category._id} key={category._id} />)}
       </div>
     </fieldset>

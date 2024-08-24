@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
-export default function Wrapper({ className, children }: React.HTMLAttributes<HTMLDivElement>) {
+export default function Wrapper({ className, children }: Readonly<React.ComponentProps<'header'>>) {
   const ref = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 

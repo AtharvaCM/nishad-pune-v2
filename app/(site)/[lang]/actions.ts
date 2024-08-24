@@ -12,7 +12,7 @@ export async function getPage(language: string) {
     modules[]{ ${modulesQuery} },
     metadata {
       ...,
-      'ogimage': image.asset->url
+      'ogimage': image.asset->url + '?w=1200'
     },
     language,
     "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{

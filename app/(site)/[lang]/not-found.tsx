@@ -2,7 +2,7 @@ import { groq } from 'next-sanity';
 
 import Modules from '@/components/modules';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { linkQuery } from '@/sanity/lib/queries';
+import { modulesQuery } from '@/sanity/lib/queries';
 
 export default async function NotFound() {
   const page = await get404();
@@ -18,15 +18,8 @@ async function get404() {
   return await sanityFetch<Sanity.Page>({
     query: groq`*[_type == 'page' && metadata.slug.current == '404'][0]{
 			...,
-			modules[]{
-				...,
-				ctas[]{
-					...,
-					link{ ${linkQuery} }
-				}
-			}
+      modules[]{ ${modulesQuery} }
 		}`,
-    params: {},
     tags: ['404'],
   });
 }

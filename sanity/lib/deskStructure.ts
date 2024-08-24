@@ -13,7 +13,9 @@ export const deskStructure = (S: StructureBuilder, context: StructureResolverCon
   S.list()
     .title('Nishad Pune Content')
     .items([
-      singleton(S, 'site').icon(VscServerProcess),
+      singleton(S, 'site', 'Site settings').icon(VscServerProcess),
+      S.divider(),
+
       orderableDocumentListDeskItem({
         type: 'page',
         title: 'Pages',
@@ -26,6 +28,8 @@ export const deskStructure = (S: StructureBuilder, context: StructureResolverCon
         S,
         context,
       }),
+      S.documentTypeListItem('blog.post').title('Blog posts'),
+      S.documentTypeListItem('blog.category').title('Blog categories'),
       S.divider(),
 
       S.documentTypeListItem('navigation'),
@@ -36,13 +40,10 @@ export const deskStructure = (S: StructureBuilder, context: StructureResolverCon
       S.documentTypeListItem('event').title('Events'),
       S.divider(),
 
-      S.documentTypeListItem('blog.post').title('Blog posts'),
-      S.documentTypeListItem('blog.category').title('Blog categories'),
-      S.divider(),
-
       group(S, 'Miscellaneous', [
         S.documentTypeListItem('logo').title('Logos'),
         S.documentTypeListItem('pricing').title('Pricing tiers'),
+        S.documentTypeListItem('reputation'),
         S.documentTypeListItem('testimonial').title('Testimonials'),
       ]).icon(BsDatabaseAdd),
     ]);

@@ -1,10 +1,10 @@
-import { VscSymbolMisc } from 'react-icons/vsc';
+import { VscVerified } from 'react-icons/vsc';
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'logo',
   title: 'Logo',
-  icon: VscSymbolMisc,
+  icon: VscVerified,
   type: 'document',
   fields: [
     defineField({
@@ -24,10 +24,12 @@ export default defineType({
         }),
         defineField({
           name: 'light',
+          description: 'On dark backgrounds',
           type: 'image',
         }),
         defineField({
           name: 'dark',
+          description: 'On light backgrounds',
           type: 'image',
         }),
       ],

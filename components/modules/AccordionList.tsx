@@ -9,17 +9,17 @@ export default function AccordionList({
   items,
   layout = 'vertical',
   ...props
-}: Sanity.Module &
-  Partial<{
-    intro: any;
-    items: {
-      summary: string;
-      content: any;
-      open?: boolean;
-      _key: string;
-    }[];
-    layout: 'vertical' | 'horizontal';
-  }>) {
+}: Partial<{
+  intro: any;
+  items: {
+    summary: string;
+    content: any;
+    open?: boolean;
+    _key: string;
+  }[];
+  layout: 'vertical' | 'horizontal';
+}> &
+  Sanity.Module) {
   return (
     <section
       id={uid(props)}
@@ -34,7 +34,7 @@ export default function AccordionList({
       <div className="mx-auto w-full max-w-screen-md">
         {items?.map(({ summary, content, open, _key }) => (
           <details
-            className="accordion border-b border-border"
+            className="accordion border-b border-ink/10"
             open={open}
             itemScope
             itemProp="mainEntity"

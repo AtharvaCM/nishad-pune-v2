@@ -1,15 +1,17 @@
 import { notFound } from 'next/navigation';
 import { groq } from 'next-sanity';
 
-import Post from '@/components/modules/blog/Post';
+import Modules from '@/components/modules';
 import { client } from '@/sanity/lib/client';
 import { sanityFetch } from '@/sanity/lib/fetch';
+import { modulesQuery } from '@/sanity/lib/queries';
 import processMetadata from '@/utils/process-metadata';
 
 export default async function Page({ params }: Readonly<Props>) {
+  const page = await getPageTemplate();
   const post = await getPost(params);
-  if (!post) notFound();
-  return <Post post={post} />;
+  if (!page || !post) notFound();
+  return <Modules modules={page?.modules} page={page} post={post} />;
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -37,12 +39,23 @@ async function getPost(params: Props['params']) {
 			categories[]->,
 			metadata {
 				...,
-				'ogimage': image.asset->url
+				'ogimage': image.asset->url + '?w=1200'
 			}
 		}`,
 
     params,
     tags: ['blog.post'],
+  });
+}
+
+async function getPageTemplate() {
+  return await sanityFetch<Sanity.Page>({
+    query: groq`*[_type == 'page' && metadata.slug.current == 'blog/*'][0]{
+			...,
+			modules[]{ ${modulesQuery} },
+			metadata { slug }
+		}`,
+    tags: ['blog/*'],
   });
 }
 

@@ -8,11 +8,13 @@ import navigation from './documents/navigation';
 import page from './documents/page';
 import pricing from './documents/pricing';
 import redirect from './documents/redirect';
+import reputation from './documents/reputation';
 import site from './documents/site';
 import testimonial from './documents/testimonial';
 // modules
 import accordionList from './modules/accordion-list';
 import blogList from './modules/blog-list';
+import blogPostContent from './modules/blog-post-content';
 import breadcrumbs from './modules/breadcrumbs';
 import callout from './modules/callout';
 import creativeModule from './modules/creative';
@@ -47,6 +49,7 @@ export const schemaTypes = [
   page,
   pricing,
   redirect,
+  reputation,
   site,
   testimonial,
 
@@ -61,6 +64,7 @@ export const schemaTypes = [
   // modules
   accordionList,
   blogList,
+  blogPostContent,
   breadcrumbs,
   callout,
   creativeModule,

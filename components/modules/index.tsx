@@ -1,5 +1,6 @@
 import AccordionList from './AccordionList';
 import BlogList from './blog/BlogList';
+import PostContent from './blog/PostContent';
 import Breadcrumbs from './Breadcrumbs';
 import Callout from './Callout';
 import CreativeModule from './CreativeModule';
@@ -16,7 +17,11 @@ import StepList from './StepList';
 import TestimonialFeatured from './TestimonialFeatured';
 import TestimonialList from './TestimonialList';
 
-export default function Modules({ modules, page }: Readonly<{ modules?: Sanity.Module[]; page?: Sanity.Page }>) {
+export default function Modules({
+  modules,
+  page,
+  post,
+}: Readonly<{ modules?: Sanity.Module[]; page?: Sanity.Page; post?: Sanity.BlogPost }>) {
   return (
     <>
       {modules?.map((module) => {
@@ -25,8 +30,10 @@ export default function Modules({ modules, page }: Readonly<{ modules?: Sanity.M
             return <AccordionList {...module} key={module._key} />;
           case 'blog-list':
             return <BlogList {...module} key={module._key} />;
+          case 'blog-post-content':
+            return <PostContent {...module} post={post} key={module._key} />;
           case 'breadcrumbs':
-            return <Breadcrumbs {...module} currentPage={page} key={module._key} />;
+            return <Breadcrumbs {...module} currentPage={post ?? page} key={module._key} />;
           case 'callout':
             return <Callout {...module} key={module._key} />;
           case 'creative-module':

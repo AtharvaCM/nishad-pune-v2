@@ -49,6 +49,8 @@ declare global {
       readTime: number;
       headings?: { style: string; text: string; _key: string }[];
       categories: BlogCategory[];
+      featured: boolean;
+      hideTableOfContents: boolean;
       publishDate: string;
     };
 
@@ -78,6 +80,14 @@ declare global {
       };
       ctas?: CTA[];
       content?: any;
+    }>;
+
+    type Reputation = SanityDocument<{
+      title?: string;
+      subtitle?: string;
+      repo?: string;
+      limit?: number;
+      avatars?: Image[];
     }>;
 
     type Testimonial = SanityDocument<{

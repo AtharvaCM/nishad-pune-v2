@@ -2,10 +2,12 @@ import { defineType } from 'sanity';
 
 export default defineType({
   name: 'modules',
+  description: 'Page content',
   type: 'array',
   of: [
     { type: 'accordion-list' },
     { type: 'blog-list' },
+    { type: 'blog-post-content' },
     { type: 'breadcrumbs' },
     { type: 'callout' },
     { type: 'creative-module' },
@@ -57,6 +59,7 @@ export default defineType({
         },
       ],
       // TODO: Add screenshots of each block
+      views: [{ name: 'list' }, { name: 'grid' }],
       // views: [{ name: 'list' }, { name: 'grid', previewImageUrl: (schemaTypeName) => `/assets/${schemaTypeName}.png` }],
     },
   },

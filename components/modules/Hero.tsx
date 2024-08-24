@@ -11,6 +11,7 @@ import { client } from '@/sanity/lib/client';
 import CTAList from '../common/cta-list';
 import Img, { Source } from '../common/img';
 import Pretitle from '../common/pretitle';
+import Reputation from '../common/reputation';
 import styles from './Hero.module.scss';
 
 interface SanityVideo {
@@ -25,6 +26,7 @@ interface HeroProps {
   pretitle?: string;
   content?: TypedObject[];
   ctas?: Sanity.CTA[];
+  reputation: Sanity.Reputation;
   bgType?: 'image' | 'video';
   bgImage?: Sanity.Image;
   bgVideo?: SanityVideo;
@@ -38,6 +40,7 @@ export default function Hero({
   pretitle,
   content,
   ctas,
+  reputation,
   bgType = 'image',
   bgImage,
   bgVideo,
@@ -122,7 +125,18 @@ export default function Hero({
             style={{ textAlign: stegaClean(textAlign) }}
           >
             <Pretitle className={cn((hasImage || hasVideo) && 'text-background/70')}>{pretitle}</Pretitle>
+
             <PortableText value={content} />
+
+            <Reputation
+              className={cn('!mt-4', hasImage && '[&_strong]:text-amber-400', {
+                'justify-start': stegaClean(textAlign) === 'left',
+                'justify-center': stegaClean(textAlign) === 'center',
+                'justify-end': stegaClean(textAlign) === 'right',
+              })}
+              reputation={reputation}
+            />
+
             <CTAList
               ctas={ctas}
               className={cn('!mt-4', {

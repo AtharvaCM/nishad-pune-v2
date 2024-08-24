@@ -38,7 +38,7 @@ function Crumb({
 }: {
   link?: Omit<Sanity.Link, '_type'>;
   position: number;
-} & React.HTMLAttributes<HTMLLIElement>) {
+} & React.ComponentProps<'li'>) {
   const content = (
     <>
       <span itemProp="name">{stegaClean(children || link?.label || link?.internal?.title || link?.external)}</span>
