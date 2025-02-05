@@ -6,12 +6,15 @@ export default defineType({
   type: 'array',
   of: [
     { type: 'accordion-list' },
+    { type: 'blog-frontpage' },
     { type: 'blog-list' },
     { type: 'blog-post-content' },
     { type: 'breadcrumbs' },
     { type: 'callout' },
+    { type: 'card-list' },
     { type: 'creative-module' },
     { type: 'custom-html' },
+    { type: 'event-content' },
     { type: 'flag-list' },
     { type: 'hero' },
     { type: 'hero.saas' },
@@ -19,38 +22,27 @@ export default defineType({
     { type: 'logo-list' },
     { type: 'pricing-list' },
     { type: 'richtext-module' },
+    { type: 'schedule-module' },
+    { type: 'search-module' },
     { type: 'stat-list' },
     { type: 'step-list' },
+    { type: 'tabbed-content' },
     { type: 'testimonial-list' },
     { type: 'testimonial.featured' },
   ],
   options: {
     insertMenu: {
       groups: [
+        { name: 'hero', of: ['hero', 'hero.saas', 'hero.split'] },
         {
-          name: 'intro',
-          title: 'Intro',
-          of: ['hero', 'hero.saas', 'hero.split'],
+          name: 'lists',
+          of: ['accordion-list', 'blog-list', 'card-list', 'flag-list', 'logo-list', 'stat-list', 'step-list', 'testimonial-list'],
         },
-        {
-          name: 'content',
-          title: 'Content',
-          of: ['accordion-list', 'blog-list', 'richtext-module', 'custom-html'],
-        },
-        {
-          name: 'navigation',
-          title: 'Navigation',
-          of: ['breadcrumbs'],
-        },
+        { name: 'blog', of: ['blog-list', 'blog-post-content'] },
         {
           name: 'media',
           title: 'Media',
           of: ['callout', 'creative-module', 'flag-list'],
-        },
-        {
-          name: 'listings',
-          title: 'Listings',
-          of: ['logo-list', 'pricing-list', 'stat-list', 'step-list'],
         },
         {
           name: 'testimonials',
@@ -58,9 +50,13 @@ export default defineType({
           of: ['testimonial-list', 'testimonial.featured'],
         },
       ],
-      // TODO: Add screenshots of each block
-      views: [{ name: 'list' }, { name: 'grid' }],
-      // views: [{ name: 'list' }, { name: 'grid', previewImageUrl: (schemaTypeName) => `/assets/${schemaTypeName}.png` }],
+      views: [
+        {
+          name: 'grid',
+          previewImageUrl: (schemaType) => `/studio/thumbnails/${schemaType}.webp`,
+        },
+        { name: 'list' },
+      ],
     },
   },
 });

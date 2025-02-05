@@ -1,6 +1,8 @@
 import { PiFlowArrow } from 'react-icons/pi';
 import { defineField, defineType } from 'sanity';
 
+import processSlug from '@/sanity/lib/processSlug';
+
 export default defineType({
   name: 'redirect',
   title: 'Redirect',
@@ -9,16 +11,15 @@ export default defineType({
   fields: [
     defineField({
       name: 'source',
-      title: 'Redirect from',
+      description: 'Redirect from',
       placeholder: 'e.g. /old-path, /old-blog/:slug',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'destination',
-      title: 'Redirect to',
-      placeholder: 'e.g. /new-path, /blog/:slug',
-      type: 'string',
+      description: 'Redirect to',
+      type: 'link',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -43,11 +44,14 @@ export default defineType({
   preview: {
     select: {
       title: 'source',
-      destination: 'destination',
+      _type: 'destination.internal._type',
+      internal: 'destination.internal.metadata.slug.current',
+      params: 'destination.params',
+      external: 'destination.external',
     },
-    prepare: ({ title, destination }) => ({
+    prepare: ({ title, _type, internal, params, external }) => ({
       title,
-      subtitle: `to ${destination}`,
+      subtitle: (external || internal) && `to ${external || processSlug({ _type, internal, params })}`,
     }),
   },
 });

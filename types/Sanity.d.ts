@@ -54,6 +54,20 @@ declare global {
       publishDate: string;
     };
 
+    type Event = PageBase & {
+      readonly _type: 'event';
+      title: string;
+      theme: string;
+      date: string;
+      image: Image;
+      googleMapsLink: string;
+      contactInfo: {
+        phone: string;
+        email: string;
+      };
+      location: string;
+    };
+
     type BlogCategory = SanityDocument<{
       title: string;
     }>;
@@ -114,6 +128,14 @@ declare global {
         loading: 'lazy' | 'eager';
         overlay: boolean;
       }>;
+
+    type Video = {
+      asset: {
+        _ref: string;
+      };
+      alt: string;
+      overlay: boolean;
+    };
 
     type Link = {
       readonly _type: 'link';

@@ -5,8 +5,9 @@ import Breadcrumbs from './Breadcrumbs';
 import Callout from './Callout';
 import CreativeModule from './CreativeModule';
 import CustomHTML from './CustomHTML';
+import EventContent from './event/event-content';
 import FlagList from './FlagList';
-import Hero from './Hero';
+import Hero from './hero';
 import HeroSaaS from './HeroSaaS';
 import HeroSplit from './HeroSplit';
 import LogoList from './LogoList';
@@ -21,7 +22,9 @@ export default function Modules({
   modules,
   page,
   post,
-}: Readonly<{ modules?: Sanity.Module[]; page?: Sanity.Page; post?: Sanity.BlogPost }>) {
+  event,
+}: Readonly<{ modules?: Sanity.Module[]; page?: Sanity.Page; post?: Sanity.BlogPost; event?: Sanity.Event }>) {
+  console.log('modules: ', modules);
   return (
     <>
       {modules?.map((module) => {
@@ -40,6 +43,8 @@ export default function Modules({
             return <CreativeModule {...module} key={module._key} />;
           case 'custom-html':
             return <CustomHTML {...module} key={module._key} />;
+          case 'event-content':
+            return <EventContent {...module} event={event} key={module._key} />;
           case 'flag-list':
             return <FlagList {...module} key={module._key} />;
           case 'hero':

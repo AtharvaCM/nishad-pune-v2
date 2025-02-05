@@ -1,7 +1,7 @@
 import { SearchIcon } from '@sanity/icons';
 import { orderRankField, orderRankOrdering } from '@sanity/orderable-document-list';
 import { RiPagesFill } from 'react-icons/ri';
-import { VscEyeClosed, VscHome, VscQuestion } from 'react-icons/vsc';
+import { VscEdit, VscEyeClosed, VscHome, VscQuestion, VscSearch } from 'react-icons/vsc';
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
@@ -57,7 +57,13 @@ export default defineType({
     prepare: ({ title, slug, media, noindex }) => ({
       title,
       subtitle: slug && (slug === 'index' ? '/' : `/${slug}`),
-      media: media || (slug === 'index' && VscHome) || (slug === '404' && VscQuestion) || (noindex && VscEyeClosed),
+      media:
+        media ||
+        (slug === 'index' && VscHome) ||
+        (slug === '404' && VscQuestion) ||
+        (slug === 'search' && VscSearch) ||
+        (['blog', 'blog/*'].includes(slug) && VscEdit) ||
+        (noindex && VscEyeClosed),
     }),
   },
 });

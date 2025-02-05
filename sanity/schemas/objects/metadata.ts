@@ -16,7 +16,7 @@ export default defineType({
       description: 'URL path / permalink. Use "index" for the homepage.',
       options: {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        source: (doc: any) => doc.metadata.title || doc.title,
+        source: (doc: any) => doc.title || doc.metadata.title,
         isUnique: isUniqueOtherThanLanguage,
       },
       validation: (Rule) => Rule.required().error('The slug is requried.'),
@@ -40,6 +40,9 @@ export default defineType({
       title: 'Image',
       description: 'Used for social sharing previews',
       type: 'image',
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
       name: 'noIndex',

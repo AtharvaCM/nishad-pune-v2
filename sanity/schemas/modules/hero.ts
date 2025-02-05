@@ -2,6 +2,7 @@ import { TfiLayoutCtaCenter } from 'react-icons/tfi';
 import { defineField, defineType } from 'sanity';
 
 import { getBlockText } from '../../utils';
+import { reputationBlock } from '../documents/reputation';
 import { alignItems, alignmentFieldset, textAlign } from '../fragments/fields/alignment';
 
 export default defineType({
@@ -10,7 +11,7 @@ export default defineType({
   icon: TfiLayoutCtaCenter,
   type: 'object',
   groups: [{ name: 'content', default: true }, { name: 'media' }, { name: 'options' }],
-  fieldsets: [alignmentFieldset],
+  fieldsets: [alignmentFieldset, { name: 'media', options: { columns: 2 } }],
   fields: [
     defineField({
       name: 'pretitle',
@@ -22,7 +23,7 @@ export default defineType({
       name: 'content',
       type: 'array',
       description: 'The main content of the hero section, typically a block of text.',
-      of: [{ type: 'block' }],
+      of: [{ type: 'block' }, { type: 'custom-html' }, reputationBlock],
       group: 'content',
     }),
     defineField({
@@ -31,12 +32,6 @@ export default defineType({
       description: 'List of call-to-action buttons.',
       type: 'array',
       of: [{ type: 'cta' }],
-      group: 'content',
-    }),
-    defineField({
-      name: 'reputation',
-      type: 'reference',
-      to: [{ type: 'reputation' }],
       group: 'content',
     }),
     defineField({
@@ -88,6 +83,7 @@ export default defineType({
         }),
       ],
       hidden: ({ parent }) => parent?.bgType !== 'image',
+      fieldset: 'media',
       group: 'media',
     }),
     defineField({
@@ -98,9 +94,21 @@ export default defineType({
       options: {
         hotspot: true,
       },
-      validation: (Rule) => Rule.required(),
+      fields: [
+        defineField({
+          name: 'loading',
+          type: 'string',
+          options: {
+            list: ['lazy', 'eager'],
+            layout: 'radio',
+          },
+          initialValue: 'lazy',
+        }),
+      ],
+      // validation: (Rule) => Rule.required(), // TODO: Make it required only when the bgType is image
       hidden: ({ parent }) => parent?.bgType !== 'image',
       group: 'media',
+      fieldset: 'media',
     }),
     defineField({
       name: 'bgVideo',
@@ -126,6 +134,7 @@ export default defineType({
         }),
       ],
       hidden: ({ parent }) => parent?.bgType !== 'video',
+      fieldset: 'media',
       group: 'media',
     }),
     defineField({
@@ -137,6 +146,7 @@ export default defineType({
         hotspot: true,
       },
       hidden: ({ parent }) => parent?.bgType !== 'video',
+      fieldset: 'media',
       group: 'media',
     }),
     defineField({

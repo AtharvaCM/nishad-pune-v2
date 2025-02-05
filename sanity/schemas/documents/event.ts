@@ -1,4 +1,6 @@
+import { SearchIcon } from '@sanity/icons';
 import { MdEvent } from 'react-icons/md';
+import { RiPagesFill } from 'react-icons/ri';
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
@@ -6,6 +8,10 @@ export default defineType({
   title: 'Event',
   icon: MdEvent,
   type: 'document',
+  groups: [
+    { name: 'content', icon: RiPagesFill, default: true },
+    { name: 'seo', title: 'SEO', icon: SearchIcon },
+  ],
   fields: [
     defineField({
       name: 'title',
@@ -13,6 +19,7 @@ export default defineType({
       type: 'string',
       description: 'The title of the event.',
       validation: (Rule) => Rule.required().min(10).max(100).warning('Event title should be between 10 and 100 characters.'),
+      group: 'content',
     }),
     defineField({
       name: 'theme',
@@ -20,6 +27,7 @@ export default defineType({
       type: 'string',
       description: 'The theme of the event, usually an audio-visual or orchestra theme.',
       validation: (Rule) => Rule.required().min(10).max(100).warning('Theme should be between 10 and 100 characters.'),
+      group: 'content',
     }),
     defineField({
       name: 'date',
@@ -27,6 +35,7 @@ export default defineType({
       type: 'datetime',
       description: 'The date and time of the event.',
       validation: (Rule) => Rule.required().warning('Date and time are required.'),
+      group: 'content',
     }),
     defineField({
       name: 'location',
@@ -34,6 +43,7 @@ export default defineType({
       type: 'string',
       description: 'The location of the event.',
       validation: (Rule) => Rule.required().min(5).max(200).warning('Location should be between 5 and 200 characters.'),
+      group: 'content',
     }),
 
     defineField({
@@ -42,6 +52,7 @@ export default defineType({
       type: 'url',
       description: 'Google Maps link to embed for the venue.',
       validation: (Rule) => Rule.uri({ scheme: ['https'], allowRelative: false }).warning('A valid Google Maps URL is required.'),
+      group: 'content',
     }),
     defineField({
       name: 'contactInfo',
@@ -67,6 +78,7 @@ export default defineType({
           validation: (Rule) => Rule.email().warning('A valid email address is required.'),
         }),
       ],
+      group: 'content',
     }),
     defineField({
       name: 'image',
@@ -104,6 +116,12 @@ export default defineType({
           initialValue: false,
         }),
       ],
+      group: 'content',
+    }),
+    defineField({
+      name: 'metadata',
+      type: 'metadata',
+      group: 'seo',
     }),
   ],
 

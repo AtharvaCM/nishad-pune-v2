@@ -12,12 +12,22 @@ export const ctaQuery = groq`
 	link{ ${linkQuery} }
 `;
 
+export const reputationBlockQuery = groq`
+	_type == 'reputation-block' => { reputation-> }
+`;
+
 // @sanity-typegen-ignore
 export const modulesQuery = groq`
 	...,
 	ctas[]{ ${ctaQuery} },
 	_type == 'blog-list' => { predefinedFilters[]-> },
 	_type == 'breadcrumbs' => { crumbs[]{ ${linkQuery} } },
+	_type == 'card-list' => {
+		cards[]{
+			...,
+			ctas[]{ ${ctaQuery} }
+		}
+	},
 	_type == 'creative-module' => {
 		modules[]{
 			...,
@@ -27,10 +37,30 @@ export const modulesQuery = groq`
 			}
 		}
 	},
-	_type == 'hero' => { reputation-> },
-	_type == 'hero.saas' => { reputation-> },
-	_type == 'hero.split' => { reputation-> },
+	_type == 'hero' => {
+		content[]{
+			...,
+			${reputationBlockQuery}
+		}
+	},
+	_type == 'hero.saas' => {
+		content[]{
+			...,
+			${reputationBlockQuery}
+		}
+	},
+	_type == 'hero.split' => {
+		content[]{
+			...,
+			${reputationBlockQuery}
+		}
+	},
 	_type == 'logo-list' => { logos[]-> },
+	_type == 'placeholder-block' => { 
+		...,
+		title,
+		type
+	 },
 	_type == 'pricing-list' => {
 		tiers[]->{
 			...,
@@ -44,6 +74,12 @@ export const modulesQuery = groq`
 				'text': pt::text(@)
 			}
 		),
+	},
+	_type == 'tabbed-content' => {
+		tabs[]{
+			...,
+			ctas[]{ ${ctaQuery} }
+		}
 	},
 	_type == 'testimonial.featured' => { testimonial-> },
 	_type == 'testimonial-list' => { testimonials[]-> },

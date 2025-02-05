@@ -68,7 +68,7 @@ export default defineConfig({
     }),
   ],
   tasks: { enabled: false },
-  scheduledPublishing: { enabled: false },
+  scheduledPublishing: { enabled: true },
   document: {
     actions: (input, { schemaType }) => {
       const docActionComponents = singletonTypes.includes(schemaType)

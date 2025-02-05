@@ -1,15 +1,23 @@
 import { TfiLayoutCtaCenter } from 'react-icons/tfi';
 import { defineField, defineType } from 'sanity';
 
-import { getBlockText } from '../../utils';
+import { getBlockText } from '@/sanity/utils';
+
+import { reputationBlock } from '../documents/reputation';
 
 export default defineType({
   name: 'hero.saas',
   title: 'Hero (SaaS)',
   icon: TfiLayoutCtaCenter,
   type: 'object',
-  groups: [{ name: 'content', default: true }, { name: 'image' }],
+  groups: [{ name: 'content', default: true }, { name: 'image' }, { name: 'options' }],
   fields: [
+    defineField({
+      name: 'uid',
+      title: 'Unique Identifier',
+      type: 'uid',
+      group: 'options',
+    }),
     defineField({
       name: 'pretitle',
       type: 'string',
@@ -18,7 +26,7 @@ export default defineType({
     defineField({
       name: 'content',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [{ type: 'block' }, { type: 'custom-html' }, reputationBlock],
       group: 'content',
     }),
     defineField({
@@ -26,12 +34,6 @@ export default defineType({
       title: 'Call-to-actions',
       type: 'array',
       of: [{ type: 'cta' }],
-      group: 'content',
-    }),
-    defineField({
-      name: 'reputation',
-      type: 'reference',
-      to: [{ type: 'reputation' }],
       group: 'content',
     }),
     defineField({
@@ -55,8 +57,8 @@ export default defineType({
           name: 'loading',
           type: 'string',
           options: {
-            layout: 'radio',
             list: ['lazy', 'eager'],
+            layout: 'radio',
           },
           initialValue: 'lazy',
         }),

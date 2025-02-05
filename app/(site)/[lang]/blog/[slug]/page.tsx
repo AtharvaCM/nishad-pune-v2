@@ -8,8 +8,10 @@ import { modulesQuery } from '@/sanity/lib/queries';
 import processMetadata from '@/utils/process-metadata';
 
 export default async function Page({ params }: Readonly<Props>) {
-  const page = await getPageTemplate();
+  const page = await getPageTemplate(params.lang);
+  console.log('page: ', page);
   const post = await getPost(params);
+  console.log('post: ', post);
   if (!page || !post) notFound();
   return <Modules modules={page?.modules} page={page} post={post} />;
 }
@@ -42,23 +44,28 @@ async function getPost(params: Props['params']) {
 				'ogimage': image.asset->url + '?w=1200'
 			}
 		}`,
-
     params,
     tags: ['blog.post'],
   });
 }
 
-async function getPageTemplate() {
+async function getPageTemplate(lang: string) {
+  const slug = `${lang}/blog/*`;
+  const query = groq`*[_type == 'page' && metadata.slug.current == 'blog/*'][0]{
+    ...,
+    modules[]{ ${modulesQuery} },
+    metadata { slug }
+  }`;
+
   return await sanityFetch<Sanity.Page>({
-    query: groq`*[_type == 'page' && metadata.slug.current == 'blog/*'][0]{
-			...,
-			modules[]{ ${modulesQuery} },
-			metadata { slug }
-		}`,
+    query,
+    params: {
+      slug,
+    },
     tags: ['blog/*'],
   });
 }
 
 type Props = {
-  params: { slug?: string };
+  params: { slug?: string; lang: string };
 };

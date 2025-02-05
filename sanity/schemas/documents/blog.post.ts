@@ -25,6 +25,7 @@ export default defineType({
         { type: 'block' },
         imageBlock,
         defineArrayMember({
+          title: 'Code block',
           type: 'code',
           options: {
             withFilename: true,
@@ -41,6 +42,17 @@ export default defineType({
         {
           type: 'reference',
           to: [{ type: 'blog.category' }],
+        },
+      ],
+      group: 'content',
+    }),
+    defineField({
+      name: 'authors',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'person' }],
         },
       ],
       group: 'content',
@@ -73,12 +85,13 @@ export default defineType({
     select: {
       featured: 'featured',
       title: 'metadata.title',
-      subtitle: 'publishDate',
+      publishDate: 'publishDate',
+      slug: 'metadata.slug.current',
       media: 'metadata.image',
     },
-    prepare: ({ title, subtitle, media, featured }) => ({
+    prepare: ({ title, publishDate, slug, media, featured }) => ({
       title: [featured && '★', title].filter(Boolean).join(' '),
-      subtitle,
+      subtitle: [publishDate || 'No date', slug && `/${slug}`].filter(Boolean).join(' — '),
       media,
     }),
   },

@@ -1,26 +1,15 @@
-'use client';
-
 import { PortableText } from '@portabletext/react';
 import { stegaClean } from '@sanity/client/stega';
-import { useEffect, useState } from 'react';
 import { TypedObject } from 'sanity';
 
+import CTAList from '@/components/common/cta-list';
+import Img, { Source } from '@/components/common/img';
+import Pretitle from '@/components/common/pretitle';
+import Reputation from '@/components/common/reputation';
 import { cn } from '@/lib/utils';
-import { client } from '@/sanity/lib/client';
 
-import CTAList from '../common/cta-list';
-import Img, { Source } from '../common/img';
-import Pretitle from '../common/pretitle';
-import Reputation from '../common/reputation';
-import styles from './Hero.module.scss';
-
-interface SanityVideo {
-  asset: {
-    _ref: string;
-  };
-  alt: string;
-  overlay: boolean;
-}
+import styles from './hero.module.scss';
+import HeroBgVideo from './HeroBgVideo';
 
 interface HeroProps {
   pretitle?: string;
@@ -29,14 +18,14 @@ interface HeroProps {
   reputation: Sanity.Reputation;
   bgType?: 'image' | 'video';
   bgImage?: Sanity.Image;
-  bgVideo?: SanityVideo;
+  bgVideo?: Sanity.Video;
   bgVideoThumbnail?: Sanity.Image;
   bgImageMobile?: Sanity.Image;
   textAlign?: React.CSSProperties['textAlign'];
   alignItems?: React.CSSProperties['alignItems'];
 }
 
-export default function Hero({
+export default async function Hero({
   pretitle,
   content,
   ctas,
@@ -49,31 +38,14 @@ export default function Hero({
   textAlign = 'center',
   alignItems,
 }: Readonly<Partial<HeroProps>>) {
-  const [videoUrl, setVideoUrl] = useState<string | null>(null);
-  const [videoLoaded, setVideoLoaded] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (bgType === 'video' && bgVideo?.asset?._ref) {
-      const fetchVideoUrl = async () => {
-        const videoAsset = await client.getDocument(bgVideo.asset._ref);
-        if (videoAsset?.url) {
-          setVideoUrl(videoAsset.url);
-        }
-      };
-
-      fetchVideoUrl();
-    }
-  }, [bgType, bgVideo]);
-
-  const handleVideoLoaded = () => {
-    setVideoLoaded(true);
-  };
-
   const hasImage = !!bgImage?.asset;
-  const hasVideo = !!videoUrl;
 
   return (
-    <section className={cn((hasImage || hasVideo) && 'grid overflow-hidden bg-background text-background *:col-span-full *:row-span-full')}>
+    <section
+      className={cn(
+        (hasImage || bgType === 'video') && 'grid overflow-hidden bg-background text-background *:col-span-full *:row-span-full',
+      )}
+    >
       {bgType === 'image' && bgImage?.asset && (
         <picture className={cn(bgImage.overlay && styles['d-section__picture'])}>
           <Source image={bgImageMobile} imageWidth={1200} />
@@ -81,36 +53,14 @@ export default function Hero({
         </picture>
       )}
 
-      {bgType === 'video' && (
-        <>
-          {!videoLoaded && bgVideoThumbnail?.asset && (
-            <picture className={cn(bgVideoThumbnail.overlay && styles['d-section__picture'])}>
-              <Img className="size-full max-h-fold object-cover" image={bgVideoThumbnail} imageWidth={1800} draggable={false} />
-            </picture>
-          )}
-          {hasVideo && (
-            <div className={cn(bgVideo?.overlay && styles['d-section__video-wrapper'], 'w-full h-[100svh] max-h-fold relative')}>
-              <video
-                className={cn('absolute size-full max-h-fold object-cover')}
-                autoPlay
-                muted
-                playsInline
-                onLoadedData={handleVideoLoaded}
-                style={{ display: videoLoaded ? 'block' : 'none' }}
-              >
-                <source src={videoUrl} type="video/mp4" />
-              </video>
-            </div>
-          )}
-        </>
-      )}
+      {bgType === 'video' && <HeroBgVideo bgVideo={bgVideo} bgVideoThumbnail={bgVideoThumbnail} />}
 
       {content && (
         <div className="section flex w-full flex-col">
           <div
             className={cn(
               'richtext relative isolate max-w-xl [&_:is(h1,h2)]:text-balance',
-              (bgImage?.asset || hasVideo) && 'text-shadow',
+              bgImage?.asset && 'text-shadow',
               {
                 'mb-8': stegaClean(alignItems) === 'start',
                 'my-auto': stegaClean(alignItems) === 'center',
@@ -124,12 +74,12 @@ export default function Hero({
             )}
             style={{ textAlign: stegaClean(textAlign) }}
           >
-            <Pretitle className={cn((hasImage || hasVideo) && 'text-background/70')}>{pretitle}</Pretitle>
+            <Pretitle className={cn((hasImage || bgType === 'video') && 'text-background/70')}>{pretitle}</Pretitle>
 
             <PortableText value={content} />
 
             <Reputation
-              className={cn('!mt-4', hasImage && '[&_strong]:text-amber-400', {
+              className={cn('!mt-4', (hasImage || bgType === 'video') && '[&_strong]:text-amber-400', {
                 'justify-start': stegaClean(textAlign) === 'left',
                 'justify-center': stegaClean(textAlign) === 'center',
                 'justify-end': stegaClean(textAlign) === 'right',

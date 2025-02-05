@@ -86,6 +86,72 @@ export type TestimonialFeatured = {
   };
 };
 
+export type TabbedContent = {
+  _type: 'tabbed-content';
+  pretitle?: string;
+  intro?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
+  tabs?: Array<{
+    label?: string;
+    pretitle?: string;
+    content?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }>;
+    ctas?: Array<
+      {
+        _key: string;
+      } & Cta
+    >;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      onRight?: boolean;
+      onBottom?: boolean;
+      loading?: 'lazy' | 'eager';
+      _type: 'image';
+    };
+    _key: string;
+  }>;
+};
+
 export type StepList = {
   _type: 'step-list';
   intro?: Array<{
@@ -158,8 +224,58 @@ export type StatList = {
   textAlign?: 'left' | 'center' | 'right';
 };
 
+export type SearchModule = {
+  _type: 'search-module';
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
+  scope?: 'all' | 'pages' | 'blog posts';
+};
+
+export type ScheduleModule = {
+  _type: 'schedule-module';
+  start?: string;
+  end?: string;
+  modules?: Array<
+    | ({
+        _key: string;
+      } & Callout)
+    | ({
+        _key: string;
+      } & CustomHtml)
+    | ({
+        _key: string;
+      } & Hero)
+    | ({
+        _key: string;
+      } & HeroSaas)
+    | ({
+        _key: string;
+      } & HeroSplit)
+    | ({
+        _key: string;
+      } & TestimonialFeatured)
+  >;
+};
+
 export type RichtextModule = {
   _type: 'richtext-module';
+  uid?: string;
   content?: Array<
     | {
         children?: Array<{
@@ -198,9 +314,13 @@ export type RichtextModule = {
     | ({
         _key: string;
       } & Code)
+    | ({
+        _key: string;
+      } & CustomHtml)
   >;
   tableOfContents?: boolean;
   tocPosition?: 'left' | 'right';
+  stretch?: boolean;
 };
 
 export type PricingList = {
@@ -262,40 +382,50 @@ export type LogoList = {
   }>;
   logoType?: 'default' | 'light' | 'dark';
   autoScroll?: boolean;
+  duration?: number;
 };
 
 export type HeroSplit = {
   _type: 'hero.split';
   pretitle?: string;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: 'span';
-      _key: string;
-    }>;
-    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
-    listItem?: 'bullet' | 'number';
-    markDefs?: Array<{
-      href?: string;
-      _type: 'link';
-      _key: string;
-    }>;
-    level?: number;
-    _type: 'block';
-    _key: string;
-  }>;
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & CustomHtml)
+    | {
+        reputation?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'reputation';
+        };
+        _type: 'reputation-block';
+        _key: string;
+      }
+  >;
   ctas?: Array<
     {
       _key: string;
     } & Cta
   >;
-  reputation?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'reputation';
-  };
   image?: {
     asset?: {
       _ref: string;
@@ -315,36 +445,46 @@ export type HeroSplit = {
 
 export type HeroSaas = {
   _type: 'hero.saas';
+  uid?: string;
   pretitle?: string;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: 'span';
-      _key: string;
-    }>;
-    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
-    listItem?: 'bullet' | 'number';
-    markDefs?: Array<{
-      href?: string;
-      _type: 'link';
-      _key: string;
-    }>;
-    level?: number;
-    _type: 'block';
-    _key: string;
-  }>;
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & CustomHtml)
+    | {
+        reputation?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'reputation';
+        };
+        _type: 'reputation-block';
+        _key: string;
+      }
+  >;
   ctas?: Array<
     {
       _key: string;
     } & Cta
   >;
-  reputation?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'reputation';
-  };
   image?: {
     asset?: {
       _ref: string;
@@ -364,35 +504,44 @@ export type HeroSaas = {
 export type Hero = {
   _type: 'hero';
   pretitle?: string;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: 'span';
-      _key: string;
-    }>;
-    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
-    listItem?: 'bullet' | 'number';
-    markDefs?: Array<{
-      href?: string;
-      _type: 'link';
-      _key: string;
-    }>;
-    level?: number;
-    _type: 'block';
-    _key: string;
-  }>;
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & CustomHtml)
+    | {
+        reputation?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'reputation';
+        };
+        _type: 'reputation-block';
+        _key: string;
+      }
+  >;
   ctas?: Array<
     {
       _key: string;
     } & Cta
   >;
-  reputation?: {
-    _ref: string;
-    _type: 'reference';
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: 'reputation';
-  };
   bgType?: 'image' | 'video';
   bgImage?: {
     asset?: {
@@ -417,6 +566,7 @@ export type Hero = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    loading?: 'lazy' | 'eager';
     _type: 'image';
   };
   bgVideo?: {
@@ -447,6 +597,7 @@ export type Hero = {
 
 export type FlagList = {
   _type: 'flag-list';
+  pretitle?: string;
   intro?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -499,6 +650,11 @@ export type FlagList = {
   }>;
   iconSize?: number;
   iconPosition?: 'top' | 'left';
+};
+
+export type EventContent = {
+  _type: 'event-content';
+  uid?: string;
 };
 
 export type CustomHtml = {
@@ -604,6 +760,69 @@ export type CreativeModule = {
   alignItems?: 'start' | 'center' | 'end';
 };
 
+export type CardList = {
+  _type: 'card-list';
+  uid?: string;
+  pretitle?: string;
+  intro?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
+  cards?: Array<{
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+    };
+    content?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+      listItem?: 'bullet' | 'number';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }>;
+    ctas?: Array<
+      {
+        _key: string;
+      } & Cta
+    >;
+    _key: string;
+  }>;
+  layout?: 'grid' | 'carousel';
+  visualSeparation?: boolean;
+};
+
 export type Callout = {
   _type: 'callout';
   content?: Array<{
@@ -638,6 +857,7 @@ export type Breadcrumbs = {
       _key: string;
     } & Link
   >;
+  hideCurrent?: boolean;
 };
 
 export type BlogPostContent = {
@@ -666,19 +886,27 @@ export type BlogList = {
     _key: string;
   }>;
   layout?: 'grid' | 'carousel';
-  limit?: number;
+  showFeaturedPostsFirst?: boolean;
   displayFilters?: boolean;
-  predefinedFilters?: Array<{
+  limit?: number;
+  filteredCategory?: {
     _ref: string;
     _type: 'reference';
     _weak?: boolean;
-    _key: string;
     [internalGroqTypeReferenceTo]?: 'blog.category';
-  }>;
+  };
+};
+
+export type BlogFrontpage = {
+  _type: 'blog-frontpage';
+  mainPost?: 'recent' | 'featured';
+  showFeaturedPostsFirst?: boolean;
+  itemsPerPage?: number;
 };
 
 export type AccordionList = {
   _type: 'accordion-list';
+  uid?: string;
   intro?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -721,7 +949,7 @@ export type AccordionList = {
     _key: string;
   }>;
   layout?: 'vertical' | 'horizontal';
-  uid?: string;
+  generateSchema?: boolean;
 };
 
 export type Uid = string;
@@ -730,6 +958,9 @@ export type Modules = Array<
   | ({
       _key: string;
     } & AccordionList)
+  | ({
+      _key: string;
+    } & BlogFrontpage)
   | ({
       _key: string;
     } & BlogList)
@@ -744,10 +975,16 @@ export type Modules = Array<
     } & Callout)
   | ({
       _key: string;
+    } & CardList)
+  | ({
+      _key: string;
     } & CreativeModule)
   | ({
       _key: string;
     } & CustomHtml)
+  | ({
+      _key: string;
+    } & EventContent)
   | ({
       _key: string;
     } & FlagList)
@@ -771,10 +1008,19 @@ export type Modules = Array<
     } & RichtextModule)
   | ({
       _key: string;
+    } & ScheduleModule)
+  | ({
+      _key: string;
+    } & SearchModule)
+  | ({
+      _key: string;
     } & StatList)
   | ({
       _key: string;
     } & StepList)
+  | ({
+      _key: string;
+    } & TabbedContent)
   | ({
       _key: string;
     } & TestimonialList)
@@ -920,30 +1166,6 @@ export type Document = {
   _weak?: boolean;
 };
 
-export type Reputation = {
-  _id: string;
-  _type: 'reputation';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  subtitle?: string;
-  repo?: string;
-  limit?: number;
-  avatars?: Array<{
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: 'image';
-    _key: string;
-  }>;
-};
-
 export type Redirect = {
   _id: string;
   _type: 'redirect';
@@ -951,7 +1173,7 @@ export type Redirect = {
   _updatedAt: string;
   _rev: string;
   source?: string;
-  destination?: string;
+  destination?: Link;
   permanent?: boolean;
 };
 
@@ -991,6 +1213,26 @@ export type Pricing = {
     _type: 'block';
     _key: string;
   }>;
+};
+
+export type Person = {
+  _id: string;
+  _type: 'person';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
 };
 
 export type Navigation = {
@@ -1083,6 +1325,7 @@ export type Event = {
     overlay?: boolean;
     _type: 'image';
   };
+  metadata?: Metadata;
 };
 
 export type BlogCategory = {
@@ -1092,6 +1335,7 @@ export type BlogCategory = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  slug?: Slug;
 };
 
 export type Announcement = {
@@ -1231,6 +1475,13 @@ export type BlogPost = {
     _key: string;
     [internalGroqTypeReferenceTo]?: 'blog.category';
   }>;
+  authors?: Array<{
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: 'person';
+  }>;
   publishDate?: string;
   featured?: boolean;
   hideTableOfContents?: boolean;
@@ -1289,6 +1540,31 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
+};
+
+export type Reputation = {
+  _id: string;
+  _type: 'reputation';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  subtitle?: string;
+  repo?: string;
+  showForks?: boolean;
+  limit?: number;
+  avatars?: Array<{
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+    _key: string;
+  }>;
 };
 
 export type SanityImageCrop = {
